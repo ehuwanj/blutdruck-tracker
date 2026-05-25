@@ -353,4 +353,190 @@ class AppLocalizationsEn extends AppLocalizations {
   String historyPulseLabel(int count) {
     return 'Pulse $count';
   }
+
+  @override
+  String statisticsPeriodSummary(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get statisticsKeyMetricsTitle => 'Key metrics';
+
+  @override
+  String get statisticsMetricLabel => 'Metric';
+
+  @override
+  String get statisticsMetricAverage => 'Avg';
+
+  @override
+  String get statisticsMetricMin => 'Min';
+
+  @override
+  String get statisticsMetricMax => 'Max';
+
+  @override
+  String get statisticsMetricTrend => 'Trend';
+
+  @override
+  String get statisticsMetricEmptyValue => '—';
+
+  @override
+  String get pulsePressureLabel => 'Pulse pressure';
+
+  @override
+  String get meanArterialPressureLabel => 'MAP';
+
+  @override
+  String get trendUp => 'rising';
+
+  @override
+  String get trendDown => 'falling';
+
+  @override
+  String get trendStable => 'stable';
+
+  @override
+  String get trendUnknown => 'no trend';
+
+  @override
+  String get statisticsClassificationTitle => 'Category distribution';
+
+  @override
+  String get statisticsClassificationOpenStatus => 'Open status view';
+
+  @override
+  String get statisticsBmiTitle => 'BMI';
+
+  @override
+  String get statisticsBmiCurrent => 'Current';
+
+  @override
+  String get statisticsBmiAverage => 'Average';
+
+  @override
+  String get statisticsBmiHelper =>
+      'Calculated from your profile height and the latest in-period weight.';
+
+  @override
+  String get statisticsBmiProfileTitle => 'Add your height';
+
+  @override
+  String get statisticsBmiProfileLink =>
+      'Set height in profile to calculate BMI.';
+
+  @override
+  String get statisticsInsightsTitle => 'Insights';
+
+  @override
+  String get statisticsLoadErrorTitle => 'Could not load statistics';
+
+  @override
+  String get statisticsLoadErrorBody => 'Please try again.';
+
+  @override
+  String get statusDistributionTitle => 'Category distribution';
+
+  @override
+  String get statusDistributionEmpty => 'No readings in this period.';
+
+  @override
+  String get statusExplanationTitle => 'What do the categories mean?';
+
+  @override
+  String get statusExplanationIntro =>
+      'Thresholds follow common office-measurement ranges. They are descriptive guides, not diagnoses.';
+
+  @override
+  String get statusCategoryThresholdHypotension =>
+      'Systolic < 90 or diastolic < 60';
+
+  @override
+  String get statusCategoryThresholdOptimal =>
+      'Systolic < 120 and diastolic < 80';
+
+  @override
+  String get statusCategoryThresholdNormal =>
+      'Systolic 120–129 and/or diastolic 80–84';
+
+  @override
+  String get statusCategoryThresholdHighNormal =>
+      'Systolic 130–139 and/or diastolic 85–89';
+
+  @override
+  String get statusCategoryThresholdHypertensionGrade1 =>
+      'Systolic 140–159 and/or diastolic 90–99';
+
+  @override
+  String get statusCategoryThresholdHypertensionGrade2 =>
+      'Systolic 160–179 and/or diastolic 100–109';
+
+  @override
+  String get statusCategoryThresholdHypertensionGrade3 =>
+      'Systolic ≥ 180 or diastolic ≥ 110';
+
+  @override
+  String get statusCategoryThresholdIsolatedSystolic =>
+      'Systolic ≥ 140 and diastolic < 90';
+
+  @override
+  String categoryCount(int count) {
+    return '$count';
+  }
+
+  @override
+  String get insightNoDataTitle => 'No insights yet';
+
+  @override
+  String get insightNoDataBody => 'Record a few readings to see insights here.';
+
+  @override
+  String get insightFewEntriesTitle => 'Few entries this period';
+
+  @override
+  String get insightFewEntriesBody =>
+      'Add more readings for a clearer picture.';
+
+  @override
+  String get insightMeasureMoreOftenTitle => 'Measure more often';
+
+  @override
+  String get insightMeasureMoreOftenBody =>
+      'Aim for several readings each week.';
+
+  @override
+  String get insightBpRisingTitle => 'Trend is rising';
+
+  @override
+  String get insightBpRisingBody =>
+      'Recent readings have been higher than earlier in the period.';
+
+  @override
+  String get insightBpFallingTitle => 'Trend is falling';
+
+  @override
+  String get insightBpFallingBody =>
+      'Recent readings have been lower than earlier in the period.';
+
+  @override
+  String get insightFrequentlyElevatedTitle => 'Often above the normal range';
+
+  @override
+  String insightFrequentlyElevatedBody(Object count, Object total) {
+    return '$count of $total readings landed in elevated categories.';
+  }
+
+  @override
+  String get insightFrequentlyLowTitle => 'Often below the normal range';
+
+  @override
+  String insightFrequentlyLowBody(Object count, Object total) {
+    return '$count of $total readings were low.';
+  }
+
+  @override
+  String get insightWellDocumentedTitle => 'Well documented';
+
+  @override
+  String get insightWellDocumentedBody =>
+      'You\'re recording regularly. Keep it up.';
 }

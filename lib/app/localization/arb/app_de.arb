@@ -144,5 +144,70 @@
     "placeholders": {
       "count": {"type": "int"}
     }
-  }
+  },
+  "statisticsPeriodSummary": "{from} – {to}",
+  "@statisticsPeriodSummary": {
+    "placeholders": {
+      "from": {"type": "String"},
+      "to": {"type": "String"}
+    }
+  },
+  "statisticsKeyMetricsTitle": "Kennzahlen",
+  "statisticsMetricLabel": "Kennzahl",
+  "statisticsMetricAverage": "Mittel",
+  "statisticsMetricMin": "Min",
+  "statisticsMetricMax": "Max",
+  "statisticsMetricTrend": "Trend",
+  "statisticsMetricEmptyValue": "—",
+  "pulsePressureLabel": "Pulsdruck",
+  "meanArterialPressureLabel": "MAD",
+  "trendUp": "steigend",
+  "trendDown": "fallend",
+  "trendStable": "stabil",
+  "trendUnknown": "kein Trend",
+  "statisticsClassificationTitle": "Kategorieverteilung",
+  "statisticsClassificationOpenStatus": "Status öffnen",
+  "statisticsBmiTitle": "BMI",
+  "statisticsBmiCurrent": "Aktuell",
+  "statisticsBmiAverage": "Mittel",
+  "statisticsBmiHelper": "Berechnet aus Ihrer Profilgröße und dem letzten Gewicht im Zeitraum.",
+  "statisticsBmiProfileTitle": "Größe ergänzen",
+  "statisticsBmiProfileLink": "Größe im Profil eintragen, um BMI zu berechnen.",
+  "statisticsInsightsTitle": "Hinweise",
+  "statisticsLoadErrorTitle": "Statistiken konnten nicht geladen werden",
+  "statisticsLoadErrorBody": "Bitte erneut versuchen.",
+  "statusDistributionTitle": "Kategorieverteilung",
+  "statusDistributionEmpty": "Keine Messungen in diesem Zeitraum.",
+  "statusExplanationTitle": "Was bedeuten die Kategorien?",
+  "statusExplanationIntro": "Die Schwellen orientieren sich an üblichen Praxiswerten. Sie sind beschreibende Hinweise, keine Diagnose.",
+  "statusCategoryThresholdHypotension": "Systolisch < 90 oder diastolisch < 60",
+  "statusCategoryThresholdOptimal": "Systolisch < 120 und diastolisch < 80",
+  "statusCategoryThresholdNormal": "Systolisch 120–129 und/oder diastolisch 80–84",
+  "statusCategoryThresholdHighNormal": "Systolisch 130–139 und/oder diastolisch 85–89",
+  "statusCategoryThresholdHypertensionGrade1": "Systolisch 140–159 und/oder diastolisch 90–99",
+  "statusCategoryThresholdHypertensionGrade2": "Systolisch 160–179 und/oder diastolisch 100–109",
+  "statusCategoryThresholdHypertensionGrade3": "Systolisch ≥ 180 oder diastolisch ≥ 110",
+  "statusCategoryThresholdIsolatedSystolic": "Systolisch ≥ 140 und diastolisch < 90",
+  "categoryCount": "{count}",
+  "@categoryCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "insightNoDataTitle": "Noch keine Hinweise",
+  "insightNoDataBody": "Erfassen Sie einige Messungen, um Hinweise zu sehen.",
+  "insightFewEntriesTitle": "Wenige Einträge in diesem Zeitraum",
+  "insightFewEntriesBody": "Erfassen Sie mehr Messungen für eine deutlichere Auswertung.",
+  "insightMeasureMoreOftenTitle": "Häufiger messen",
+  "insightMeasureMoreOftenBody": "Mehrere Messungen pro Woche helfen, einen Verlauf zu sehen.",
+  "insightBpRisingTitle": "Trend steigt",
+  "insightBpRisingBody": "Die jüngsten Werte sind höher als zu Beginn des Zeitraums.",
+  "insightBpFallingTitle": "Trend fällt",
+  "insightBpFallingBody": "Die jüngsten Werte sind niedriger als zu Beginn des Zeitraums.",
+  "insightFrequentlyElevatedTitle": "Häufig über dem Normalbereich",
+  "insightFrequentlyElevatedBody": "{count} von {total} Messungen lagen in erhöhten Kategorien.",
+  "insightFrequentlyLowTitle": "Häufig unter dem Normalbereich",
+  "insightFrequentlyLowBody": "{count} von {total} Messungen waren niedrig.",
+  "insightWellDocumentedTitle": "Gut dokumentiert",
+  "insightWellDocumentedBody": "Sie erfassen regelmäßig. Weiter so."
 }

@@ -6,6 +6,8 @@ import 'package:blutdruck_tracker/features/overview/presentation/screens/overvie
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_entry_screen.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_history_screen.dart';
 import 'package:blutdruck_tracker/features/settings/domain/entities/locale_setting.dart';
+import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
+import 'package:blutdruck_tracker/features/status/presentation/screens/status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -22,15 +24,11 @@ final appRouter = GoRouter(
         ),
         GoRoute(
           path: '/statistics',
-          builder: (context, state) => PlaceholderScreen(
-            title: AppLocalizations.of(context).statisticsTitle,
-          ),
+          builder: (context, state) => const StatisticsScreen(),
         ),
         GoRoute(
           path: '/status',
-          builder: (context, state) => PlaceholderScreen(
-            title: AppLocalizations.of(context).statusTitle,
-          ),
+          builder: (context, state) => const StatusScreen(),
         ),
         GoRoute(
           path: '/export',

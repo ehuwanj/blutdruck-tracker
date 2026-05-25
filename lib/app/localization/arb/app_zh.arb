@@ -144,5 +144,70 @@
     "placeholders": {
       "count": {"type": "int"}
     }
-  }
+  },
+  "statisticsPeriodSummary": "{from} – {to}",
+  "@statisticsPeriodSummary": {
+    "placeholders": {
+      "from": {"type": "String"},
+      "to": {"type": "String"}
+    }
+  },
+  "statisticsKeyMetricsTitle": "关键指标",
+  "statisticsMetricLabel": "指标",
+  "statisticsMetricAverage": "平均",
+  "statisticsMetricMin": "最小",
+  "statisticsMetricMax": "最大",
+  "statisticsMetricTrend": "趋势",
+  "statisticsMetricEmptyValue": "—",
+  "pulsePressureLabel": "脉压",
+  "meanArterialPressureLabel": "平均动脉压",
+  "trendUp": "上升",
+  "trendDown": "下降",
+  "trendStable": "稳定",
+  "trendUnknown": "无趋势",
+  "statisticsClassificationTitle": "分类分布",
+  "statisticsClassificationOpenStatus": "打开状态视图",
+  "statisticsBmiTitle": "BMI",
+  "statisticsBmiCurrent": "当前",
+  "statisticsBmiAverage": "平均",
+  "statisticsBmiHelper": "根据您的身高和该时段内最新的体重计算。",
+  "statisticsBmiProfileTitle": "添加身高",
+  "statisticsBmiProfileLink": "在个人资料中填写身高以计算 BMI。",
+  "statisticsInsightsTitle": "提示",
+  "statisticsLoadErrorTitle": "无法加载统计",
+  "statisticsLoadErrorBody": "请重试。",
+  "statusDistributionTitle": "分类分布",
+  "statusDistributionEmpty": "此时间段没有记录。",
+  "statusExplanationTitle": "各分类的含义",
+  "statusExplanationIntro": "阈值基于常见的门诊测量参考。它们是描述性的指引，不是诊断。",
+  "statusCategoryThresholdHypotension": "收缩压 < 90 或舒张压 < 60",
+  "statusCategoryThresholdOptimal": "收缩压 < 120 且舒张压 < 80",
+  "statusCategoryThresholdNormal": "收缩压 120–129 且/或舒张压 80–84",
+  "statusCategoryThresholdHighNormal": "收缩压 130–139 且/或舒张压 85–89",
+  "statusCategoryThresholdHypertensionGrade1": "收缩压 140–159 且/或舒张压 90–99",
+  "statusCategoryThresholdHypertensionGrade2": "收缩压 160–179 且/或舒张压 100–109",
+  "statusCategoryThresholdHypertensionGrade3": "收缩压 ≥ 180 或舒张压 ≥ 110",
+  "statusCategoryThresholdIsolatedSystolic": "收缩压 ≥ 140 且舒张压 < 90",
+  "categoryCount": "{count}",
+  "@categoryCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "insightNoDataTitle": "暂无提示",
+  "insightNoDataBody": "记录几次测量后即可查看提示。",
+  "insightFewEntriesTitle": "本时段记录较少",
+  "insightFewEntriesBody": "增加记录可获得更清晰的视图。",
+  "insightMeasureMoreOftenTitle": "建议更频繁地测量",
+  "insightMeasureMoreOftenBody": "每周多次测量有助于看清趋势。",
+  "insightBpRisingTitle": "趋势上升",
+  "insightBpRisingBody": "近期测量值高于时段初期。",
+  "insightBpFallingTitle": "趋势下降",
+  "insightBpFallingBody": "近期测量值低于时段初期。",
+  "insightFrequentlyElevatedTitle": "经常高于正常范围",
+  "insightFrequentlyElevatedBody": "共 {total} 次记录中，{count} 次落在偏高分类。",
+  "insightFrequentlyLowTitle": "经常低于正常范围",
+  "insightFrequentlyLowBody": "共 {total} 次记录中，{count} 次偏低。",
+  "insightWellDocumentedTitle": "记录良好",
+  "insightWellDocumentedBody": "您在规律地记录。请保持。"
 }

@@ -693,6 +693,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pulse {count}'**
   String historyPulseLabel(int count);
+
+  /// No description provided for @statisticsPeriodSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} – {to}'**
+  String statisticsPeriodSummary(String from, String to);
+
+  /// No description provided for @statisticsKeyMetricsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Key metrics'**
+  String get statisticsKeyMetricsTitle;
+
+  /// No description provided for @statisticsMetricLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Metric'**
+  String get statisticsMetricLabel;
+
+  /// No description provided for @statisticsMetricAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg'**
+  String get statisticsMetricAverage;
+
+  /// No description provided for @statisticsMetricMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Min'**
+  String get statisticsMetricMin;
+
+  /// No description provided for @statisticsMetricMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Max'**
+  String get statisticsMetricMax;
+
+  /// No description provided for @statisticsMetricTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend'**
+  String get statisticsMetricTrend;
+
+  /// No description provided for @statisticsMetricEmptyValue.
+  ///
+  /// In en, this message translates to:
+  /// **'—'**
+  String get statisticsMetricEmptyValue;
+
+  /// No description provided for @pulsePressureLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse pressure'**
+  String get pulsePressureLabel;
+
+  /// No description provided for @meanArterialPressureLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'MAP'**
+  String get meanArterialPressureLabel;
+
+  /// No description provided for @trendUp.
+  ///
+  /// In en, this message translates to:
+  /// **'rising'**
+  String get trendUp;
+
+  /// No description provided for @trendDown.
+  ///
+  /// In en, this message translates to:
+  /// **'falling'**
+  String get trendDown;
+
+  /// No description provided for @trendStable.
+  ///
+  /// In en, this message translates to:
+  /// **'stable'**
+  String get trendStable;
+
+  /// No description provided for @trendUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'no trend'**
+  String get trendUnknown;
+
+  /// No description provided for @statisticsClassificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Category distribution'**
+  String get statisticsClassificationTitle;
+
+  /// No description provided for @statisticsClassificationOpenStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Open status view'**
+  String get statisticsClassificationOpenStatus;
+
+  /// No description provided for @statisticsBmiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'BMI'**
+  String get statisticsBmiTitle;
+
+  /// No description provided for @statisticsBmiCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get statisticsBmiCurrent;
+
+  /// No description provided for @statisticsBmiAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Average'**
+  String get statisticsBmiAverage;
+
+  /// No description provided for @statisticsBmiHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculated from your profile height and the latest in-period weight.'**
+  String get statisticsBmiHelper;
+
+  /// No description provided for @statisticsBmiProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your height'**
+  String get statisticsBmiProfileTitle;
+
+  /// No description provided for @statisticsBmiProfileLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Set height in profile to calculate BMI.'**
+  String get statisticsBmiProfileLink;
+
+  /// No description provided for @statisticsInsightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Insights'**
+  String get statisticsInsightsTitle;
+
+  /// No description provided for @statisticsLoadErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load statistics'**
+  String get statisticsLoadErrorTitle;
+
+  /// No description provided for @statisticsLoadErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again.'**
+  String get statisticsLoadErrorBody;
+
+  /// No description provided for @statusDistributionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Category distribution'**
+  String get statusDistributionTitle;
+
+  /// No description provided for @statusDistributionEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No readings in this period.'**
+  String get statusDistributionEmpty;
+
+  /// No description provided for @statusExplanationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What do the categories mean?'**
+  String get statusExplanationTitle;
+
+  /// No description provided for @statusExplanationIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Thresholds follow common office-measurement ranges. They are descriptive guides, not diagnoses.'**
+  String get statusExplanationIntro;
+
+  /// No description provided for @statusCategoryThresholdHypotension.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic < 90 or diastolic < 60'**
+  String get statusCategoryThresholdHypotension;
+
+  /// No description provided for @statusCategoryThresholdOptimal.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic < 120 and diastolic < 80'**
+  String get statusCategoryThresholdOptimal;
+
+  /// No description provided for @statusCategoryThresholdNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic 120–129 and/or diastolic 80–84'**
+  String get statusCategoryThresholdNormal;
+
+  /// No description provided for @statusCategoryThresholdHighNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic 130–139 and/or diastolic 85–89'**
+  String get statusCategoryThresholdHighNormal;
+
+  /// No description provided for @statusCategoryThresholdHypertensionGrade1.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic 140–159 and/or diastolic 90–99'**
+  String get statusCategoryThresholdHypertensionGrade1;
+
+  /// No description provided for @statusCategoryThresholdHypertensionGrade2.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic 160–179 and/or diastolic 100–109'**
+  String get statusCategoryThresholdHypertensionGrade2;
+
+  /// No description provided for @statusCategoryThresholdHypertensionGrade3.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic ≥ 180 or diastolic ≥ 110'**
+  String get statusCategoryThresholdHypertensionGrade3;
+
+  /// No description provided for @statusCategoryThresholdIsolatedSystolic.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic ≥ 140 and diastolic < 90'**
+  String get statusCategoryThresholdIsolatedSystolic;
+
+  /// No description provided for @categoryCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}'**
+  String categoryCount(int count);
+
+  /// No description provided for @insightNoDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No insights yet'**
+  String get insightNoDataTitle;
+
+  /// No description provided for @insightNoDataBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Record a few readings to see insights here.'**
+  String get insightNoDataBody;
+
+  /// No description provided for @insightFewEntriesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Few entries this period'**
+  String get insightFewEntriesTitle;
+
+  /// No description provided for @insightFewEntriesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more readings for a clearer picture.'**
+  String get insightFewEntriesBody;
+
+  /// No description provided for @insightMeasureMoreOftenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Measure more often'**
+  String get insightMeasureMoreOftenTitle;
+
+  /// No description provided for @insightMeasureMoreOftenBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Aim for several readings each week.'**
+  String get insightMeasureMoreOftenBody;
+
+  /// No description provided for @insightBpRisingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend is rising'**
+  String get insightBpRisingTitle;
+
+  /// No description provided for @insightBpRisingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent readings have been higher than earlier in the period.'**
+  String get insightBpRisingBody;
+
+  /// No description provided for @insightBpFallingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend is falling'**
+  String get insightBpFallingTitle;
+
+  /// No description provided for @insightBpFallingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent readings have been lower than earlier in the period.'**
+  String get insightBpFallingBody;
+
+  /// No description provided for @insightFrequentlyElevatedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Often above the normal range'**
+  String get insightFrequentlyElevatedTitle;
+
+  /// No description provided for @insightFrequentlyElevatedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {total} readings landed in elevated categories.'**
+  String insightFrequentlyElevatedBody(Object count, Object total);
+
+  /// No description provided for @insightFrequentlyLowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Often below the normal range'**
+  String get insightFrequentlyLowTitle;
+
+  /// No description provided for @insightFrequentlyLowBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {total} readings were low.'**
+  String insightFrequentlyLowBody(Object count, Object total);
+
+  /// No description provided for @insightWellDocumentedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Well documented'**
+  String get insightWellDocumentedTitle;
+
+  /// No description provided for @insightWellDocumentedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re recording regularly. Keep it up.'**
+  String get insightWellDocumentedBody;
 }
 
 class _AppLocalizationsDelegate

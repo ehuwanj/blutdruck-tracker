@@ -329,4 +329,177 @@ class AppLocalizationsZh extends AppLocalizations {
   String historyPulseLabel(int count) {
     return '脉搏 $count';
   }
+
+  @override
+  String statisticsPeriodSummary(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get statisticsKeyMetricsTitle => '关键指标';
+
+  @override
+  String get statisticsMetricLabel => '指标';
+
+  @override
+  String get statisticsMetricAverage => '平均';
+
+  @override
+  String get statisticsMetricMin => '最小';
+
+  @override
+  String get statisticsMetricMax => '最大';
+
+  @override
+  String get statisticsMetricTrend => '趋势';
+
+  @override
+  String get statisticsMetricEmptyValue => '—';
+
+  @override
+  String get pulsePressureLabel => '脉压';
+
+  @override
+  String get meanArterialPressureLabel => '平均动脉压';
+
+  @override
+  String get trendUp => '上升';
+
+  @override
+  String get trendDown => '下降';
+
+  @override
+  String get trendStable => '稳定';
+
+  @override
+  String get trendUnknown => '无趋势';
+
+  @override
+  String get statisticsClassificationTitle => '分类分布';
+
+  @override
+  String get statisticsClassificationOpenStatus => '打开状态视图';
+
+  @override
+  String get statisticsBmiTitle => 'BMI';
+
+  @override
+  String get statisticsBmiCurrent => '当前';
+
+  @override
+  String get statisticsBmiAverage => '平均';
+
+  @override
+  String get statisticsBmiHelper => '根据您的身高和该时段内最新的体重计算。';
+
+  @override
+  String get statisticsBmiProfileTitle => '添加身高';
+
+  @override
+  String get statisticsBmiProfileLink => '在个人资料中填写身高以计算 BMI。';
+
+  @override
+  String get statisticsInsightsTitle => '提示';
+
+  @override
+  String get statisticsLoadErrorTitle => '无法加载统计';
+
+  @override
+  String get statisticsLoadErrorBody => '请重试。';
+
+  @override
+  String get statusDistributionTitle => '分类分布';
+
+  @override
+  String get statusDistributionEmpty => '此时间段没有记录。';
+
+  @override
+  String get statusExplanationTitle => '各分类的含义';
+
+  @override
+  String get statusExplanationIntro => '阈值基于常见的门诊测量参考。它们是描述性的指引，不是诊断。';
+
+  @override
+  String get statusCategoryThresholdHypotension => '收缩压 < 90 或舒张压 < 60';
+
+  @override
+  String get statusCategoryThresholdOptimal => '收缩压 < 120 且舒张压 < 80';
+
+  @override
+  String get statusCategoryThresholdNormal => '收缩压 120–129 且/或舒张压 80–84';
+
+  @override
+  String get statusCategoryThresholdHighNormal => '收缩压 130–139 且/或舒张压 85–89';
+
+  @override
+  String get statusCategoryThresholdHypertensionGrade1 =>
+      '收缩压 140–159 且/或舒张压 90–99';
+
+  @override
+  String get statusCategoryThresholdHypertensionGrade2 =>
+      '收缩压 160–179 且/或舒张压 100–109';
+
+  @override
+  String get statusCategoryThresholdHypertensionGrade3 =>
+      '收缩压 ≥ 180 或舒张压 ≥ 110';
+
+  @override
+  String get statusCategoryThresholdIsolatedSystolic => '收缩压 ≥ 140 且舒张压 < 90';
+
+  @override
+  String categoryCount(int count) {
+    return '$count';
+  }
+
+  @override
+  String get insightNoDataTitle => '暂无提示';
+
+  @override
+  String get insightNoDataBody => '记录几次测量后即可查看提示。';
+
+  @override
+  String get insightFewEntriesTitle => '本时段记录较少';
+
+  @override
+  String get insightFewEntriesBody => '增加记录可获得更清晰的视图。';
+
+  @override
+  String get insightMeasureMoreOftenTitle => '建议更频繁地测量';
+
+  @override
+  String get insightMeasureMoreOftenBody => '每周多次测量有助于看清趋势。';
+
+  @override
+  String get insightBpRisingTitle => '趋势上升';
+
+  @override
+  String get insightBpRisingBody => '近期测量值高于时段初期。';
+
+  @override
+  String get insightBpFallingTitle => '趋势下降';
+
+  @override
+  String get insightBpFallingBody => '近期测量值低于时段初期。';
+
+  @override
+  String get insightFrequentlyElevatedTitle => '经常高于正常范围';
+
+  @override
+  String insightFrequentlyElevatedBody(Object count, Object total) {
+    return '共 $total 次记录中，$count 次落在偏高分类。';
+  }
+
+  @override
+  String get insightFrequentlyLowTitle => '经常低于正常范围';
+
+  @override
+  String insightFrequentlyLowBody(Object count, Object total) {
+    return '共 $total 次记录中，$count 次偏低。';
+  }
+
+  @override
+  String get insightWellDocumentedTitle => '记录良好';
+
+  @override
+  String get insightWellDocumentedBody => '您在规律地记录。请保持。';
 }
