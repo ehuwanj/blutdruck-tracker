@@ -8,7 +8,8 @@
       "PowerShell(Get-ChildItem *)",
       "Bash(dir \"C:\\\\Data\\\\ideas\\\\blutdruck-tracker\\\\.claude\\\\commands\\\\specforge\" /a)",
       "PowerShell(cmd /c \"dir C:\\\\Data\\\\ideas\\\\blutdruck-tracker\\\\.claude\\\\commands\\\\specforge /a /s 2>&1\")",
-      "Bash(gh api *)"
+      "Bash(gh api *)",
+      "PowerShell($f = Get-Item .claude\\\\CLAUDE.md; $lines = \\(Get-Content $f.FullName | Measure-Object -Line\\).Lines; Write-Output \\(\"CLAUDE.md: {0} lines, {1} bytes\" -f $lines, $f.Length\\))"
     ]
   }
 }
