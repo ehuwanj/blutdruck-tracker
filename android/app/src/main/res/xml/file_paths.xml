@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Paths shared by share_plus via the FileProvider. Generated CSV / PDF
+  exports are written to files-path/exports/. The cache-path entry covers
+  ad-hoc temporary share targets.
+-->
+<paths>
+    <files-path name="exports" path="exports/" />
+    <cache-path name="cache" path="" />
+</paths>

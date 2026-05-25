@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "appTitle": "Blutdruck Tracker",
+  "@appTitle": {
+    "description": "Application title shown in the system app switcher and as the default header."
+  },
+  "disclaimerTitle": "Important notice",
+  "@disclaimerTitle": {
+    "description": "Title of the first-launch medical disclaimer dialog."
+  },
+  "disclaimerBody": "This app is for personal tracking and informational purposes only. It is not a medical device and does not provide diagnosis, treatment, or medical advice. Please consult a qualified healthcare professional for medical decisions.",
+  "@disclaimerBody": {
+    "description": "Canonical medical disclaimer body. Mirrors docs/specs/12-privacy-and-medical.md."
+  },
+  "disclaimerAccept": "I understand",
+  "@disclaimerAccept": {
+    "description": "Confirmation button on the first-launch disclaimer dialog."
+  }
+}
