@@ -118,5 +118,31 @@
   "timeSlotSettingsLink": "在设置中更改宽度",
   "weightChartTitle": "体重趋势",
   "overviewLoadErrorTitle": "无法加载概览",
-  "overviewLoadErrorBody": "请重试。"
+  "overviewLoadErrorBody": "请重试。",
+  "historyEmptyTitle": "暂无记录",
+  "historyEmptyBody": "点击 + 添加第一条记录。",
+  "historyEmptyAction": "添加第一条记录",
+  "historyEntriesCount": "{count, plural, other {{count} 条记录}}",
+  "@historyEntriesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "historyFilterAllTime": "全部时间",
+  "historyFilterRange": "{from} – {to}",
+  "@historyFilterRange": {
+    "placeholders": {
+      "from": {"type": "String"},
+      "to": {"type": "String"}
+    }
+  },
+  "historyFilterClear": "清除筛选",
+  "historyLoadErrorTitle": "无法加载记录",
+  "historyLoadErrorBody": "请重试。",
+  "historyPulseLabel": "脉搏 {count}",
+  "@historyPulseLabel": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  }
 }

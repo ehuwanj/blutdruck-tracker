@@ -4,6 +4,7 @@ import 'package:blutdruck_tracker/app/providers.dart';
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/screens/overview_screen.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_entry_screen.dart';
+import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_history_screen.dart';
 import 'package:blutdruck_tracker/features/settings/domain/entities/locale_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,9 +18,7 @@ final appRouter = GoRouter(
         GoRoute(path: '/', builder: (context, state) => const OverviewScreen()),
         GoRoute(
           path: '/history',
-          builder: (context, state) => PlaceholderScreen(
-            title: AppLocalizations.of(context).historyTitle,
-          ),
+          builder: (context, state) => const ReadingHistoryScreen(),
         ),
         GoRoute(
           path: '/statistics',

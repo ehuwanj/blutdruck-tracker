@@ -313,4 +313,47 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get overviewLoadErrorBody => 'Bitte erneut versuchen.';
+
+  @override
+  String get historyEmptyTitle => 'Noch keine Einträge';
+
+  @override
+  String get historyEmptyBody =>
+      'Tippen Sie auf das +, um die erste Messung zu erfassen.';
+
+  @override
+  String get historyEmptyAction => 'Erste Messung erfassen';
+
+  @override
+  String historyEntriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Einträge',
+      one: '1 Eintrag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get historyFilterAllTime => 'Gesamter Zeitraum';
+
+  @override
+  String historyFilterRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get historyFilterClear => 'Filter zurücksetzen';
+
+  @override
+  String get historyLoadErrorTitle => 'Einträge konnten nicht geladen werden';
+
+  @override
+  String get historyLoadErrorBody => 'Bitte erneut versuchen.';
+
+  @override
+  String historyPulseLabel(int count) {
+    return 'Puls $count';
+  }
 }

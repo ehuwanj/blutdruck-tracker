@@ -288,4 +288,45 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get overviewLoadErrorBody => '请重试。';
+
+  @override
+  String get historyEmptyTitle => '暂无记录';
+
+  @override
+  String get historyEmptyBody => '点击 + 添加第一条记录。';
+
+  @override
+  String get historyEmptyAction => '添加第一条记录';
+
+  @override
+  String historyEntriesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 条记录',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get historyFilterAllTime => '全部时间';
+
+  @override
+  String historyFilterRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get historyFilterClear => '清除筛选';
+
+  @override
+  String get historyLoadErrorTitle => '无法加载记录';
+
+  @override
+  String get historyLoadErrorBody => '请重试。';
+
+  @override
+  String historyPulseLabel(int count) {
+    return '脉搏 $count';
+  }
 }

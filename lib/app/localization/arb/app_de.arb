@@ -118,5 +118,31 @@
   "timeSlotSettingsLink": "Breite in Einstellungen ändern",
   "weightChartTitle": "Gewichtsverlauf",
   "overviewLoadErrorTitle": "Überblick konnte nicht geladen werden",
-  "overviewLoadErrorBody": "Bitte erneut versuchen."
+  "overviewLoadErrorBody": "Bitte erneut versuchen.",
+  "historyEmptyTitle": "Noch keine Einträge",
+  "historyEmptyBody": "Tippen Sie auf das +, um die erste Messung zu erfassen.",
+  "historyEmptyAction": "Erste Messung erfassen",
+  "historyEntriesCount": "{count, plural, one {1 Eintrag} other {{count} Einträge}}",
+  "@historyEntriesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "historyFilterAllTime": "Gesamter Zeitraum",
+  "historyFilterRange": "{from} – {to}",
+  "@historyFilterRange": {
+    "placeholders": {
+      "from": {"type": "String"},
+      "to": {"type": "String"}
+    }
+  },
+  "historyFilterClear": "Filter zurücksetzen",
+  "historyLoadErrorTitle": "Einträge konnten nicht geladen werden",
+  "historyLoadErrorBody": "Bitte erneut versuchen.",
+  "historyPulseLabel": "Puls {count}",
+  "@historyPulseLabel": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  }
 }

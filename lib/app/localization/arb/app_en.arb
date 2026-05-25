@@ -118,5 +118,31 @@
   "timeSlotSettingsLink": "Change width in Settings",
   "weightChartTitle": "Weight trend",
   "overviewLoadErrorTitle": "Could not load overview",
-  "overviewLoadErrorBody": "Please try again."
+  "overviewLoadErrorBody": "Please try again.",
+  "historyEmptyTitle": "No readings yet",
+  "historyEmptyBody": "Tap the + button to add your first reading.",
+  "historyEmptyAction": "Add first reading",
+  "historyEntriesCount": "{count, plural, one {1 entry} other {{count} entries}}",
+  "@historyEntriesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "historyFilterAllTime": "All time",
+  "historyFilterRange": "{from} – {to}",
+  "@historyFilterRange": {
+    "placeholders": {
+      "from": {"type": "String"},
+      "to": {"type": "String"}
+    }
+  },
+  "historyFilterClear": "Clear filter",
+  "historyLoadErrorTitle": "Could not load readings",
+  "historyLoadErrorBody": "Please try again.",
+  "historyPulseLabel": "Pulse {count}",
+  "@historyPulseLabel": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  }
 }

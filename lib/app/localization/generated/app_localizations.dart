@@ -633,6 +633,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please try again.'**
   String get overviewLoadErrorBody;
+
+  /// No description provided for @historyEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No readings yet'**
+  String get historyEmptyTitle;
+
+  /// No description provided for @historyEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the + button to add your first reading.'**
+  String get historyEmptyBody;
+
+  /// No description provided for @historyEmptyAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Add first reading'**
+  String get historyEmptyAction;
+
+  /// No description provided for @historyEntriesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one {1 entry} other {{count} entries}}'**
+  String historyEntriesCount(int count);
+
+  /// No description provided for @historyFilterAllTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get historyFilterAllTime;
+
+  /// No description provided for @historyFilterRange.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} – {to}'**
+  String historyFilterRange(String from, String to);
+
+  /// No description provided for @historyFilterClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filter'**
+  String get historyFilterClear;
+
+  /// No description provided for @historyLoadErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load readings'**
+  String get historyLoadErrorTitle;
+
+  /// No description provided for @historyLoadErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again.'**
+  String get historyLoadErrorBody;
+
+  /// No description provided for @historyPulseLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse {count}'**
+  String historyPulseLabel(int count);
 }
 
 class _AppLocalizationsDelegate
