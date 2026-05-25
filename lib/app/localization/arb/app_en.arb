@@ -1,19 +1,122 @@
 {
   "@@locale": "en",
-  "appTitle": "Blutdruck Tracker",
-  "@appTitle": {
-    "description": "Application title shown in the system app switcher and as the default header."
-  },
+  "appTitle": "Blood Pressure Tracker",
+  "overviewTitle": "Overview",
+  "historyTitle": "History",
+  "statisticsTitle": "Statistics",
+  "statusTitle": "Status",
+  "exportTitle": "Export",
+  "settingsTitle": "Settings",
+  "remindersTitle": "Reminders",
+  "privacyTitle": "Privacy info",
+  "addReadingTitle": "Add reading",
+  "editReadingTitle": "Edit reading",
+  "saveButton": "Save",
+  "cancelButton": "Cancel",
+  "deleteButton": "Delete",
+  "confirmButton": "Confirm",
+  "languageSystem": "System",
+  "languageEnglish": "English",
+  "languageGerman": "Deutsch",
+  "languageChinese": "中文",
+  "categoryHypotension": "Low blood pressure",
+  "categoryOptimal": "Optimal",
+  "categoryNormal": "Normal",
+  "categoryHighNormal": "High normal",
+  "categoryHypertensionGrade1": "Hypertension grade 1",
+  "categoryHypertensionGrade2": "Hypertension grade 2",
+  "categoryHypertensionGrade3": "Hypertension grade 3",
+  "categoryIsolatedSystolic": "Isolated systolic hypertension",
+  "bmiUnderweight": "Underweight",
+  "bmiNormal": "Normal weight",
+  "bmiOverweight": "Overweight",
+  "bmiObese": "Obesity",
   "disclaimerTitle": "Important notice",
-  "@disclaimerTitle": {
-    "description": "Title of the first-launch medical disclaimer dialog."
-  },
   "disclaimerBody": "This app is for personal tracking and informational purposes only. It is not a medical device and does not provide diagnosis, treatment, or medical advice. Please consult a qualified healthcare professional for medical decisions.",
-  "@disclaimerBody": {
-    "description": "Canonical medical disclaimer body. Mirrors docs/specs/12-privacy-and-medical.md."
-  },
   "disclaimerAccept": "I understand",
-  "@disclaimerAccept": {
-    "description": "Confirmation button on the first-launch disclaimer dialog."
-  }
+  "measuredAtLabel": "Date and time",
+  "systolicLabel": "Systolic",
+  "diastolicLabel": "Diastolic",
+  "pulseLabel": "Pulse",
+  "weightLabel": "Weight",
+  "armLabel": "Arm",
+  "armLeftLabel": "Left",
+  "armRightLabel": "Right",
+  "unspecifiedLabel": "Unspecified",
+  "stressLevelLabel": "Stress level",
+  "medicationNoteLabel": "Medication note",
+  "noteLabel": "Notes",
+  "validationRange": "This value is outside the expected input range. Please check it.",
+  "validationSystolicDiastolic": "Systolic should usually be higher than diastolic.",
+  "validationNoteTooLong": "The note is too long.",
+  "validationMedicationTooLong": "The medication note is too long.",
+  "validationFutureDate": "The measurement time is too far in the future.",
+  "readingSavedMessage": "Reading saved",
+  "formLoadErrorTitle": "Could not load reading",
+  "formLoadErrorBody": "Please try again.",
+  "deleteReadingTitle": "Delete reading",
+  "deleteReadingBody": "Delete this reading?",
+  "overviewTabHistory": "History",
+  "overviewTabStatistics": "Statistics",
+  "overviewTabStatus": "Status",
+  "latestReadingTitle": "Latest reading",
+  "latestReadingEmptyTitle": "No readings yet",
+  "latestReadingEmptyBody": "Add your first reading to start seeing your trend.",
+  "latestReadingEmptyAction": "Add first reading",
+  "latestReadingSemanticLabel": "Latest reading: {systolic} to {diastolic}, pulse {pulse}, category {category}, {relativeTime}",
+  "@latestReadingSemanticLabel": {
+    "placeholders": {
+      "systolic": {"type": "int"},
+      "diastolic": {"type": "int"},
+      "pulse": {"type": "int"},
+      "category": {"type": "String"},
+      "relativeTime": {"type": "String"}
+    }
+  },
+  "relativeTimeNow": "Just now",
+  "relativeTimeMinutes": "{count, plural, one {1 minute ago} other {{count} minutes ago}}",
+  "@relativeTimeMinutes": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "relativeTimeHours": "{count, plural, one {1 hour ago} other {{count} hours ago}}",
+  "@relativeTimeHours": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "relativeTimeDays": "{count, plural, one {1 day ago} other {{count} days ago}}",
+  "@relativeTimeDays": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bloodPressureChartTitle": "Blood pressure trend",
+  "chartEmptyTitle": "No readings in this period",
+  "chartEmptyBody": "Choose another period or add a new reading.",
+  "period7Days": "7 d",
+  "period14Days": "14 d",
+  "period30Days": "30 d",
+  "period90Days": "90 d",
+  "periodCustom": "Custom",
+  "timeSlotChartTitle": "Time slot",
+  "timeSlotChartEmptyTitle": "Time slot trend",
+  "timeSlotChartHint": "Collect more readings at a similar time of day to see this view.",
+  "timeSlotSourceAuto": "auto-detected",
+  "timeSlotSourcePinned": "pinned",
+  "timeSlotHeader": "{range} · {hours} h · {source}",
+  "@timeSlotHeader": {
+    "placeholders": {
+      "range": {"type": "String"},
+      "hours": {"type": "int"},
+      "source": {"type": "String"}
+    }
+  },
+  "timeSlotSettingsTooltip": "Time-slot settings",
+  "timeSlotAutoToggle": "Choose slot automatically",
+  "timeSlotSettingsLink": "Change width in Settings",
+  "weightChartTitle": "Weight trend",
+  "overviewLoadErrorTitle": "Could not load overview",
+  "overviewLoadErrorBody": "Please try again."
 }

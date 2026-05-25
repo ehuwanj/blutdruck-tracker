@@ -1,7 +1,122 @@
 {
   "@@locale": "zh",
   "appTitle": "血压记录",
+  "overviewTitle": "概览",
+  "historyTitle": "历史",
+  "statisticsTitle": "统计",
+  "statusTitle": "状态",
+  "exportTitle": "导出",
+  "settingsTitle": "设置",
+  "remindersTitle": "提醒",
+  "privacyTitle": "隐私说明",
+  "addReadingTitle": "添加记录",
+  "editReadingTitle": "编辑记录",
+  "saveButton": "保存",
+  "cancelButton": "取消",
+  "deleteButton": "删除",
+  "confirmButton": "确认",
+  "languageSystem": "系统",
+  "languageEnglish": "English",
+  "languageGerman": "Deutsch",
+  "languageChinese": "中文",
+  "categoryHypotension": "低血压",
+  "categoryOptimal": "理想",
+  "categoryNormal": "正常",
+  "categoryHighNormal": "正常偏高",
+  "categoryHypertensionGrade1": "高血压 1 级",
+  "categoryHypertensionGrade2": "高血压 2 级",
+  "categoryHypertensionGrade3": "高血压 3 级",
+  "categoryIsolatedSystolic": "单纯收缩期高血压",
+  "bmiUnderweight": "偏瘦",
+  "bmiNormal": "正常",
+  "bmiOverweight": "超重",
+  "bmiObese": "肥胖",
   "disclaimerTitle": "重要提示",
-  "disclaimerBody": "本应用仅用于个人记录和信息参考。它不是医疗设备，不提供诊断、治疗或医疗建议。如有医学问题，请咨询合格的医疗专业人员。",
-  "disclaimerAccept": "我明白了"
+  "disclaimerBody": "此应用仅用于个人记录和信息参考。它不是医疗器械，不提供诊断、治疗或医疗建议。医疗决定请咨询合格的医疗专业人员。",
+  "disclaimerAccept": "明白了",
+  "measuredAtLabel": "日期和时间",
+  "systolicLabel": "收缩压",
+  "diastolicLabel": "舒张压",
+  "pulseLabel": "脉搏",
+  "weightLabel": "体重",
+  "armLabel": "测量手臂",
+  "armLeftLabel": "左",
+  "armRightLabel": "右",
+  "unspecifiedLabel": "未指定",
+  "stressLevelLabel": "压力等级",
+  "medicationNoteLabel": "用药备注",
+  "noteLabel": "备注",
+  "validationRange": "该值超出输入范围，请检查。",
+  "validationSystolicDiastolic": "收缩压通常应高于舒张压。",
+  "validationNoteTooLong": "备注过长。",
+  "validationMedicationTooLong": "用药备注过长。",
+  "validationFutureDate": "测量时间过于靠后。",
+  "readingSavedMessage": "已保存",
+  "formLoadErrorTitle": "无法加载记录",
+  "formLoadErrorBody": "请重试。",
+  "deleteReadingTitle": "删除记录",
+  "deleteReadingBody": "删除这条记录？",
+  "overviewTabHistory": "历史",
+  "overviewTabStatistics": "统计",
+  "overviewTabStatus": "状态",
+  "latestReadingTitle": "最新记录",
+  "latestReadingEmptyTitle": "暂无记录",
+  "latestReadingEmptyBody": "添加第一条记录后即可查看趋势。",
+  "latestReadingEmptyAction": "添加第一条记录",
+  "latestReadingSemanticLabel": "最新记录：{systolic} 比 {diastolic}，脉搏 {pulse}，分类 {category}，{relativeTime}",
+  "@latestReadingSemanticLabel": {
+    "placeholders": {
+      "systolic": {"type": "int"},
+      "diastolic": {"type": "int"},
+      "pulse": {"type": "int"},
+      "category": {"type": "String"},
+      "relativeTime": {"type": "String"}
+    }
+  },
+  "relativeTimeNow": "刚刚",
+  "relativeTimeMinutes": "{count} 分钟前",
+  "@relativeTimeMinutes": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "relativeTimeHours": "{count} 小时前",
+  "@relativeTimeHours": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "relativeTimeDays": "{count} 天前",
+  "@relativeTimeDays": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bloodPressureChartTitle": "血压趋势",
+  "chartEmptyTitle": "此时间段没有记录",
+  "chartEmptyBody": "请选择其他时间段或添加新记录。",
+  "period7Days": "7 天",
+  "period14Days": "14 天",
+  "period30Days": "30 天",
+  "period90Days": "90 天",
+  "periodCustom": "自定义",
+  "timeSlotChartTitle": "时间窗口",
+  "timeSlotChartEmptyTitle": "时间窗口趋势",
+  "timeSlotChartHint": "在相近的每天时间记录更多测量后，即可查看此视图。",
+  "timeSlotSourceAuto": "自动识别",
+  "timeSlotSourcePinned": "已固定",
+  "timeSlotHeader": "{range} · {hours} 小时 · {source}",
+  "@timeSlotHeader": {
+    "placeholders": {
+      "range": {"type": "String"},
+      "hours": {"type": "int"},
+      "source": {"type": "String"}
+    }
+  },
+  "timeSlotSettingsTooltip": "时间窗口设置",
+  "timeSlotAutoToggle": "自动选择时间窗口",
+  "timeSlotSettingsLink": "在设置中更改宽度",
+  "weightChartTitle": "体重趋势",
+  "overviewLoadErrorTitle": "无法加载概览",
+  "overviewLoadErrorBody": "请重试。"
 }

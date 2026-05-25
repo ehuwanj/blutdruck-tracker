@@ -1,43 +1,48 @@
-import 'package:blutdruck_tracker/app/disclaimer/disclaimer_dialog.dart';
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
+import 'package:blutdruck_tracker/app/providers.dart';
+import 'package:blutdruck_tracker/app/router.dart';
 import 'package:blutdruck_tracker/app/theme/app_theme.dart';
+import 'package:blutdruck_tracker/features/settings/domain/entities/locale_setting.dart';
+import 'package:blutdruck_tracker/features/settings/domain/entities/theme_mode_setting.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Root widget. Step 0 ships an empty home scaffold; feature screens land
-/// in step 5 (app shell + routing).
-class BlutdruckTrackerApp extends StatelessWidget {
+class BlutdruckTrackerApp extends ConsumerWidget {
   const BlutdruckTrackerApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(settingsProvider).valueOrNull;
+    return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
+      themeMode: settings?.themeMode.toThemeMode() ?? ThemeMode.system,
+      locale: settings?.locale.toLocale(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const DisclaimerGate(child: _PlaceholderHome()),
+      routerConfig: appRouter,
     );
   }
 }
 
-class _PlaceholderHome extends StatelessWidget {
-  const _PlaceholderHome();
+extension on ThemeModeSetting {
+  ThemeMode toThemeMode() {
+    return switch (this) {
+      ThemeModeSetting.system => ThemeMode.system,
+      ThemeModeSetting.light => ThemeMode.light,
+      ThemeModeSetting.dark => ThemeMode.dark,
+    };
+  }
+}
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.appTitle)),
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.all(24),
-          child: Text(
-            'Step 0 foundation in place. Feature screens land in step 5.',
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
+extension on LocaleSetting {
+  Locale? toLocale() {
+    return switch (this) {
+      LocaleSetting.system => null,
+      LocaleSetting.en => const Locale('en'),
+      LocaleSetting.de => const Locale('de'),
+      LocaleSetting.zh => const Locale('zh'),
+    };
   }
 }

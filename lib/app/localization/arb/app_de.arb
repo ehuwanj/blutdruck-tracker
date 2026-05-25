@@ -1,7 +1,122 @@
 {
   "@@locale": "de",
   "appTitle": "Blutdruck Tracker",
+  "overviewTitle": "Überblick",
+  "historyTitle": "Verlauf",
+  "statisticsTitle": "Statistiken",
+  "statusTitle": "Status",
+  "exportTitle": "Exportieren",
+  "settingsTitle": "Einstellungen",
+  "remindersTitle": "Erinnerungen",
+  "privacyTitle": "Datenschutz",
+  "addReadingTitle": "Messung erfassen",
+  "editReadingTitle": "Messung bearbeiten",
+  "saveButton": "Speichern",
+  "cancelButton": "Abbrechen",
+  "deleteButton": "Löschen",
+  "confirmButton": "Bestätigen",
+  "languageSystem": "System",
+  "languageEnglish": "English",
+  "languageGerman": "Deutsch",
+  "languageChinese": "中文",
+  "categoryHypotension": "Niedriger Blutdruck",
+  "categoryOptimal": "Optimal",
+  "categoryNormal": "Normal",
+  "categoryHighNormal": "Hochnormal",
+  "categoryHypertensionGrade1": "Bluthochdruck Grad 1",
+  "categoryHypertensionGrade2": "Bluthochdruck Grad 2",
+  "categoryHypertensionGrade3": "Bluthochdruck Grad 3",
+  "categoryIsolatedSystolic": "Isolierte systolische Hypertonie",
+  "bmiUnderweight": "Untergewicht",
+  "bmiNormal": "Normalgewicht",
+  "bmiOverweight": "Übergewicht",
+  "bmiObese": "Adipositas",
   "disclaimerTitle": "Wichtiger Hinweis",
   "disclaimerBody": "Diese App dient nur der persönlichen Dokumentation und Information. Sie ist kein Medizinprodukt und bietet keine Diagnose, Behandlung oder medizinische Beratung. Bitte wenden Sie sich bei medizinischen Fragen an qualifiziertes medizinisches Fachpersonal.",
-  "disclaimerAccept": "Verstanden"
+  "disclaimerAccept": "Verstanden",
+  "measuredAtLabel": "Datum und Uhrzeit",
+  "systolicLabel": "Systolisch",
+  "diastolicLabel": "Diastolisch",
+  "pulseLabel": "Puls",
+  "weightLabel": "Gewicht",
+  "armLabel": "Arm",
+  "armLeftLabel": "Links",
+  "armRightLabel": "Rechts",
+  "unspecifiedLabel": "Nicht angegeben",
+  "stressLevelLabel": "Stress",
+  "medicationNoteLabel": "Medikament",
+  "noteLabel": "Notiz",
+  "validationRange": "Dieser Wert liegt außerhalb des Eingabebereichs. Bitte überprüfen.",
+  "validationSystolicDiastolic": "Systolisch sollte normalerweise höher als diastolisch sein.",
+  "validationNoteTooLong": "Die Notiz ist zu lang.",
+  "validationMedicationTooLong": "Der Medikamentenhinweis ist zu lang.",
+  "validationFutureDate": "Der Messzeitpunkt liegt zu weit in der Zukunft.",
+  "readingSavedMessage": "Eintrag gespeichert",
+  "formLoadErrorTitle": "Messung konnte nicht geladen werden",
+  "formLoadErrorBody": "Bitte erneut versuchen.",
+  "deleteReadingTitle": "Messung löschen",
+  "deleteReadingBody": "Diese Messung löschen?",
+  "overviewTabHistory": "Verlauf",
+  "overviewTabStatistics": "Statistiken",
+  "overviewTabStatus": "Status",
+  "latestReadingTitle": "Letzte Messung",
+  "latestReadingEmptyTitle": "Noch keine Messungen",
+  "latestReadingEmptyBody": "Erfassen Sie die erste Messung, um Ihren Verlauf zu sehen.",
+  "latestReadingEmptyAction": "Erste Messung erfassen",
+  "latestReadingSemanticLabel": "Letzte Messung: {systolic} zu {diastolic}, Puls {pulse}, Kategorie {category}, {relativeTime}",
+  "@latestReadingSemanticLabel": {
+    "placeholders": {
+      "systolic": {"type": "int"},
+      "diastolic": {"type": "int"},
+      "pulse": {"type": "int"},
+      "category": {"type": "String"},
+      "relativeTime": {"type": "String"}
+    }
+  },
+  "relativeTimeNow": "Gerade eben",
+  "relativeTimeMinutes": "{count, plural, one {vor 1 Minute} other {vor {count} Minuten}}",
+  "@relativeTimeMinutes": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "relativeTimeHours": "{count, plural, one {vor 1 Stunde} other {vor {count} Stunden}}",
+  "@relativeTimeHours": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "relativeTimeDays": "{count, plural, one {vor 1 Tag} other {vor {count} Tagen}}",
+  "@relativeTimeDays": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bloodPressureChartTitle": "Blutdruckverlauf",
+  "chartEmptyTitle": "Keine Messungen in diesem Zeitraum",
+  "chartEmptyBody": "Wählen Sie einen anderen Zeitraum oder erfassen Sie eine neue Messung.",
+  "period7Days": "7 T",
+  "period14Days": "14 T",
+  "period30Days": "30 T",
+  "period90Days": "90 T",
+  "periodCustom": "Benutzerdefiniert",
+  "timeSlotChartTitle": "Zeitfenster",
+  "timeSlotChartEmptyTitle": "Zeitfensterverlauf",
+  "timeSlotChartHint": "Sammeln Sie mehr Messungen zur gleichen Tageszeit, um diese Auswertung zu sehen.",
+  "timeSlotSourceAuto": "automatisch erkannt",
+  "timeSlotSourcePinned": "festgelegt",
+  "timeSlotHeader": "{range} · {hours} h · {source}",
+  "@timeSlotHeader": {
+    "placeholders": {
+      "range": {"type": "String"},
+      "hours": {"type": "int"},
+      "source": {"type": "String"}
+    }
+  },
+  "timeSlotSettingsTooltip": "Zeitfenster einstellen",
+  "timeSlotAutoToggle": "Slot automatisch wählen",
+  "timeSlotSettingsLink": "Breite in Einstellungen ändern",
+  "weightChartTitle": "Gewichtsverlauf",
+  "overviewLoadErrorTitle": "Überblick konnte nicht geladen werden",
+  "overviewLoadErrorBody": "Bitte erneut versuchen."
 }

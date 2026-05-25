@@ -1,5 +1,5 @@
-import 'package:blutdruck_tracker/app/disclaimer/disclaimer_acceptance_provider.dart';
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
+import 'package:blutdruck_tracker/app/providers.dart';
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,9 +21,16 @@ class DisclaimerDialog extends ConsumerWidget {
         actions: [
           FilledButton(
             onPressed: () {
-              ref
-                  .read(disclaimerAcceptedVersionProvider.notifier)
-                  .markAccepted(kDisclaimerVersion);
+              final settings = ref.read(settingsProvider).valueOrNull;
+              if (settings != null) {
+                ref
+                    .read(settingsProvider.notifier)
+                    .save(
+                      settings.copyWith(
+                        disclaimerAcceptedVersion: kDisclaimerVersion,
+                      ),
+                    );
+              }
               Navigator.of(context).pop();
             },
             child: Text(l10n.disclaimerAccept),
@@ -50,7 +57,11 @@ class _DisclaimerGateState extends ConsumerState<DisclaimerGate> {
 
   @override
   Widget build(BuildContext context) {
-    final accepted = ref.watch(disclaimerAcceptedVersionProvider);
+    final settings = ref.watch(settingsProvider);
+    if (!settings.hasValue) {
+      return widget.child;
+    }
+    final accepted = settings.valueOrNull?.disclaimerAcceptedVersion;
     final needsAcceptance = accepted == null || accepted < kDisclaimerVersion;
 
     if (needsAcceptance && !_scheduled) {
