@@ -1,21 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(gh repo *)",
+      "PowerShell(*)",
+      "Bash(*)",
       "WebFetch(domain:api.github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)",
-      "PowerShell(Get-ChildItem \"C:\\\\Data\\\\ideas\\\\blutdruck-tracker\\\\\" -Recurse -Name -ErrorAction SilentlyContinue | Where-Object { $_ -match \"specforge\" })",
-      "PowerShell(Get-ChildItem *)",
-      "Bash(dir \"C:\\\\Data\\\\ideas\\\\blutdruck-tracker\\\\.claude\\\\commands\\\\specforge\" /a)",
-      "PowerShell(cmd /c \"dir C:\\\\Data\\\\ideas\\\\blutdruck-tracker\\\\.claude\\\\commands\\\\specforge /a /s 2>&1\")",
-      "Bash(gh api *)",
-      "PowerShell($f = Get-Item .claude\\\\CLAUDE.md; $lines = \\(Get-Content $f.FullName | Measure-Object -Line\\).Lines; Write-Output \\(\"CLAUDE.md: {0} lines, {1} bytes\" -f $lines, $f.Length\\))",
-      "PowerShell(Get-Command flutter -ErrorAction SilentlyContinue)",
-      "PowerShell(Get-Command dart -ErrorAction SilentlyContinue)",
-      "PowerShell(Get-Command fvm -ErrorAction SilentlyContinue)",
-      "PowerShell(Get-Command winget -ErrorAction SilentlyContinue)",
-      "PowerShell(Get-Command choco  -ErrorAction SilentlyContinue)",
-      "PowerShell(Get-Command scoop  -ErrorAction SilentlyContinue)"
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

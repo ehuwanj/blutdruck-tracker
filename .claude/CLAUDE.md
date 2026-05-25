@@ -143,9 +143,6 @@ For every step (`implement <N>` or ad-hoc):
   update the relevant spec and let this file stay small.
 - Pull requests are created only when the user asks.
 
-## Usage with PowerShell
-- allow to proceed with PowerShell
-
 ## Quick reference
 
 Load-bearing facts that come up across many steps; full detail in the
