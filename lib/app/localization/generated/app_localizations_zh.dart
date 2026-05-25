@@ -502,4 +502,165 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get insightWellDocumentedBody => '您在规律地记录。请保持。';
+
+  @override
+  String get csvColumnDate => '日期';
+
+  @override
+  String get csvColumnTime => '时间';
+
+  @override
+  String get csvColumnSystolic => '收缩压';
+
+  @override
+  String get csvColumnDiastolic => '舒张压';
+
+  @override
+  String get csvColumnPulse => '脉搏';
+
+  @override
+  String get csvColumnPulsePressure => '脉压';
+
+  @override
+  String get csvColumnMap => 'MAP';
+
+  @override
+  String get csvColumnWeightKg => '体重_kg';
+
+  @override
+  String get csvColumnArm => '手臂';
+
+  @override
+  String get csvColumnStress => '压力';
+
+  @override
+  String get csvColumnMedication => '用药';
+
+  @override
+  String get csvColumnNote => '备注';
+
+  @override
+  String get csvColumnCategory => '分类';
+
+  @override
+  String get csvColumnSource => '来源';
+
+  @override
+  String get exportFormatCsv => 'CSV';
+
+  @override
+  String get exportFormatPdf => 'PDF';
+
+  @override
+  String get exportFormatLabel => '格式';
+
+  @override
+  String get exportPeriodLabel => '时间段';
+
+  @override
+  String get exportIncludeContextFields => '包含上下文字段';
+
+  @override
+  String get exportIncludeChartImage => '包含图表';
+
+  @override
+  String get exportGenerateAction => '生成并分享';
+
+  @override
+  String get exportGeneratingMessage => '正在生成…';
+
+  @override
+  String get exportSavedMessage => '导出已保存。';
+
+  @override
+  String get exportHistoryTitle => '最近的导出';
+
+  @override
+  String get exportHistoryEmpty => '暂无导出。';
+
+  @override
+  String get exportDeleteRecordTitle => '删除导出？';
+
+  @override
+  String get exportDeleteRecordBody => '从最近列表中移除此导出。';
+
+  @override
+  String get pdfReportHeader => '血压报告';
+
+  @override
+  String pdfGeneratedAt(String timestamp) {
+    return '生成于 $timestamp';
+  }
+
+  @override
+  String get pdfSummaryTitle => '摘要';
+
+  @override
+  String get pdfReadingsTitle => '记录';
+
+  @override
+  String get pdfDisclaimerFooter => '此报告不能替代医学建议。';
+
+  @override
+  String get pdfChartUnavailable => '此版本未包含图表图像。';
+
+  @override
+  String get reminderNotificationTitle => '血压测量';
+
+  @override
+  String get reminderNotificationBody => '该记录一次测量了。';
+
+  @override
+  String get remindersMasterToggle => '启用提醒';
+
+  @override
+  String get remindersEmptyTitle => '暂无提醒';
+
+  @override
+  String get remindersEmptyBody => '添加提醒后即可获得每天的轻柔提示。';
+
+  @override
+  String get remindersAddAction => '添加提醒';
+
+  @override
+  String get reminderEditTitle => '编辑提醒';
+
+  @override
+  String get reminderAddTitle => '新建提醒';
+
+  @override
+  String get reminderTimeLabel => '时间';
+
+  @override
+  String get reminderWeekdaysLabel => '星期';
+
+  @override
+  String get reminderEveryDay => '每天';
+
+  @override
+  String get reminderLabelLabel => '标签（可选）';
+
+  @override
+  String get reminderPermissionDenied => '未授予通知权限。';
+
+  @override
+  String get weekdayMon => '一';
+
+  @override
+  String get weekdayTue => '二';
+
+  @override
+  String get weekdayWed => '三';
+
+  @override
+  String get weekdayThu => '四';
+
+  @override
+  String get weekdayFri => '五';
+
+  @override
+  String get weekdaySat => '六';
+
+  @override
+  String get weekdaySun => '日';
 }

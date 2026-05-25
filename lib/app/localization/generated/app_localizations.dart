@@ -1017,6 +1017,324 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You\'re recording regularly. Keep it up.'**
   String get insightWellDocumentedBody;
+
+  /// No description provided for @csvColumnDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get csvColumnDate;
+
+  /// No description provided for @csvColumnTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get csvColumnTime;
+
+  /// No description provided for @csvColumnSystolic.
+  ///
+  /// In en, this message translates to:
+  /// **'Systolic'**
+  String get csvColumnSystolic;
+
+  /// No description provided for @csvColumnDiastolic.
+  ///
+  /// In en, this message translates to:
+  /// **'Diastolic'**
+  String get csvColumnDiastolic;
+
+  /// No description provided for @csvColumnPulse.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse'**
+  String get csvColumnPulse;
+
+  /// No description provided for @csvColumnPulsePressure.
+  ///
+  /// In en, this message translates to:
+  /// **'PulsePressure'**
+  String get csvColumnPulsePressure;
+
+  /// No description provided for @csvColumnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'MAP'**
+  String get csvColumnMap;
+
+  /// No description provided for @csvColumnWeightKg.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight_kg'**
+  String get csvColumnWeightKg;
+
+  /// No description provided for @csvColumnArm.
+  ///
+  /// In en, this message translates to:
+  /// **'Arm'**
+  String get csvColumnArm;
+
+  /// No description provided for @csvColumnStress.
+  ///
+  /// In en, this message translates to:
+  /// **'Stress'**
+  String get csvColumnStress;
+
+  /// No description provided for @csvColumnMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication'**
+  String get csvColumnMedication;
+
+  /// No description provided for @csvColumnNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get csvColumnNote;
+
+  /// No description provided for @csvColumnCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get csvColumnCategory;
+
+  /// No description provided for @csvColumnSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Source'**
+  String get csvColumnSource;
+
+  /// No description provided for @exportFormatCsv.
+  ///
+  /// In en, this message translates to:
+  /// **'CSV'**
+  String get exportFormatCsv;
+
+  /// No description provided for @exportFormatPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF'**
+  String get exportFormatPdf;
+
+  /// No description provided for @exportFormatLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Format'**
+  String get exportFormatLabel;
+
+  /// No description provided for @exportPeriodLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Period'**
+  String get exportPeriodLabel;
+
+  /// No description provided for @exportIncludeContextFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Include context fields'**
+  String get exportIncludeContextFields;
+
+  /// No description provided for @exportIncludeChartImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Include chart image'**
+  String get exportIncludeChartImage;
+
+  /// No description provided for @exportGenerateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate and share'**
+  String get exportGenerateAction;
+
+  /// No description provided for @exportGeneratingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating…'**
+  String get exportGeneratingMessage;
+
+  /// No description provided for @exportSavedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Export saved.'**
+  String get exportSavedMessage;
+
+  /// No description provided for @exportHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent exports'**
+  String get exportHistoryTitle;
+
+  /// No description provided for @exportHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No exports yet.'**
+  String get exportHistoryEmpty;
+
+  /// No description provided for @exportDeleteRecordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete export?'**
+  String get exportDeleteRecordTitle;
+
+  /// No description provided for @exportDeleteRecordBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this export file from the recents list.'**
+  String get exportDeleteRecordBody;
+
+  /// No description provided for @pdfReportHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Blood pressure report'**
+  String get pdfReportHeader;
+
+  /// No description provided for @pdfGeneratedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Generated {timestamp}'**
+  String pdfGeneratedAt(String timestamp);
+
+  /// No description provided for @pdfSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get pdfSummaryTitle;
+
+  /// No description provided for @pdfReadingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Readings'**
+  String get pdfReadingsTitle;
+
+  /// No description provided for @pdfDisclaimerFooter.
+  ///
+  /// In en, this message translates to:
+  /// **'This report does not replace medical advice.'**
+  String get pdfDisclaimerFooter;
+
+  /// No description provided for @pdfChartUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart image not included in this build.'**
+  String get pdfChartUnavailable;
+
+  /// No description provided for @reminderNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Blood pressure reading'**
+  String get reminderNotificationTitle;
+
+  /// No description provided for @reminderNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to record a measurement.'**
+  String get reminderNotificationBody;
+
+  /// No description provided for @remindersMasterToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable reminders'**
+  String get remindersMasterToggle;
+
+  /// No description provided for @remindersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No reminders yet'**
+  String get remindersEmptyTitle;
+
+  /// No description provided for @remindersEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a reminder to get a gentle nudge each day.'**
+  String get remindersEmptyBody;
+
+  /// No description provided for @remindersAddAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Add reminder'**
+  String get remindersAddAction;
+
+  /// No description provided for @reminderEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit reminder'**
+  String get reminderEditTitle;
+
+  /// No description provided for @reminderAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New reminder'**
+  String get reminderAddTitle;
+
+  /// No description provided for @reminderTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get reminderTimeLabel;
+
+  /// No description provided for @reminderWeekdaysLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekdays'**
+  String get reminderWeekdaysLabel;
+
+  /// No description provided for @reminderEveryDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Every day'**
+  String get reminderEveryDay;
+
+  /// No description provided for @reminderLabelLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label (optional)'**
+  String get reminderLabelLabel;
+
+  /// No description provided for @reminderPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification permission was not granted.'**
+  String get reminderPermissionDenied;
+
+  /// No description provided for @weekdayMon.
+  ///
+  /// In en, this message translates to:
+  /// **'Mon'**
+  String get weekdayMon;
+
+  /// No description provided for @weekdayTue.
+  ///
+  /// In en, this message translates to:
+  /// **'Tue'**
+  String get weekdayTue;
+
+  /// No description provided for @weekdayWed.
+  ///
+  /// In en, this message translates to:
+  /// **'Wed'**
+  String get weekdayWed;
+
+  /// No description provided for @weekdayThu.
+  ///
+  /// In en, this message translates to:
+  /// **'Thu'**
+  String get weekdayThu;
+
+  /// No description provided for @weekdayFri.
+  ///
+  /// In en, this message translates to:
+  /// **'Fri'**
+  String get weekdayFri;
+
+  /// No description provided for @weekdaySat.
+  ///
+  /// In en, this message translates to:
+  /// **'Sat'**
+  String get weekdaySat;
+
+  /// No description provided for @weekdaySun.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get weekdaySun;
 }
 
 class _AppLocalizationsDelegate

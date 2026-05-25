@@ -13,6 +13,14 @@ class BlutdruckTrackerApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider).valueOrNull;
+    // Re-schedule notifications whenever the reminder list emits a new
+    // value (initial app-start emission, plus any add/edit/delete writes
+    // that flow through the Drift stream). Spec 08 §Local reminders.
+    ref.listen(remindersStreamProvider, (previous, next) {
+      final reminders = next.valueOrNull;
+      if (reminders == null) return;
+      ref.read(reminderSchedulerProvider).scheduleAll(reminders);
+    });
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       theme: AppTheme.light(),

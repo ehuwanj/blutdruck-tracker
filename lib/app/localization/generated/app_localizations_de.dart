@@ -543,4 +543,169 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get insightWellDocumentedBody => 'Sie erfassen regelmäßig. Weiter so.';
+
+  @override
+  String get csvColumnDate => 'Datum';
+
+  @override
+  String get csvColumnTime => 'Uhrzeit';
+
+  @override
+  String get csvColumnSystolic => 'Systolisch';
+
+  @override
+  String get csvColumnDiastolic => 'Diastolisch';
+
+  @override
+  String get csvColumnPulse => 'Puls';
+
+  @override
+  String get csvColumnPulsePressure => 'Pulsdruck';
+
+  @override
+  String get csvColumnMap => 'MAD';
+
+  @override
+  String get csvColumnWeightKg => 'Gewicht_kg';
+
+  @override
+  String get csvColumnArm => 'Arm';
+
+  @override
+  String get csvColumnStress => 'Stress';
+
+  @override
+  String get csvColumnMedication => 'Medikament';
+
+  @override
+  String get csvColumnNote => 'Notiz';
+
+  @override
+  String get csvColumnCategory => 'Kategorie';
+
+  @override
+  String get csvColumnSource => 'Quelle';
+
+  @override
+  String get exportFormatCsv => 'CSV';
+
+  @override
+  String get exportFormatPdf => 'PDF';
+
+  @override
+  String get exportFormatLabel => 'Format';
+
+  @override
+  String get exportPeriodLabel => 'Zeitraum';
+
+  @override
+  String get exportIncludeContextFields => 'Kontextfelder einschließen';
+
+  @override
+  String get exportIncludeChartImage => 'Diagramm einbetten';
+
+  @override
+  String get exportGenerateAction => 'Erstellen und teilen';
+
+  @override
+  String get exportGeneratingMessage => 'Wird erstellt…';
+
+  @override
+  String get exportSavedMessage => 'Export gespeichert.';
+
+  @override
+  String get exportHistoryTitle => 'Letzte Exporte';
+
+  @override
+  String get exportHistoryEmpty => 'Noch keine Exporte.';
+
+  @override
+  String get exportDeleteRecordTitle => 'Export löschen?';
+
+  @override
+  String get exportDeleteRecordBody => 'Eintrag aus der Liste entfernen.';
+
+  @override
+  String get pdfReportHeader => 'Blutdruck-Bericht';
+
+  @override
+  String pdfGeneratedAt(String timestamp) {
+    return 'Erstellt $timestamp';
+  }
+
+  @override
+  String get pdfSummaryTitle => 'Zusammenfassung';
+
+  @override
+  String get pdfReadingsTitle => 'Messungen';
+
+  @override
+  String get pdfDisclaimerFooter =>
+      'Diese Auswertung ersetzt keine ärztliche Beurteilung.';
+
+  @override
+  String get pdfChartUnavailable =>
+      'Diagrammbild in dieser Version nicht enthalten.';
+
+  @override
+  String get reminderNotificationTitle => 'Blutdruckmessung';
+
+  @override
+  String get reminderNotificationBody => 'Zeit für eine Messung.';
+
+  @override
+  String get remindersMasterToggle => 'Erinnerungen aktivieren';
+
+  @override
+  String get remindersEmptyTitle => 'Noch keine Erinnerungen';
+
+  @override
+  String get remindersEmptyBody =>
+      'Erinnerung hinzufügen, um eine sanfte Erinnerung zu erhalten.';
+
+  @override
+  String get remindersAddAction => 'Erinnerung hinzufügen';
+
+  @override
+  String get reminderEditTitle => 'Erinnerung bearbeiten';
+
+  @override
+  String get reminderAddTitle => 'Neue Erinnerung';
+
+  @override
+  String get reminderTimeLabel => 'Uhrzeit';
+
+  @override
+  String get reminderWeekdaysLabel => 'Wochentage';
+
+  @override
+  String get reminderEveryDay => 'Täglich';
+
+  @override
+  String get reminderLabelLabel => 'Bezeichnung (optional)';
+
+  @override
+  String get reminderPermissionDenied =>
+      'Benachrichtigungsberechtigung wurde nicht erteilt.';
+
+  @override
+  String get weekdayMon => 'Mo';
+
+  @override
+  String get weekdayTue => 'Di';
+
+  @override
+  String get weekdayWed => 'Mi';
+
+  @override
+  String get weekdayThu => 'Do';
+
+  @override
+  String get weekdayFri => 'Fr';
+
+  @override
+  String get weekdaySat => 'Sa';
+
+  @override
+  String get weekdaySun => 'So';
 }

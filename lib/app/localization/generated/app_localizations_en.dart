@@ -539,4 +539,169 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get insightWellDocumentedBody =>
       'You\'re recording regularly. Keep it up.';
+
+  @override
+  String get csvColumnDate => 'Date';
+
+  @override
+  String get csvColumnTime => 'Time';
+
+  @override
+  String get csvColumnSystolic => 'Systolic';
+
+  @override
+  String get csvColumnDiastolic => 'Diastolic';
+
+  @override
+  String get csvColumnPulse => 'Pulse';
+
+  @override
+  String get csvColumnPulsePressure => 'PulsePressure';
+
+  @override
+  String get csvColumnMap => 'MAP';
+
+  @override
+  String get csvColumnWeightKg => 'Weight_kg';
+
+  @override
+  String get csvColumnArm => 'Arm';
+
+  @override
+  String get csvColumnStress => 'Stress';
+
+  @override
+  String get csvColumnMedication => 'Medication';
+
+  @override
+  String get csvColumnNote => 'Note';
+
+  @override
+  String get csvColumnCategory => 'Category';
+
+  @override
+  String get csvColumnSource => 'Source';
+
+  @override
+  String get exportFormatCsv => 'CSV';
+
+  @override
+  String get exportFormatPdf => 'PDF';
+
+  @override
+  String get exportFormatLabel => 'Format';
+
+  @override
+  String get exportPeriodLabel => 'Period';
+
+  @override
+  String get exportIncludeContextFields => 'Include context fields';
+
+  @override
+  String get exportIncludeChartImage => 'Include chart image';
+
+  @override
+  String get exportGenerateAction => 'Generate and share';
+
+  @override
+  String get exportGeneratingMessage => 'Generating…';
+
+  @override
+  String get exportSavedMessage => 'Export saved.';
+
+  @override
+  String get exportHistoryTitle => 'Recent exports';
+
+  @override
+  String get exportHistoryEmpty => 'No exports yet.';
+
+  @override
+  String get exportDeleteRecordTitle => 'Delete export?';
+
+  @override
+  String get exportDeleteRecordBody =>
+      'Delete this export file from the recents list.';
+
+  @override
+  String get pdfReportHeader => 'Blood pressure report';
+
+  @override
+  String pdfGeneratedAt(String timestamp) {
+    return 'Generated $timestamp';
+  }
+
+  @override
+  String get pdfSummaryTitle => 'Summary';
+
+  @override
+  String get pdfReadingsTitle => 'Readings';
+
+  @override
+  String get pdfDisclaimerFooter =>
+      'This report does not replace medical advice.';
+
+  @override
+  String get pdfChartUnavailable => 'Chart image not included in this build.';
+
+  @override
+  String get reminderNotificationTitle => 'Blood pressure reading';
+
+  @override
+  String get reminderNotificationBody => 'Time to record a measurement.';
+
+  @override
+  String get remindersMasterToggle => 'Enable reminders';
+
+  @override
+  String get remindersEmptyTitle => 'No reminders yet';
+
+  @override
+  String get remindersEmptyBody =>
+      'Add a reminder to get a gentle nudge each day.';
+
+  @override
+  String get remindersAddAction => 'Add reminder';
+
+  @override
+  String get reminderEditTitle => 'Edit reminder';
+
+  @override
+  String get reminderAddTitle => 'New reminder';
+
+  @override
+  String get reminderTimeLabel => 'Time';
+
+  @override
+  String get reminderWeekdaysLabel => 'Weekdays';
+
+  @override
+  String get reminderEveryDay => 'Every day';
+
+  @override
+  String get reminderLabelLabel => 'Label (optional)';
+
+  @override
+  String get reminderPermissionDenied =>
+      'Notification permission was not granted.';
+
+  @override
+  String get weekdayMon => 'Mon';
+
+  @override
+  String get weekdayTue => 'Tue';
+
+  @override
+  String get weekdayWed => 'Wed';
+
+  @override
+  String get weekdayThu => 'Thu';
+
+  @override
+  String get weekdayFri => 'Fri';
+
+  @override
+  String get weekdaySat => 'Sat';
+
+  @override
+  String get weekdaySun => 'Sun';
 }

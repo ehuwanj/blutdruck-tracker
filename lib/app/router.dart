@@ -2,9 +2,11 @@ import 'package:blutdruck_tracker/app/disclaimer/disclaimer_dialog.dart';
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
 import 'package:blutdruck_tracker/app/providers.dart';
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
+import 'package:blutdruck_tracker/features/export/presentation/screens/export_screen.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/screens/overview_screen.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_entry_screen.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_history_screen.dart';
+import 'package:blutdruck_tracker/features/reminders/presentation/screens/reminder_settings_screen.dart';
 import 'package:blutdruck_tracker/features/settings/domain/entities/locale_setting.dart';
 import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
 import 'package:blutdruck_tracker/features/status/presentation/screens/status_screen.dart';
@@ -32,9 +34,7 @@ final appRouter = GoRouter(
         ),
         GoRoute(
           path: '/export',
-          builder: (context, state) => PlaceholderScreen(
-            title: AppLocalizations.of(context).exportTitle,
-          ),
+          builder: (context, state) => const ExportScreen(),
         ),
         GoRoute(
           path: '/settings',
@@ -42,9 +42,7 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: 'reminders',
-              builder: (context, state) => PlaceholderScreen(
-                title: AppLocalizations.of(context).remindersTitle,
-              ),
+              builder: (context, state) => const ReminderSettingsScreen(),
             ),
             GoRoute(
               path: 'privacy',

@@ -1,5 +1,9 @@
 import 'package:blutdruck_tracker/core/database/app_database.dart';
 import 'package:blutdruck_tracker/core/utils/clock.dart';
+import 'package:blutdruck_tracker/features/export/data/datasources/export_history_local_datasource.dart';
+import 'package:blutdruck_tracker/features/export/data/repositories/export_history_repository_impl.dart';
+import 'package:blutdruck_tracker/features/export/domain/entities/export_record.dart';
+import 'package:blutdruck_tracker/features/export/domain/repositories/export_history_repository.dart';
 import 'package:blutdruck_tracker/features/readings/data/datasources/reading_local_datasource.dart';
 import 'package:blutdruck_tracker/features/readings/data/repositories/reading_repository_impl.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/blood_pressure_reading.dart';
@@ -10,6 +14,11 @@ import 'package:blutdruck_tracker/features/readings/domain/usecases/get_latest_r
 import 'package:blutdruck_tracker/features/readings/domain/usecases/get_reading_by_id.dart';
 import 'package:blutdruck_tracker/features/readings/domain/usecases/get_readings.dart';
 import 'package:blutdruck_tracker/features/readings/domain/usecases/update_reading.dart';
+import 'package:blutdruck_tracker/features/reminders/data/datasources/reminder_local_datasource.dart';
+import 'package:blutdruck_tracker/features/reminders/data/repositories/reminder_repository_impl.dart';
+import 'package:blutdruck_tracker/features/reminders/domain/entities/reminder.dart';
+import 'package:blutdruck_tracker/features/reminders/domain/repositories/reminder_repository.dart';
+import 'package:blutdruck_tracker/features/reminders/domain/services/reminder_scheduler.dart';
 import 'package:blutdruck_tracker/features/settings/data/datasources/app_settings_local_datasource.dart';
 import 'package:blutdruck_tracker/features/settings/data/repositories/settings_repository_impl.dart';
 import 'package:blutdruck_tracker/features/settings/domain/entities/app_settings.dart';
@@ -47,6 +56,52 @@ final readingRepositoryProvider = Provider<ReadingRepository>((ref) {
 
 final settingsRepositoryProvider = Provider<SettingsRepository>((ref) {
   return SettingsRepositoryImpl(ref.watch(appSettingsLocalDataSourceProvider));
+});
+
+final exportHistoryLocalDataSourceProvider =
+    Provider<ExportHistoryLocalDataSource>((ref) {
+      return DriftExportHistoryLocalDataSource(ref.watch(databaseProvider));
+    });
+
+final exportHistoryRepositoryProvider = Provider<ExportHistoryRepository>((
+  ref,
+) {
+  return ExportHistoryRepositoryImpl(
+    ref.watch(exportHistoryLocalDataSourceProvider),
+  );
+});
+
+final recentExportsProvider = StreamProvider.autoDispose<List<ExportRecord>>((
+  ref,
+) {
+  return ref.watch(exportHistoryRepositoryProvider).watchRecent();
+});
+
+final reminderLocalDataSourceProvider = Provider<ReminderLocalDataSource>((
+  ref,
+) {
+  return DriftReminderLocalDataSource(ref.watch(databaseProvider));
+});
+
+final reminderRepositoryProvider = Provider<ReminderRepository>((ref) {
+  return ReminderRepositoryImpl(
+    dataSource: ref.watch(reminderLocalDataSourceProvider),
+    clock: ref.watch(clockProvider),
+  );
+});
+
+final remindersStreamProvider = StreamProvider.autoDispose<List<Reminder>>((
+  ref,
+) {
+  return ref.watch(reminderRepositoryProvider).watchAll();
+});
+
+/// Bound at app start in `main.dart` with the concrete
+/// `LocalNotificationReminderScheduler`. Until then, calls throw.
+final reminderSchedulerProvider = Provider<ReminderScheduler>((ref) {
+  throw UnimplementedError(
+    'reminderSchedulerProvider must be overridden at app start.',
+  );
 });
 
 final addReadingProvider = Provider<AddReading>((ref) {
