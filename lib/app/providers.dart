@@ -4,6 +4,12 @@ import 'package:blutdruck_tracker/features/export/data/datasources/export_histor
 import 'package:blutdruck_tracker/features/export/data/repositories/export_history_repository_impl.dart';
 import 'package:blutdruck_tracker/features/export/domain/entities/export_record.dart';
 import 'package:blutdruck_tracker/features/export/domain/repositories/export_history_repository.dart';
+import 'package:blutdruck_tracker/features/integrations/fitbit/data/disabled_fitbit_gateway.dart';
+import 'package:blutdruck_tracker/features/integrations/fitbit/domain/fitbit_gateway.dart';
+import 'package:blutdruck_tracker/features/integrations/health/data/disabled_health_data_gateway.dart';
+import 'package:blutdruck_tracker/features/integrations/health/domain/health_data_gateway.dart';
+import 'package:blutdruck_tracker/features/integrations/llm/data/disabled_llm_gateway.dart';
+import 'package:blutdruck_tracker/features/integrations/llm/domain/llm_gateway.dart';
 import 'package:blutdruck_tracker/features/readings/data/datasources/reading_local_datasource.dart';
 import 'package:blutdruck_tracker/features/readings/data/repositories/reading_repository_impl.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/blood_pressure_reading.dart';
@@ -81,6 +87,20 @@ final recentExportsProvider = StreamProvider.autoDispose<List<ExportRecord>>((
   ref,
 ) {
   return ref.watch(exportHistoryRepositoryProvider).watchRecent();
+});
+
+// Disabled integration gateways. Tests/builds that intentionally want to
+// exercise an enabled impl override these in their own ProviderScope.
+final llmGatewayProvider = Provider<LlmGateway>((ref) {
+  return const DisabledLlmGateway();
+});
+
+final healthGatewayProvider = Provider<HealthDataGateway>((ref) {
+  return const DisabledHealthDataGateway();
+});
+
+final fitbitGatewayProvider = Provider<FitbitGateway>((ref) {
+  return const DisabledFitbitGateway();
 });
 
 final reminderLocalDataSourceProvider = Provider<ReminderLocalDataSource>((
