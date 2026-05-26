@@ -78,7 +78,22 @@ Follow `.claude/CLAUDE.md` for the full wording. The highest-risk rules are:
 
 ## Commands
 
-Use PowerShell in this workspace.
+Use Git Bash for all `git` commands in this workspace. The configured Git Bash
+launcher is:
+
+```powershell
+C:\Users\27750358\AppData\Local\Programs\Git\git-bash.exe
+```
+
+For non-interactive Codex command execution, use the same Git installation's
+shell entry point and run project Git commands from the repository root, for
+example:
+
+```powershell
+& 'C:\Users\27750358\AppData\Local\Programs\Git\bin\bash.exe' -lc 'cd /c/Data/ideas/blutdruck-tracker && git status --short'
+```
+
+For non-Git project commands, the Codex shell may still be PowerShell.
 
 Common verification commands:
 

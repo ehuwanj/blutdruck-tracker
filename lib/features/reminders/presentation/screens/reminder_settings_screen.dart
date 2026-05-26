@@ -150,18 +150,34 @@ Future<void> _openSheet(
   WidgetRef ref,
   Reminder? existing,
 ) async {
+  final l10n = AppLocalizations.of(context);
   final result = await showModalBottomSheet<Reminder>(
     context: context,
     isScrollControlled: true,
     builder: (sheetContext) => ReminderFormSheet(initial: existing),
   );
   if (result == null) return;
+  final settings = ref.read(settingsProvider).valueOrNull;
+  // Spec 08 §Local reminders: "Request notification permission ... the
+  // first time the user enables reminders." Adding a reminder while the
+  // master switch is off is the implicit first-enable, so we must request
+  // permission here before flipping `remindersEnabled` — the master-toggle
+  // path is not the only entry point.
+  if (existing == null && settings != null && !settings.remindersEnabled) {
+    final scheduler = ref.read(reminderSchedulerProvider);
+    final granted = await scheduler.requestPermission();
+    if (!granted) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.reminderPermissionDenied)));
+      }
+      return;
+    }
+  }
   final repository = ref.read(reminderRepositoryProvider);
   final id = existing?.id ?? const Uuid().v4();
   await repository.upsert(result.copyWith(id: id));
-  // Toggle the master switch on automatically when the first reminder is
-  // added — matches the spec's "first enable" permission flow.
-  final settings = ref.read(settingsProvider).valueOrNull;
   if (existing == null && settings != null && !settings.remindersEnabled) {
     await ref
         .read(settingsProvider.notifier)

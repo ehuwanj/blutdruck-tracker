@@ -20,9 +20,17 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 /// cold start → empty state → add reading via the form → see it in the
 /// overview → export CSV (write only, share sheet is not asserted).
 ///
-/// Runs under `flutter test integration_test/` without a device — the
-/// IntegrationTestWidgetsFlutterBinding falls back to the regular widget
-/// test binding when no real device is attached.
+/// Execution model (spec 11 §CI gates):
+/// - On CI / a real Android emulator, run with
+///   `flutter test integration_test/`. The IntegrationTestWidgetsFlutterBinding
+///   drives the host device.
+/// - Locally without a connected device, `flutter test integration_test/`
+///   exits with "No supported devices connected" — spec 11 allows CI to
+///   skip this gate when no emulator is attached. To exercise the same
+///   scenarios on the host VM, run this file as a regular widget test:
+///   `flutter test integration_test/app_test.dart`. The share_plus method
+///   channel is stubbed and path_provider is faked, so no platform surface
+///   is required for the file write to be observable.
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 

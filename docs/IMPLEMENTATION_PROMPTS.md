@@ -725,6 +725,61 @@ status table in docs/specs/README.md.
 
 ---
 
+## Verification findings — 2026-05-26
+
+Follow-up review after Claude's implementation found that the MVP is not fully
+finished yet. The main quality gates are mostly healthy, but the following
+items still need fixes before the steps can be considered complete:
+
+- `lib/app/router.dart`: `AppShell.reschedule()` schedules reminders whenever
+  the reminder stream emits or the locale changes, but it does not check
+  `settings.remindersEnabled`. This can recreate scheduled notifications after
+  the user has disabled reminders.
+- `lib/features/reminders/presentation/screens/reminder_settings_screen.dart`:
+  adding the first reminder auto-enables reminders without requesting
+  notification permission. The permission request exists in the master toggle
+  path, but `_openSheet()` bypasses it.
+- `integration_test/app_test.dart`: the file comment says the test can run
+  without a device, but `flutter test integration_test` currently fails before
+  executing tests on this machine with "No supported devices connected". Step
+  15's integration-test gate is therefore not satisfied unless a supported
+  Android/iOS target is connected or the test strategy is adjusted.
+
+Verified during the review:
+
+- `dart analyze .` passed with no issues.
+- `dart format --set-exit-if-changed .` reported `152 files (0 changed)`.
+- `flutter gen-l10n` completed successfully.
+- `flutter test` passed.
+- Targeted reminder occurrence and disabled-gateway tests passed.
+
+### Resolutions
+
+All three findings were validated against the relevant specs and addressed:
+
+- `lib/app/router.dart`: `reschedule()` now reads `settingsProvider` and
+  short-circuits when `remindersEnabled` is false. The OS schedule is no longer
+  re-created on a stream/locale tick after the user disabled reminders. The
+  master-toggle path still owns the "off → on" transition (permission +
+  schedule) and the "on → off" transition (`cancelAll`).
+- `lib/features/reminders/presentation/screens/reminder_settings_screen.dart`:
+  `_openSheet()` now requests OS notification permission before flipping
+  `remindersEnabled` on the implicit first-enable (adding the first reminder
+  while the master switch is off). When permission is denied it shows the
+  same `reminderPermissionDenied` snackbar as the master toggle and skips
+  persisting the reminder. Behaviour matches spec 08 §Local reminders:
+  "Request notification permission … the first time the user enables
+  reminders."
+- `integration_test/app_test.dart`: the inaccurate "runs without a device"
+  comment was rewritten to reflect the actual execution model. Spec 11
+  §CI gates explicitly permits skipping the integration gate locally when
+  no emulator is attached, so no behavioural change is needed — the comment
+  now documents both how to run the test on CI/an emulator and how to
+  exercise the same scenarios on the host VM (`flutter test
+  integration_test/app_test.dart`).
+
+---
+
 ## After step 15
 
 The MVP is feature-complete per the acceptance criteria in

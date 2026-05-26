@@ -79,9 +79,14 @@ class AppShell extends ConsumerWidget {
     //  - the initial reminder-stream emission and any add/edit/delete,
     //  - a locale change (the second listener observes locale and
     //    re-runs the schedule so notification copy follows the UI).
+    // The master switch (`remindersEnabled`) gates whether we touch the OS:
+    // when off, the user's chosen state is "no notifications", so we must
+    // not silently re-create them on a stream emission.
     void reschedule() {
       final reminders = ref.read(remindersStreamProvider).valueOrNull;
       if (reminders == null) return;
+      final settings = ref.read(settingsProvider).valueOrNull;
+      if (settings == null || !settings.remindersEnabled) return;
       ref
           .read(reminderSchedulerProvider)
           .scheduleAll(
