@@ -7,8 +7,17 @@ import 'package:blutdruck_tracker/features/reminders/domain/entities/reminder.da
 abstract class ReminderScheduler {
   /// Cancels every previously scheduled notification and re-schedules from
   /// the supplied list. Disabled reminders are skipped. Called on app
-  /// start and after add/edit/delete.
-  Future<void> scheduleAll(List<Reminder> reminders);
+  /// start, after add/edit/delete, and when the locale changes.
+  ///
+  /// [title] and [body] are the user-visible notification copy in the
+  /// active locale. They are passed per call (rather than fixed at
+  /// scheduler construction) so a locale change re-schedules with the
+  /// new copy on the very next emission.
+  Future<void> scheduleAll(
+    List<Reminder> reminders, {
+    required String title,
+    required String body,
+  });
 
   /// Cancels every previously scheduled notification.
   Future<void> cancelAll();

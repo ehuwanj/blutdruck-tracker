@@ -25,12 +25,6 @@ Future<void> main() async {
           return LocalNotificationReminderScheduler(
             plugin: plugin,
             clock: ref.watch(clockProvider),
-            // The reminder UI text is locale-aware; the system notification
-            // pulled out of the AppLocalizations would require a context.
-            // We use the English defaults here and update on locale change
-            // by re-scheduling from the screen when needed.
-            notificationTitle: 'Blood pressure reading',
-            notificationBody: 'Time to record a measurement.',
           );
         }),
       ],

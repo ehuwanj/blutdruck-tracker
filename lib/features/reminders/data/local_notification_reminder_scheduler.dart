@@ -14,8 +14,6 @@ class LocalNotificationReminderScheduler implements ReminderScheduler {
   LocalNotificationReminderScheduler({
     required this.plugin,
     required this.clock,
-    required this.notificationTitle,
-    required this.notificationBody,
     this.calculator = const ReminderOccurrenceCalculator(),
     this.scheduleWindow = const Duration(days: 14),
   });
@@ -26,13 +24,15 @@ class LocalNotificationReminderScheduler implements ReminderScheduler {
 
   final FlutterLocalNotificationsPlugin plugin;
   final Clock clock;
-  final String notificationTitle;
-  final String notificationBody;
   final ReminderOccurrenceCalculator calculator;
   final Duration scheduleWindow;
 
   @override
-  Future<void> scheduleAll(List<Reminder> reminders) async {
+  Future<void> scheduleAll(
+    List<Reminder> reminders, {
+    required String title,
+    required String body,
+  }) async {
     await plugin.cancelAll();
     final now = clock.now().toLocal();
     final occurrences = calculator.computeOccurrences(
@@ -47,8 +47,8 @@ class LocalNotificationReminderScheduler implements ReminderScheduler {
       final tzTime = tz.TZDateTime.from(occurrence.localOccurrence, tz.local);
       await plugin.zonedSchedule(
         id,
-        notificationTitle,
-        notificationBody,
+        title,
+        body,
         tzTime,
         details,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,

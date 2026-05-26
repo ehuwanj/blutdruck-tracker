@@ -1,16 +1,19 @@
 import 'package:blutdruck_tracker/app/disclaimer/disclaimer_dialog.dart';
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
+import 'package:blutdruck_tracker/app/providers.dart';
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/features/export/presentation/screens/export_screen.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/screens/overview_screen.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_entry_screen.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_history_screen.dart';
 import 'package:blutdruck_tracker/features/reminders/presentation/screens/reminder_settings_screen.dart';
+import 'package:blutdruck_tracker/features/settings/domain/entities/locale_setting.dart';
 import 'package:blutdruck_tracker/features/settings/presentation/screens/privacy_info_screen.dart';
 import 'package:blutdruck_tracker/features/settings/presentation/screens/settings_screen.dart';
 import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
 import 'package:blutdruck_tracker/features/status/presentation/screens/status_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -63,18 +66,45 @@ final appRouter = GoRouter(
   ],
 );
 
-class AppShell extends StatelessWidget {
+class AppShell extends ConsumerWidget {
   const AppShell({required this.child, super.key});
 
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    // Re-schedule notifications with the currently-active locale's copy.
+    // Triggered on:
+    //  - the initial reminder-stream emission and any add/edit/delete,
+    //  - a locale change (the second listener observes locale and
+    //    re-runs the schedule so notification copy follows the UI).
+    void reschedule() {
+      final reminders = ref.read(remindersStreamProvider).valueOrNull;
+      if (reminders == null) return;
+      ref
+          .read(reminderSchedulerProvider)
+          .scheduleAll(
+            reminders,
+            title: l10n.reminderNotificationTitle,
+            body: l10n.reminderNotificationBody,
+          );
+    }
+
+    ref
+      ..listen(remindersStreamProvider, (_, _) => reschedule())
+      ..listen<LocaleSetting?>(
+        settingsProvider.select((s) => s.valueOrNull?.locale),
+        (previous, next) {
+          if (previous == next) return;
+          reschedule();
+        },
+      );
     return Scaffold(
       body: DisclaimerGate(child: child),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/readings/new'),
-        tooltip: AppLocalizations.of(context).addReadingTitle,
+        tooltip: l10n.addReadingTitle,
         child: const Icon(Icons.add),
       ),
     );

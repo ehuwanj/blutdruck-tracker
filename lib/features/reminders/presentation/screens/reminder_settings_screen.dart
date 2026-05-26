@@ -97,7 +97,13 @@ class _MasterToggle extends ConsumerWidget {
         } else {
           final reminders = ref.read(remindersStreamProvider).valueOrNull;
           if (reminders != null) {
-            await ref.read(reminderSchedulerProvider).scheduleAll(reminders);
+            await ref
+                .read(reminderSchedulerProvider)
+                .scheduleAll(
+                  reminders,
+                  title: l10n.reminderNotificationTitle,
+                  body: l10n.reminderNotificationBody,
+                );
           }
         }
       },

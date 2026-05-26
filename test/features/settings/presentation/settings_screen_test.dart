@@ -206,7 +206,11 @@ class _NoopScheduler implements ReminderScheduler {
   Future<bool> requestPermission() async => true;
 
   @override
-  Future<void> scheduleAll(List<Reminder> reminders) async {
+  Future<void> scheduleAll(
+    List<Reminder> reminders, {
+    required String title,
+    required String body,
+  }) async {
     scheduleCount++;
   }
 }
