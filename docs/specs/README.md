@@ -38,4 +38,19 @@ update both to match.
 
 | Spec | Status |
 |------|--------|
-| 00–12 | Draft — pending user review |
+| 00 — Project overview | Implemented (step 0 foundation; MVP scope covered through step 15) |
+| 01 — Architecture | Implemented (steps 0, 1, 5; folder layout matches) |
+| 02 — Domain model | Implemented (step 1) |
+| 03 — Database | Implemented (step 3) |
+| 04 — Business logic | Implemented (step 2) |
+| 05 — Screens & navigation | Implemented (steps 5–12) |
+| 06 — Design system | Implemented (step 0 `AppColors` extension; widgets across step 5) |
+| 07 — State management | Implemented (step 4; `FamilyAsyncNotifier` form, time-slot providers) |
+| 08 — Export & reminders | Implemented (steps 10–11) |
+| 09 — Localization | Implemented (steps 0, 5, 14) — EN/DE/ZH parity verified by `locale_switch_test` |
+| 10 — Future integrations | Disabled gateways shipped (step 13). Enablement pending |
+| 11 — Testing | Implemented (steps 2, 11, 15) — unit + widget + integration coverage |
+| 12 — Privacy & medical rules | Implemented (steps 5, 12) — disclaimer flow + delete-all-data with VACUUM |
+
+See [`../IMPLEMENTATION_PROMPTS.md`](../IMPLEMENTATION_PROMPTS.md) for the
+step-by-step implementation log.
