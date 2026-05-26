@@ -704,4 +704,155 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get weekdaySun => 'Sun';
+
+  @override
+  String get settingsGroupProfile => 'Profile';
+
+  @override
+  String get settingsGroupAppearance => 'Appearance';
+
+  @override
+  String get settingsGroupUnits => 'Units';
+
+  @override
+  String get settingsGroupTimeSlot => 'Time slot';
+
+  @override
+  String get settingsGroupReminders => 'Reminders';
+
+  @override
+  String get settingsGroupData => 'Data';
+
+  @override
+  String get settingsGroupPrivacy => 'Privacy';
+
+  @override
+  String get settingsGroupIntegrations => 'Integrations';
+
+  @override
+  String get settingsGroupAbout => 'About';
+
+  @override
+  String get settingsHeightLabel => 'Height';
+
+  @override
+  String get settingsHeightHint => 'Used for the BMI calculation.';
+
+  @override
+  String get settingsHeightSuffix => 'cm';
+
+  @override
+  String get settingsHeightOutOfRange => 'Enter a value between 80 and 250.';
+
+  @override
+  String get settingsHeightInvalid => 'Please enter a number.';
+
+  @override
+  String get settingsHeightSaveAction => 'Save';
+
+  @override
+  String get settingsHeightClearAction => 'Clear';
+
+  @override
+  String get settingsThemeLabel => 'Theme';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsLanguageLabel => 'Language';
+
+  @override
+  String get settingsWeightUnitLabel => 'Weight unit';
+
+  @override
+  String get settingsWeightUnitKg => 'kg';
+
+  @override
+  String get settingsWeightUnitLb => 'lb';
+
+  @override
+  String get settingsSlotWidthLabel => 'Slot width';
+
+  @override
+  String get settingsSlotWidth1h => '1 h';
+
+  @override
+  String get settingsSlotWidth2h => '2 h';
+
+  @override
+  String get settingsSlotWidth3h => '3 h';
+
+  @override
+  String get settingsSlotAutoToggle => 'Choose slot automatically';
+
+  @override
+  String get settingsSlotStartLabel => 'Pinned slot start';
+
+  @override
+  String get settingsSlotStartUnset => 'Not set';
+
+  @override
+  String get settingsRemindersOpen => 'Open reminder settings';
+
+  @override
+  String get settingsExportOpen => 'Open export';
+
+  @override
+  String get settingsDeleteAllAction => 'Delete all data';
+
+  @override
+  String get settingsDeleteAllConfirmTitle => 'Delete all data?';
+
+  @override
+  String get settingsDeleteAllConfirmBody =>
+      'All readings, reminders, and exports will be removed. This cannot be undone.';
+
+  @override
+  String get settingsDeleteAllConfirmAction => 'Continue';
+
+  @override
+  String get settingsDeleteAllSecondTitle => 'Last chance';
+
+  @override
+  String get settingsDeleteAllSecondBody => 'Type DELETE to confirm.';
+
+  @override
+  String get settingsDeleteAllChallenge => 'DELETE';
+
+  @override
+  String get settingsDeleteAllCompleted => 'All data deleted.';
+
+  @override
+  String get settingsPrivacyOpen => 'Open privacy info';
+
+  @override
+  String get settingsIntegrationsHealthConnect => 'Health Connect / HealthKit';
+
+  @override
+  String get settingsIntegrationsFitbit => 'Fitbit / Google Health';
+
+  @override
+  String get settingsIntegrationsLlm => 'AI insights (LLM)';
+
+  @override
+  String get settingsIntegrationsComingSoon => 'Coming soon';
+
+  @override
+  String get settingsAboutVersion => 'Version';
+
+  @override
+  String get settingsAboutLicenses => 'Open source licenses';
+
+  @override
+  String get settingsAboutAppVersion => '0.1.0+1';
+
+  @override
+  String get privacyResetDisclaimerAction => 'Show disclaimer again';
 }

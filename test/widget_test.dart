@@ -5,6 +5,7 @@ import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/blood_pressure_reading.dart';
 import 'package:blutdruck_tracker/features/readings/domain/repositories/reading_repository.dart';
 import 'package:blutdruck_tracker/features/settings/domain/entities/app_settings.dart';
+import 'package:blutdruck_tracker/features/settings/domain/entities/locale_setting.dart';
 import 'package:blutdruck_tracker/features/settings/domain/repositories/settings_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -92,7 +93,11 @@ void main() {
 
     expect(find.text('Settings'), findsWidgets);
 
-    await tester.tap(find.text('Deutsch'));
+    // The language picker is a DropdownButton; open it, then pick Deutsch
+    // from the now-visible menu.
+    await tester.tap(find.byType(DropdownButton<LocaleSetting>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Deutsch').last);
     await tester.pumpAndSettle();
 
     expect(repository.value.locale.name, 'de');

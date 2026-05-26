@@ -21,8 +21,10 @@ import 'package:blutdruck_tracker/features/reminders/domain/repositories/reminde
 import 'package:blutdruck_tracker/features/reminders/domain/services/reminder_scheduler.dart';
 import 'package:blutdruck_tracker/features/settings/data/datasources/app_settings_local_datasource.dart';
 import 'package:blutdruck_tracker/features/settings/data/repositories/settings_repository_impl.dart';
+import 'package:blutdruck_tracker/features/settings/data/services/drift_data_wiper.dart';
 import 'package:blutdruck_tracker/features/settings/domain/entities/app_settings.dart';
 import 'package:blutdruck_tracker/features/settings/domain/repositories/settings_repository.dart';
+import 'package:blutdruck_tracker/features/settings/domain/services/data_wiper.dart';
 import 'package:blutdruck_tracker/features/statistics/domain/entities/statistics_result.dart';
 import 'package:blutdruck_tracker/features/statistics/domain/entities/time_slot_pick.dart';
 import 'package:blutdruck_tracker/features/statistics/domain/entities/time_slot_series.dart';
@@ -56,6 +58,10 @@ final readingRepositoryProvider = Provider<ReadingRepository>((ref) {
 
 final settingsRepositoryProvider = Provider<SettingsRepository>((ref) {
   return SettingsRepositoryImpl(ref.watch(appSettingsLocalDataSourceProvider));
+});
+
+final dataWiperProvider = Provider<DataWiper>((ref) {
+  return DriftDataWiper(ref.watch(databaseProvider));
 });
 
 final exportHistoryLocalDataSourceProvider =

@@ -1335,6 +1335,306 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sun'**
   String get weekdaySun;
+
+  /// No description provided for @settingsGroupProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get settingsGroupProfile;
+
+  /// No description provided for @settingsGroupAppearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsGroupAppearance;
+
+  /// No description provided for @settingsGroupUnits.
+  ///
+  /// In en, this message translates to:
+  /// **'Units'**
+  String get settingsGroupUnits;
+
+  /// No description provided for @settingsGroupTimeSlot.
+  ///
+  /// In en, this message translates to:
+  /// **'Time slot'**
+  String get settingsGroupTimeSlot;
+
+  /// No description provided for @settingsGroupReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get settingsGroupReminders;
+
+  /// No description provided for @settingsGroupData.
+  ///
+  /// In en, this message translates to:
+  /// **'Data'**
+  String get settingsGroupData;
+
+  /// No description provided for @settingsGroupPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get settingsGroupPrivacy;
+
+  /// No description provided for @settingsGroupIntegrations.
+  ///
+  /// In en, this message translates to:
+  /// **'Integrations'**
+  String get settingsGroupIntegrations;
+
+  /// No description provided for @settingsGroupAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsGroupAbout;
+
+  /// No description provided for @settingsHeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get settingsHeightLabel;
+
+  /// No description provided for @settingsHeightHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Used for the BMI calculation.'**
+  String get settingsHeightHint;
+
+  /// No description provided for @settingsHeightSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'cm'**
+  String get settingsHeightSuffix;
+
+  /// No description provided for @settingsHeightOutOfRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a value between 80 and 250.'**
+  String get settingsHeightOutOfRange;
+
+  /// No description provided for @settingsHeightInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a number.'**
+  String get settingsHeightInvalid;
+
+  /// No description provided for @settingsHeightSaveAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get settingsHeightSaveAction;
+
+  /// No description provided for @settingsHeightClearAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get settingsHeightClearAction;
+
+  /// No description provided for @settingsThemeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsThemeLabel;
+
+  /// No description provided for @settingsThemeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsThemeSystem;
+
+  /// No description provided for @settingsThemeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// No description provided for @settingsThemeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
+  /// No description provided for @settingsLanguageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguageLabel;
+
+  /// No description provided for @settingsWeightUnitLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight unit'**
+  String get settingsWeightUnitLabel;
+
+  /// No description provided for @settingsWeightUnitKg.
+  ///
+  /// In en, this message translates to:
+  /// **'kg'**
+  String get settingsWeightUnitKg;
+
+  /// No description provided for @settingsWeightUnitLb.
+  ///
+  /// In en, this message translates to:
+  /// **'lb'**
+  String get settingsWeightUnitLb;
+
+  /// No description provided for @settingsSlotWidthLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Slot width'**
+  String get settingsSlotWidthLabel;
+
+  /// No description provided for @settingsSlotWidth1h.
+  ///
+  /// In en, this message translates to:
+  /// **'1 h'**
+  String get settingsSlotWidth1h;
+
+  /// No description provided for @settingsSlotWidth2h.
+  ///
+  /// In en, this message translates to:
+  /// **'2 h'**
+  String get settingsSlotWidth2h;
+
+  /// No description provided for @settingsSlotWidth3h.
+  ///
+  /// In en, this message translates to:
+  /// **'3 h'**
+  String get settingsSlotWidth3h;
+
+  /// No description provided for @settingsSlotAutoToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose slot automatically'**
+  String get settingsSlotAutoToggle;
+
+  /// No description provided for @settingsSlotStartLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinned slot start'**
+  String get settingsSlotStartLabel;
+
+  /// No description provided for @settingsSlotStartUnset.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get settingsSlotStartUnset;
+
+  /// No description provided for @settingsRemindersOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open reminder settings'**
+  String get settingsRemindersOpen;
+
+  /// No description provided for @settingsExportOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open export'**
+  String get settingsExportOpen;
+
+  /// No description provided for @settingsDeleteAllAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all data'**
+  String get settingsDeleteAllAction;
+
+  /// No description provided for @settingsDeleteAllConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all data?'**
+  String get settingsDeleteAllConfirmTitle;
+
+  /// No description provided for @settingsDeleteAllConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'All readings, reminders, and exports will be removed. This cannot be undone.'**
+  String get settingsDeleteAllConfirmBody;
+
+  /// No description provided for @settingsDeleteAllConfirmAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get settingsDeleteAllConfirmAction;
+
+  /// No description provided for @settingsDeleteAllSecondTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Last chance'**
+  String get settingsDeleteAllSecondTitle;
+
+  /// No description provided for @settingsDeleteAllSecondBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Type DELETE to confirm.'**
+  String get settingsDeleteAllSecondBody;
+
+  /// No description provided for @settingsDeleteAllChallenge.
+  ///
+  /// In en, this message translates to:
+  /// **'DELETE'**
+  String get settingsDeleteAllChallenge;
+
+  /// No description provided for @settingsDeleteAllCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'All data deleted.'**
+  String get settingsDeleteAllCompleted;
+
+  /// No description provided for @settingsPrivacyOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open privacy info'**
+  String get settingsPrivacyOpen;
+
+  /// No description provided for @settingsIntegrationsHealthConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Connect / HealthKit'**
+  String get settingsIntegrationsHealthConnect;
+
+  /// No description provided for @settingsIntegrationsFitbit.
+  ///
+  /// In en, this message translates to:
+  /// **'Fitbit / Google Health'**
+  String get settingsIntegrationsFitbit;
+
+  /// No description provided for @settingsIntegrationsLlm.
+  ///
+  /// In en, this message translates to:
+  /// **'AI insights (LLM)'**
+  String get settingsIntegrationsLlm;
+
+  /// No description provided for @settingsIntegrationsComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon'**
+  String get settingsIntegrationsComingSoon;
+
+  /// No description provided for @settingsAboutVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get settingsAboutVersion;
+
+  /// No description provided for @settingsAboutLicenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Open source licenses'**
+  String get settingsAboutLicenses;
+
+  /// No description provided for @settingsAboutAppVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'0.1.0+1'**
+  String get settingsAboutAppVersion;
+
+  /// No description provided for @privacyResetDisclaimerAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Show disclaimer again'**
+  String get privacyResetDisclaimerAction;
 }
 
 class _AppLocalizationsDelegate

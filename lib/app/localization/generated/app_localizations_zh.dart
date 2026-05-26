@@ -663,4 +663,154 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get weekdaySun => '日';
+
+  @override
+  String get settingsGroupProfile => '个人资料';
+
+  @override
+  String get settingsGroupAppearance => '外观';
+
+  @override
+  String get settingsGroupUnits => '单位';
+
+  @override
+  String get settingsGroupTimeSlot => '时间段';
+
+  @override
+  String get settingsGroupReminders => '提醒';
+
+  @override
+  String get settingsGroupData => '数据';
+
+  @override
+  String get settingsGroupPrivacy => '隐私';
+
+  @override
+  String get settingsGroupIntegrations => '集成';
+
+  @override
+  String get settingsGroupAbout => '关于';
+
+  @override
+  String get settingsHeightLabel => '身高';
+
+  @override
+  String get settingsHeightHint => '用于 BMI 计算。';
+
+  @override
+  String get settingsHeightSuffix => 'cm';
+
+  @override
+  String get settingsHeightOutOfRange => '请输入 80 到 250 之间的值。';
+
+  @override
+  String get settingsHeightInvalid => '请输入数字。';
+
+  @override
+  String get settingsHeightSaveAction => '保存';
+
+  @override
+  String get settingsHeightClearAction => '清除';
+
+  @override
+  String get settingsThemeLabel => '主题';
+
+  @override
+  String get settingsThemeSystem => '系统';
+
+  @override
+  String get settingsThemeLight => '浅色';
+
+  @override
+  String get settingsThemeDark => '深色';
+
+  @override
+  String get settingsLanguageLabel => '语言';
+
+  @override
+  String get settingsWeightUnitLabel => '体重单位';
+
+  @override
+  String get settingsWeightUnitKg => 'kg';
+
+  @override
+  String get settingsWeightUnitLb => 'lb';
+
+  @override
+  String get settingsSlotWidthLabel => '时间段长度';
+
+  @override
+  String get settingsSlotWidth1h => '1 小时';
+
+  @override
+  String get settingsSlotWidth2h => '2 小时';
+
+  @override
+  String get settingsSlotWidth3h => '3 小时';
+
+  @override
+  String get settingsSlotAutoToggle => '自动选择时间段';
+
+  @override
+  String get settingsSlotStartLabel => '固定时间段起点';
+
+  @override
+  String get settingsSlotStartUnset => '未设置';
+
+  @override
+  String get settingsRemindersOpen => '打开提醒设置';
+
+  @override
+  String get settingsExportOpen => '打开导出';
+
+  @override
+  String get settingsDeleteAllAction => '删除所有数据';
+
+  @override
+  String get settingsDeleteAllConfirmTitle => '删除所有数据？';
+
+  @override
+  String get settingsDeleteAllConfirmBody => '所有测量、提醒和导出都将被移除。此操作无法撤销。';
+
+  @override
+  String get settingsDeleteAllConfirmAction => '继续';
+
+  @override
+  String get settingsDeleteAllSecondTitle => '最后确认';
+
+  @override
+  String get settingsDeleteAllSecondBody => '输入 DELETE 以确认。';
+
+  @override
+  String get settingsDeleteAllChallenge => 'DELETE';
+
+  @override
+  String get settingsDeleteAllCompleted => '已删除所有数据。';
+
+  @override
+  String get settingsPrivacyOpen => '打开隐私说明';
+
+  @override
+  String get settingsIntegrationsHealthConnect => 'Health Connect / HealthKit';
+
+  @override
+  String get settingsIntegrationsFitbit => 'Fitbit / Google Health';
+
+  @override
+  String get settingsIntegrationsLlm => 'AI 提示（LLM）';
+
+  @override
+  String get settingsIntegrationsComingSoon => '即将推出';
+
+  @override
+  String get settingsAboutVersion => '版本';
+
+  @override
+  String get settingsAboutLicenses => '开源许可';
+
+  @override
+  String get settingsAboutAppVersion => '0.1.0+1';
+
+  @override
+  String get privacyResetDisclaimerAction => '再次显示免责声明';
 }

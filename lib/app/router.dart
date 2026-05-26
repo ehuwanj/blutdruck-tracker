@@ -1,17 +1,16 @@
 import 'package:blutdruck_tracker/app/disclaimer/disclaimer_dialog.dart';
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
-import 'package:blutdruck_tracker/app/providers.dart';
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/features/export/presentation/screens/export_screen.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/screens/overview_screen.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_entry_screen.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/screens/reading_history_screen.dart';
 import 'package:blutdruck_tracker/features/reminders/presentation/screens/reminder_settings_screen.dart';
-import 'package:blutdruck_tracker/features/settings/domain/entities/locale_setting.dart';
+import 'package:blutdruck_tracker/features/settings/presentation/screens/privacy_info_screen.dart';
+import 'package:blutdruck_tracker/features/settings/presentation/screens/settings_screen.dart';
 import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
 import 'package:blutdruck_tracker/features/status/presentation/screens/status_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -38,7 +37,7 @@ final appRouter = GoRouter(
         ),
         GoRoute(
           path: '/settings',
-          builder: (context, state) => const SettingsPlaceholderScreen(),
+          builder: (context, state) => const SettingsScreen(),
           routes: [
             GoRoute(
               path: 'reminders',
@@ -46,9 +45,7 @@ final appRouter = GoRouter(
             ),
             GoRoute(
               path: 'privacy',
-              builder: (context, state) => PlaceholderScreen(
-                title: AppLocalizations.of(context).privacyTitle,
-              ),
+              builder: (context, state) => const PrivacyInfoScreen(),
             ),
           ],
         ),
@@ -97,60 +94,6 @@ class PlaceholderScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.xl),
           child: Text(title, textAlign: TextAlign.center),
-        ),
-      ),
-    );
-  }
-}
-
-class SettingsPlaceholderScreen extends ConsumerWidget {
-  const SettingsPlaceholderScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final settings = ref.watch(settingsProvider).valueOrNull;
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.settingsTitle)),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.settingsTitle,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: AppSpacing.md),
-            SegmentedButton<LocaleSetting>(
-              segments: [
-                ButtonSegment(
-                  value: LocaleSetting.system,
-                  label: Text(l10n.languageSystem),
-                ),
-                ButtonSegment(
-                  value: LocaleSetting.en,
-                  label: Text(l10n.languageEnglish),
-                ),
-                ButtonSegment(
-                  value: LocaleSetting.de,
-                  label: Text(l10n.languageGerman),
-                ),
-                ButtonSegment(
-                  value: LocaleSetting.zh,
-                  label: Text(l10n.languageChinese),
-                ),
-              ],
-              selected: {settings?.locale ?? LocaleSetting.system},
-              onSelectionChanged: settings == null
-                  ? null
-                  : (selection) {
-                      ref
-                          .read(settingsProvider.notifier)
-                          .save(settings.copyWith(locale: selection.single));
-                    },
-            ),
-          ],
         ),
       ),
     );
