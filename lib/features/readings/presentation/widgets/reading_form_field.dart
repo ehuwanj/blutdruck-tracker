@@ -20,8 +20,14 @@ class ReadingFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Key by label only — not by current value. Including `initialValue` in
+    // the key meant every parent rebuild (which happens on every keystroke as
+    // form state updates) destroyed the underlying TextFormField, killed
+    // focus + cursor, and re-seeded the text from `initialValue`. That made
+    // the weight field unusable past 1–2 digits (the user types "8", the
+    // field reseeds to "8.0" and steals focus mid-keystroke).
     return TextFormField(
-      key: ValueKey('$label-$initialValue'),
+      key: ValueKey(label),
       initialValue: initialValue,
       keyboardType: keyboardType,
       maxLines: maxLines,
