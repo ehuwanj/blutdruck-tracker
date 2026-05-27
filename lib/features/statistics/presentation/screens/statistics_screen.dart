@@ -29,19 +29,31 @@ class StatisticsScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.statisticsTitle)),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          AppSpacing.lg,
-          AppSpacing.sm,
-          AppSpacing.lg,
-          AppSpacing.xxl,
-        ),
-        children: const [
-          _PeriodSelector(),
-          SizedBox(height: AppSpacing.lg),
-          _StatisticsBody(),
-        ],
+      body: const StatisticsTabView(),
+    );
+  }
+}
+
+/// AppBar-less body for the Statistics view. Used both by [StatisticsScreen]
+/// (when reached via the /statistics route) and by the Overview segmented
+/// tabs (which swap content in place instead of pushing a route).
+class StatisticsTabView extends StatelessWidget {
+  const StatisticsTabView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.sm,
+        AppSpacing.lg,
+        AppSpacing.xxl,
       ),
+      children: const [
+        _PeriodSelector(),
+        SizedBox(height: AppSpacing.lg),
+        _StatisticsBody(),
+      ],
     );
   }
 }

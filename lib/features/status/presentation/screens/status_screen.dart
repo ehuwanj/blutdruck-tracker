@@ -16,33 +16,45 @@ class StatusScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final asyncStats = ref.watch(statisticsProvider);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.statusTitle)),
-      body: asyncStats.when(
-        loading: () => const AppLoadingView(),
-        error: (error, stackTrace) => AppErrorView(
-          headline: l10n.statisticsLoadErrorTitle,
-          body: l10n.statisticsLoadErrorBody,
-        ),
-        data: (stats) {
-          return ListView(
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.lg,
-              AppSpacing.lg,
-              AppSpacing.lg,
-              AppSpacing.xxl,
-            ),
-            children: [
-              _DistributionCard(distribution: stats.categoryDistribution),
-              const SizedBox(height: AppSpacing.lg),
-              const _CategoryExplanationCard(),
-              const SizedBox(height: AppSpacing.lg),
-              const _PersistentDisclaimer(),
-            ],
-          );
-        },
+      body: const StatusTabView(),
+    );
+  }
+}
+
+/// AppBar-less body for the Status view. Used both by [StatusScreen] (when
+/// reached via the /status route) and by the Overview segmented tabs.
+class StatusTabView extends ConsumerWidget {
+  const StatusTabView({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final asyncStats = ref.watch(statisticsProvider);
+    return asyncStats.when(
+      loading: () => const AppLoadingView(),
+      error: (error, stackTrace) => AppErrorView(
+        headline: l10n.statisticsLoadErrorTitle,
+        body: l10n.statisticsLoadErrorBody,
       ),
+      data: (stats) {
+        return ListView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.lg,
+            AppSpacing.lg,
+            AppSpacing.lg,
+            AppSpacing.xxl,
+          ),
+          children: [
+            _DistributionCard(distribution: stats.categoryDistribution),
+            const SizedBox(height: AppSpacing.lg),
+            const _CategoryExplanationCard(),
+            const SizedBox(height: AppSpacing.lg),
+            const _PersistentDisclaimer(),
+          ],
+        );
+      },
     );
   }
 }

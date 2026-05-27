@@ -4,11 +4,19 @@ import 'package:blutdruck_tracker/features/overview/presentation/widgets/blood_p
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/latest_reading_card.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/time_slot_chart_card.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/weight_chart_card.dart';
+import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
+import 'package:blutdruck_tracker/features/status/presentation/screens/status_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-class OverviewScreen extends StatelessWidget {
+class OverviewScreen extends StatefulWidget {
   const OverviewScreen({super.key});
+
+  @override
+  State<OverviewScreen> createState() => _OverviewScreenState();
+}
+
+class _OverviewScreenState extends State<OverviewScreen> {
+  _OverviewTab _selected = _OverviewTab.history;
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +50,24 @@ class OverviewScreen extends StatelessWidget {
                   label: Text(l10n.overviewTabStatus),
                 ),
               ],
-              selected: const {_OverviewTab.history},
+              selected: {_selected},
               onSelectionChanged: (selection) {
-                switch (selection.single) {
-                  case _OverviewTab.history:
-                    break;
-                  case _OverviewTab.statistics:
-                    context.go('/statistics');
-                  case _OverviewTab.status:
-                    context.go('/status');
-                }
+                setState(() => _selected = selection.single);
               },
             ),
           ),
-          const Expanded(child: _HistoryTabContent()),
+          // IndexedStack keeps the three tab subtrees alive so switching tabs
+          // doesn't rebuild and lose scroll position / form state.
+          Expanded(
+            child: IndexedStack(
+              index: _selected.index,
+              children: const [
+                _HistoryTabContent(),
+                StatisticsTabView(),
+                StatusTabView(),
+              ],
+            ),
+          ),
         ],
       ),
     );

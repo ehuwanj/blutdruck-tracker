@@ -6,6 +6,7 @@ import 'package:blutdruck_tracker/features/readings/presentation/providers/readi
 import 'package:blutdruck_tracker/features/readings/presentation/widgets/reading_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class ReadingEntryScreen extends ConsumerWidget {
   const ReadingEntryScreen({this.readingId, super.key});
@@ -61,7 +62,11 @@ class ReadingEntryScreen extends ConsumerWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(l10n.readingSavedMessage)),
                       );
-                      await Navigator.of(context).maybePop();
+                      // The entry screen was reached via context.go() (FAB,
+                      // empty-state CTA, history-row tap), which replaces the
+                      // route stack — Navigator.maybePop() has nothing to pop.
+                      // Send the user back to the overview explicitly.
+                      context.go('/');
                     }
                   : null,
               child: Text(l10n.saveButton),
@@ -101,7 +106,7 @@ class ReadingEntryScreen extends ConsumerWidget {
     if (confirmed ?? false) {
       await ref.read(deleteReadingProvider).call(id);
       if (context.mounted) {
-        await Navigator.of(context).maybePop();
+        context.go('/');
       }
     }
   }

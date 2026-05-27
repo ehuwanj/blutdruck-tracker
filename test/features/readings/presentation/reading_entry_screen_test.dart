@@ -10,6 +10,7 @@ import 'package:blutdruck_tracker/features/settings/domain/repositories/settings
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   testWidgets('submit is disabled when systolic or diastolic is missing', (
@@ -89,6 +90,30 @@ extension on WidgetTester {
     required _FakeReadingRepository repository,
     String? readingId,
   }) async {
+    // The screen calls context.go('/') after save/delete; pump it under a
+    // minimal GoRouter so that navigation resolves instead of throwing
+    // "No GoRouter found in context".
+    final router = GoRouter(
+      initialLocation: readingId == null
+          ? '/readings/new'
+          : '/readings/$readingId/edit',
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) =>
+              const Scaffold(body: Center(child: Text('overview'))),
+        ),
+        GoRoute(
+          path: '/readings/new',
+          builder: (context, state) => const ReadingEntryScreen(),
+        ),
+        GoRoute(
+          path: '/readings/:id/edit',
+          builder: (context, state) =>
+              ReadingEntryScreen(readingId: state.pathParameters['id']),
+        ),
+      ],
+    );
     await pumpWidget(
       ProviderScope(
         overrides: [
@@ -100,10 +125,10 @@ extension on WidgetTester {
             _FakeSettingsRepository(AppSettings.defaults()),
           ),
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: ReadingEntryScreen(readingId: readingId),
+          routerConfig: router,
         ),
       ),
     );
