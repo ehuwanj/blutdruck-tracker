@@ -27,7 +27,6 @@ mixin _$BloodPressureReading {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   int? get pulse => throw _privateConstructorUsedError;
-  double? get weightKg => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
 
   /// Create a copy of BloodPressureReading
@@ -53,7 +52,6 @@ abstract class $BloodPressureReadingCopyWith<$Res> {
     DateTime createdAt,
     DateTime updatedAt,
     int? pulse,
-    double? weightKg,
     String? note,
   });
 }
@@ -84,7 +82,6 @@ class _$BloodPressureReadingCopyWithImpl<
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? pulse = freezed,
-    Object? weightKg = freezed,
     Object? note = freezed,
   }) {
     return _then(
@@ -121,10 +118,6 @@ class _$BloodPressureReadingCopyWithImpl<
                 ? _value.pulse
                 : pulse // ignore: cast_nullable_to_non_nullable
                       as int?,
-            weightKg: freezed == weightKg
-                ? _value.weightKg
-                : weightKg // ignore: cast_nullable_to_non_nullable
-                      as double?,
             note: freezed == note
                 ? _value.note
                 : note // ignore: cast_nullable_to_non_nullable
@@ -153,7 +146,6 @@ abstract class _$$BloodPressureReadingImplCopyWith<$Res>
     DateTime createdAt,
     DateTime updatedAt,
     int? pulse,
-    double? weightKg,
     String? note,
   });
 }
@@ -180,7 +172,6 @@ class __$$BloodPressureReadingImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? pulse = freezed,
-    Object? weightKg = freezed,
     Object? note = freezed,
   }) {
     return _then(
@@ -217,10 +208,6 @@ class __$$BloodPressureReadingImplCopyWithImpl<$Res>
             ? _value.pulse
             : pulse // ignore: cast_nullable_to_non_nullable
                   as int?,
-        weightKg: freezed == weightKg
-            ? _value.weightKg
-            : weightKg // ignore: cast_nullable_to_non_nullable
-                  as double?,
         note: freezed == note
             ? _value.note
             : note // ignore: cast_nullable_to_non_nullable
@@ -242,7 +229,6 @@ class _$BloodPressureReadingImpl extends _BloodPressureReading {
     required this.createdAt,
     required this.updatedAt,
     this.pulse,
-    this.weightKg,
     this.note,
   }) : super._();
 
@@ -265,13 +251,11 @@ class _$BloodPressureReadingImpl extends _BloodPressureReading {
   @override
   final int? pulse;
   @override
-  final double? weightKg;
-  @override
   final String? note;
 
   @override
   String toString() {
-    return 'BloodPressureReading(id: $id, measuredAt: $measuredAt, systolic: $systolic, diastolic: $diastolic, source: $source, createdAt: $createdAt, updatedAt: $updatedAt, pulse: $pulse, weightKg: $weightKg, note: $note)';
+    return 'BloodPressureReading(id: $id, measuredAt: $measuredAt, systolic: $systolic, diastolic: $diastolic, source: $source, createdAt: $createdAt, updatedAt: $updatedAt, pulse: $pulse, note: $note)';
   }
 
   @override
@@ -292,8 +276,6 @@ class _$BloodPressureReadingImpl extends _BloodPressureReading {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.pulse, pulse) || other.pulse == pulse) &&
-            (identical(other.weightKg, weightKg) ||
-                other.weightKg == weightKg) &&
             (identical(other.note, note) || other.note == note));
   }
 
@@ -308,7 +290,6 @@ class _$BloodPressureReadingImpl extends _BloodPressureReading {
     createdAt,
     updatedAt,
     pulse,
-    weightKg,
     note,
   );
 
@@ -335,7 +316,6 @@ abstract class _BloodPressureReading extends BloodPressureReading {
     required final DateTime createdAt,
     required final DateTime updatedAt,
     final int? pulse,
-    final double? weightKg,
     final String? note,
   }) = _$BloodPressureReadingImpl;
   const _BloodPressureReading._() : super._();
@@ -358,8 +338,6 @@ abstract class _BloodPressureReading extends BloodPressureReading {
   DateTime get updatedAt;
   @override
   int? get pulse;
-  @override
-  double? get weightKg;
   @override
   String? get note;
 

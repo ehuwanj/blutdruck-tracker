@@ -58,9 +58,15 @@
   "latestReadingSystolicShort": "Sys.",
   "latestReadingDiastolicShort": "Dia.",
   "latestReadingPulseShort": "Puls",
-  "latestReadingTapHint": "Tippen für die letzten 7 Einträge",
-  "lastSevenEntriesTitle": "Letzte 7 Einträge",
-  "lastSevenEntriesEmpty": "Noch keine Einträge.",
+  "latestReadingTapHint": "Tippen für die letzten {count} Einträge",
+  "@latestReadingTapHint": {
+    "placeholders": { "count": {"type": "int"} }
+  },
+  "lastRecentEntriesTitle": "Letzte {count} Einträge",
+  "@lastRecentEntriesTitle": {
+    "placeholders": { "count": {"type": "int"} }
+  },
+  "lastRecentEntriesEmpty": "Noch keine Einträge.",
   "latestReadingEmptyTitle": "Noch keine Messungen",
   "latestReadingEmptyBody": "Erfassen Sie die erste Messung, um Ihren Verlauf zu sehen.",
   "latestReadingEmptyAction": "Erste Messung erfassen",
@@ -282,6 +288,13 @@
   "settingsHeightInvalid": "Bitte eine Zahl eingeben.",
   "settingsHeightSaveAction": "Speichern",
   "settingsHeightClearAction": "Löschen",
+  "settingsWeightLabel": "Gewicht",
+  "settingsWeightHint": "Wird für den BMI verwendet.",
+  "settingsWeightSuffix": "kg",
+  "settingsWeightOutOfRange": "Geben Sie einen Wert zwischen 20 und 400 ein.",
+  "settingsWeightInvalid": "Bitte eine Zahl eingeben.",
+  "settingsRecentEntriesLabel": "Letzte Einträge beim Antippen",
+  "settingsRecentEntriesHint": "Wie viele Einträge im Status-Tab beim Antippen der letzten Messung angezeigt werden.",
   "settingsThemeLabel": "Design",
   "settingsThemeSystem": "System",
   "settingsThemeLight": "Hell",

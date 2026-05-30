@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 /// - UTF-8 with BOM (callers prefix the BOM via [encodeUtf8WithBom]).
 /// - `;` field separator, `\r\n` line endings.
 /// - Decimal separator is always `.` regardless of locale.
-/// - 11 columns in a fixed order; header text follows the locale.
+/// - 10 columns in a fixed order; header text follows the locale.
 class CsvExportService {
   const CsvExportService({this.classifier = const BloodPressureClassifier()});
 
@@ -53,7 +53,6 @@ class CsvExportService {
       l10n.csvColumnPulse,
       l10n.csvColumnPulsePressure,
       l10n.csvColumnMap,
-      l10n.csvColumnWeightKg,
       l10n.csvColumnNote,
       l10n.csvColumnCategory,
       l10n.csvColumnSource,
@@ -76,7 +75,6 @@ class CsvExportService {
       _intOrEmpty(reading.pulse),
       '${reading.pulsePressure}',
       '${reading.meanArterialPressure.round()}',
-      _weightOrEmpty(reading.weightKg),
       reading.note ?? '',
       _categoryLabel(category, l10n),
       // Source is the enum `name` — stable for round-trips, not localized.
@@ -85,8 +83,6 @@ class CsvExportService {
   }
 
   String _intOrEmpty(int? value) => value == null ? '' : '$value';
-
-  String _weightOrEmpty(double? kg) => kg == null ? '' : kg.toStringAsFixed(1);
 
   String _categoryLabel(BloodPressureCategory category, AppLocalizations l10n) {
     return switch (category) {

@@ -62,13 +62,14 @@ void main() {
         clockProvider.overrideWithValue(_FakeClock(DateTime.utc(2026, 5, 30))),
         readingRepositoryProvider.overrideWithValue(
           _FakeReadingRepository([
-            reading('r1', measuredAt: DateTime.utc(2026, 5, 29), weightKg: 80),
+            reading('r1', measuredAt: DateTime.utc(2026, 5, 29)),
           ]),
         ),
         settingsRepositoryProvider.overrideWithValue(
           _FakeSettingsRepository(
             AppSettings.defaults().copyWith(
               heightCm: 180,
+              weightKg: 75,
               disclaimerAcceptedVersion: kDisclaimerVersion,
             ),
           ),
@@ -120,7 +121,6 @@ BloodPressureReading reading(
   DateTime? measuredAt,
   int systolic = 120,
   int diastolic = 80,
-  double? weightKg,
 }) {
   final timestamp = measuredAt ?? DateTime.utc(2026, 5, 25, 8);
   return BloodPressureReading(
@@ -128,7 +128,6 @@ BloodPressureReading reading(
     measuredAt: timestamp,
     systolic: systolic,
     diastolic: diastolic,
-    weightKg: weightKg,
     source: ReadingSource.manual,
     createdAt: timestamp,
     updatedAt: timestamp,

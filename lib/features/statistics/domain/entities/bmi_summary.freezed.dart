@@ -17,13 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BmiSummary {
-  /// BMI of the latest in-period reading that has a weight.
-  double? get currentBmi => throw _privateConstructorUsedError;
-
-  /// Mean of per-reading BMI values across in-period readings with weight.
-  double? get averageBmi => throw _privateConstructorUsedError;
-
-  /// Category of [currentBmi]; `null` when [currentBmi] is `null`.
+  double? get bmi => throw _privateConstructorUsedError;
   BmiCategory? get category => throw _privateConstructorUsedError;
 
   /// Create a copy of BmiSummary
@@ -40,7 +34,7 @@ abstract class $BmiSummaryCopyWith<$Res> {
     $Res Function(BmiSummary) then,
   ) = _$BmiSummaryCopyWithImpl<$Res, BmiSummary>;
   @useResult
-  $Res call({double? currentBmi, double? averageBmi, BmiCategory? category});
+  $Res call({double? bmi, BmiCategory? category});
 }
 
 /// @nodoc
@@ -57,20 +51,12 @@ class _$BmiSummaryCopyWithImpl<$Res, $Val extends BmiSummary>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? currentBmi = freezed,
-    Object? averageBmi = freezed,
-    Object? category = freezed,
-  }) {
+  $Res call({Object? bmi = freezed, Object? category = freezed}) {
     return _then(
       _value.copyWith(
-            currentBmi: freezed == currentBmi
-                ? _value.currentBmi
-                : currentBmi // ignore: cast_nullable_to_non_nullable
-                      as double?,
-            averageBmi: freezed == averageBmi
-                ? _value.averageBmi
-                : averageBmi // ignore: cast_nullable_to_non_nullable
+            bmi: freezed == bmi
+                ? _value.bmi
+                : bmi // ignore: cast_nullable_to_non_nullable
                       as double?,
             category: freezed == category
                 ? _value.category
@@ -91,7 +77,7 @@ abstract class _$$BmiSummaryImplCopyWith<$Res>
   ) = __$$BmiSummaryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double? currentBmi, double? averageBmi, BmiCategory? category});
+  $Res call({double? bmi, BmiCategory? category});
 }
 
 /// @nodoc
@@ -107,20 +93,12 @@ class __$$BmiSummaryImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? currentBmi = freezed,
-    Object? averageBmi = freezed,
-    Object? category = freezed,
-  }) {
+  $Res call({Object? bmi = freezed, Object? category = freezed}) {
     return _then(
       _$BmiSummaryImpl(
-        currentBmi: freezed == currentBmi
-            ? _value.currentBmi
-            : currentBmi // ignore: cast_nullable_to_non_nullable
-                  as double?,
-        averageBmi: freezed == averageBmi
-            ? _value.averageBmi
-            : averageBmi // ignore: cast_nullable_to_non_nullable
+        bmi: freezed == bmi
+            ? _value.bmi
+            : bmi // ignore: cast_nullable_to_non_nullable
                   as double?,
         category: freezed == category
             ? _value.category
@@ -134,23 +112,16 @@ class __$$BmiSummaryImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BmiSummaryImpl implements _BmiSummary {
-  const _$BmiSummaryImpl({this.currentBmi, this.averageBmi, this.category});
+  const _$BmiSummaryImpl({this.bmi, this.category});
 
-  /// BMI of the latest in-period reading that has a weight.
   @override
-  final double? currentBmi;
-
-  /// Mean of per-reading BMI values across in-period readings with weight.
-  @override
-  final double? averageBmi;
-
-  /// Category of [currentBmi]; `null` when [currentBmi] is `null`.
+  final double? bmi;
   @override
   final BmiCategory? category;
 
   @override
   String toString() {
-    return 'BmiSummary(currentBmi: $currentBmi, averageBmi: $averageBmi, category: $category)';
+    return 'BmiSummary(bmi: $bmi, category: $category)';
   }
 
   @override
@@ -158,17 +129,13 @@ class _$BmiSummaryImpl implements _BmiSummary {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BmiSummaryImpl &&
-            (identical(other.currentBmi, currentBmi) ||
-                other.currentBmi == currentBmi) &&
-            (identical(other.averageBmi, averageBmi) ||
-                other.averageBmi == averageBmi) &&
+            (identical(other.bmi, bmi) || other.bmi == bmi) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, currentBmi, averageBmi, category);
+  int get hashCode => Object.hash(runtimeType, bmi, category);
 
   /// Create a copy of BmiSummary
   /// with the given fields replaced by the non-null parameter values.
@@ -180,21 +147,11 @@ class _$BmiSummaryImpl implements _BmiSummary {
 }
 
 abstract class _BmiSummary implements BmiSummary {
-  const factory _BmiSummary({
-    final double? currentBmi,
-    final double? averageBmi,
-    final BmiCategory? category,
-  }) = _$BmiSummaryImpl;
+  const factory _BmiSummary({final double? bmi, final BmiCategory? category}) =
+      _$BmiSummaryImpl;
 
-  /// BMI of the latest in-period reading that has a weight.
   @override
-  double? get currentBmi;
-
-  /// Mean of per-reading BMI values across in-period readings with weight.
-  @override
-  double? get averageBmi;
-
-  /// Category of [currentBmi]; `null` when [currentBmi] is `null`.
+  double? get bmi;
   @override
   BmiCategory? get category;
 

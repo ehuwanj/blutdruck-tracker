@@ -25,8 +25,17 @@ mixin _$AppSettings {
   /// Default `60`; allowed `60`, `120`, `180`.
   int get timeSlotWidthMinutes => throw _privateConstructorUsedError;
 
+  /// Default `10`; allowed `5`, `7`, `10`, `15`, `20`. Controls how many
+  /// recent entries the Status tab's tap-Latest bottom sheet renders.
+  int get recentEntriesCount => throw _privateConstructorUsedError;
+
   /// Profile height in centimetres. `null` = unset; BMI is not computed.
   double? get heightCm => throw _privateConstructorUsedError;
+
+  /// Profile weight in kilograms. `null` = unset. Weight is a single
+  /// setting (not per-reading) per user request — BMI uses this paired
+  /// with `heightCm` to produce a single value.
+  double? get weightKg => throw _privateConstructorUsedError;
 
   /// `0..1439` minutes since local midnight, or `null` to auto-detect.
   int? get pinnedTimeSlotStartMinutes => throw _privateConstructorUsedError;
@@ -56,7 +65,9 @@ abstract class $AppSettingsCopyWith<$Res> {
     WeightUnit weightUnit,
     bool remindersEnabled,
     int timeSlotWidthMinutes,
+    int recentEntriesCount,
     double? heightCm,
+    double? weightKg,
     int? pinnedTimeSlotStartMinutes,
     int? disclaimerAcceptedVersion,
     String? lastExportDirectoryHint,
@@ -83,7 +94,9 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? weightUnit = null,
     Object? remindersEnabled = null,
     Object? timeSlotWidthMinutes = null,
+    Object? recentEntriesCount = null,
     Object? heightCm = freezed,
+    Object? weightKg = freezed,
     Object? pinnedTimeSlotStartMinutes = freezed,
     Object? disclaimerAcceptedVersion = freezed,
     Object? lastExportDirectoryHint = freezed,
@@ -110,9 +123,17 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
                 ? _value.timeSlotWidthMinutes
                 : timeSlotWidthMinutes // ignore: cast_nullable_to_non_nullable
                       as int,
+            recentEntriesCount: null == recentEntriesCount
+                ? _value.recentEntriesCount
+                : recentEntriesCount // ignore: cast_nullable_to_non_nullable
+                      as int,
             heightCm: freezed == heightCm
                 ? _value.heightCm
                 : heightCm // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            weightKg: freezed == weightKg
+                ? _value.weightKg
+                : weightKg // ignore: cast_nullable_to_non_nullable
                       as double?,
             pinnedTimeSlotStartMinutes: freezed == pinnedTimeSlotStartMinutes
                 ? _value.pinnedTimeSlotStartMinutes
@@ -147,7 +168,9 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
     WeightUnit weightUnit,
     bool remindersEnabled,
     int timeSlotWidthMinutes,
+    int recentEntriesCount,
     double? heightCm,
+    double? weightKg,
     int? pinnedTimeSlotStartMinutes,
     int? disclaimerAcceptedVersion,
     String? lastExportDirectoryHint,
@@ -173,7 +196,9 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? weightUnit = null,
     Object? remindersEnabled = null,
     Object? timeSlotWidthMinutes = null,
+    Object? recentEntriesCount = null,
     Object? heightCm = freezed,
+    Object? weightKg = freezed,
     Object? pinnedTimeSlotStartMinutes = freezed,
     Object? disclaimerAcceptedVersion = freezed,
     Object? lastExportDirectoryHint = freezed,
@@ -200,9 +225,17 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
             ? _value.timeSlotWidthMinutes
             : timeSlotWidthMinutes // ignore: cast_nullable_to_non_nullable
                   as int,
+        recentEntriesCount: null == recentEntriesCount
+            ? _value.recentEntriesCount
+            : recentEntriesCount // ignore: cast_nullable_to_non_nullable
+                  as int,
         heightCm: freezed == heightCm
             ? _value.heightCm
             : heightCm // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        weightKg: freezed == weightKg
+            ? _value.weightKg
+            : weightKg // ignore: cast_nullable_to_non_nullable
                   as double?,
         pinnedTimeSlotStartMinutes: freezed == pinnedTimeSlotStartMinutes
             ? _value.pinnedTimeSlotStartMinutes
@@ -230,7 +263,9 @@ class _$AppSettingsImpl implements _AppSettings {
     required this.weightUnit,
     required this.remindersEnabled,
     required this.timeSlotWidthMinutes,
+    required this.recentEntriesCount,
     this.heightCm,
+    this.weightKg,
     this.pinnedTimeSlotStartMinutes,
     this.disclaimerAcceptedVersion,
     this.lastExportDirectoryHint,
@@ -249,9 +284,20 @@ class _$AppSettingsImpl implements _AppSettings {
   @override
   final int timeSlotWidthMinutes;
 
+  /// Default `10`; allowed `5`, `7`, `10`, `15`, `20`. Controls how many
+  /// recent entries the Status tab's tap-Latest bottom sheet renders.
+  @override
+  final int recentEntriesCount;
+
   /// Profile height in centimetres. `null` = unset; BMI is not computed.
   @override
   final double? heightCm;
+
+  /// Profile weight in kilograms. `null` = unset. Weight is a single
+  /// setting (not per-reading) per user request — BMI uses this paired
+  /// with `heightCm` to produce a single value.
+  @override
+  final double? weightKg;
 
   /// `0..1439` minutes since local midnight, or `null` to auto-detect.
   @override
@@ -266,7 +312,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(locale: $locale, themeMode: $themeMode, weightUnit: $weightUnit, remindersEnabled: $remindersEnabled, timeSlotWidthMinutes: $timeSlotWidthMinutes, heightCm: $heightCm, pinnedTimeSlotStartMinutes: $pinnedTimeSlotStartMinutes, disclaimerAcceptedVersion: $disclaimerAcceptedVersion, lastExportDirectoryHint: $lastExportDirectoryHint)';
+    return 'AppSettings(locale: $locale, themeMode: $themeMode, weightUnit: $weightUnit, remindersEnabled: $remindersEnabled, timeSlotWidthMinutes: $timeSlotWidthMinutes, recentEntriesCount: $recentEntriesCount, heightCm: $heightCm, weightKg: $weightKg, pinnedTimeSlotStartMinutes: $pinnedTimeSlotStartMinutes, disclaimerAcceptedVersion: $disclaimerAcceptedVersion, lastExportDirectoryHint: $lastExportDirectoryHint)';
   }
 
   @override
@@ -283,8 +329,12 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.remindersEnabled == remindersEnabled) &&
             (identical(other.timeSlotWidthMinutes, timeSlotWidthMinutes) ||
                 other.timeSlotWidthMinutes == timeSlotWidthMinutes) &&
+            (identical(other.recentEntriesCount, recentEntriesCount) ||
+                other.recentEntriesCount == recentEntriesCount) &&
             (identical(other.heightCm, heightCm) ||
                 other.heightCm == heightCm) &&
+            (identical(other.weightKg, weightKg) ||
+                other.weightKg == weightKg) &&
             (identical(
                   other.pinnedTimeSlotStartMinutes,
                   pinnedTimeSlotStartMinutes,
@@ -311,7 +361,9 @@ class _$AppSettingsImpl implements _AppSettings {
     weightUnit,
     remindersEnabled,
     timeSlotWidthMinutes,
+    recentEntriesCount,
     heightCm,
+    weightKg,
     pinnedTimeSlotStartMinutes,
     disclaimerAcceptedVersion,
     lastExportDirectoryHint,
@@ -333,7 +385,9 @@ abstract class _AppSettings implements AppSettings {
     required final WeightUnit weightUnit,
     required final bool remindersEnabled,
     required final int timeSlotWidthMinutes,
+    required final int recentEntriesCount,
     final double? heightCm,
+    final double? weightKg,
     final int? pinnedTimeSlotStartMinutes,
     final int? disclaimerAcceptedVersion,
     final String? lastExportDirectoryHint,
@@ -352,9 +406,20 @@ abstract class _AppSettings implements AppSettings {
   @override
   int get timeSlotWidthMinutes;
 
+  /// Default `10`; allowed `5`, `7`, `10`, `15`, `20`. Controls how many
+  /// recent entries the Status tab's tap-Latest bottom sheet renders.
+  @override
+  int get recentEntriesCount;
+
   /// Profile height in centimetres. `null` = unset; BMI is not computed.
   @override
   double? get heightCm;
+
+  /// Profile weight in kilograms. `null` = unset. Weight is a single
+  /// setting (not per-reading) per user request — BMI uses this paired
+  /// with `heightCm` to produce a single value.
+  @override
+  double? get weightKg;
 
   /// `0..1439` minutes since local midnight, or `null` to auto-detect.
   @override

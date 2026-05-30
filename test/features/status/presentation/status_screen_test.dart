@@ -26,9 +26,7 @@ void main() {
         tester.view.resetDevicePixelRatio();
       });
 
-      final readings = [
-        _reading(id: 'r-latest', sys: 132, dia: 84, at: now),
-      ];
+      final readings = [_reading(id: 'r-latest', sys: 132, dia: 84, at: now)];
 
       await tester.pumpScreen(readings: readings, now: now);
 

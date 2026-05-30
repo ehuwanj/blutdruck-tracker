@@ -3,19 +3,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bmi_summary.freezed.dart';
 
-/// BMI rollup over a period. Computed only when height (settings) and at
-/// least one in-period weight reading are both present; otherwise the
-/// parent `StatisticsResult.bmi` is `null`.
+/// BMI snapshot computed from `AppSettings.heightCm` and
+/// `AppSettings.weightKg`. Weight is now a single setting (not
+/// per-reading), so BMI has no time series — just the current value and
+/// its WHO category. `null` when either height or weight is unset.
 @freezed
 class BmiSummary with _$BmiSummary {
-  const factory BmiSummary({
-    /// BMI of the latest in-period reading that has a weight.
-    double? currentBmi,
-
-    /// Mean of per-reading BMI values across in-period readings with weight.
-    double? averageBmi,
-
-    /// Category of [currentBmi]; `null` when [currentBmi] is `null`.
-    BmiCategory? category,
-  }) = _BmiSummary;
+  const factory BmiSummary({double? bmi, BmiCategory? category}) = _BmiSummary;
 }

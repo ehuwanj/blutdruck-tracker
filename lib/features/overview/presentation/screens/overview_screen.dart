@@ -2,10 +2,10 @@ import 'package:blutdruck_tracker/app/localization/generated/app_localizations.d
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/blood_pressure_chart_card.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/time_slot_chart_card.dart';
-import 'package:blutdruck_tracker/features/overview/presentation/widgets/weight_chart_card.dart';
 import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
 import 'package:blutdruck_tracker/features/status/presentation/screens/status_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OverviewScreen extends StatefulWidget {
   const OverviewScreen({super.key});
@@ -24,6 +24,13 @@ class _OverviewScreenState extends State<OverviewScreen> {
       appBar: AppBar(
         title: Text(l10n.overviewTitle),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: l10n.settingsTitle,
+            onPressed: () => context.go('/settings'),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -93,8 +100,6 @@ class _HistoryTabContent extends StatelessWidget {
         BloodPressureChartCard(),
         SizedBox(height: AppSpacing.lg),
         TimeSlotChartCard(),
-        SizedBox(height: AppSpacing.lg),
-        WeightChartCard(),
       ],
     );
   }

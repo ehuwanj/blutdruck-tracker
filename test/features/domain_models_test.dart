@@ -65,11 +65,7 @@ void main() {
         average: 112,
         trend: TrendDirection.stable,
       );
-      const bmi = BmiSummary(
-        currentBmi: 24.2,
-        averageBmi: 24,
-        category: BmiCategory.normal,
-      );
+      const bmi = BmiSummary(bmi: 24.2, category: BmiCategory.normal);
       final result = StatisticsResult(
         from: from,
         to: to,
@@ -98,14 +94,9 @@ void main() {
   test(
     'BmiSummary constructs with all fields and copyWith changes category',
     () {
-      const summary = BmiSummary(
-        currentBmi: 26.2,
-        averageBmi: 25.8,
-        category: BmiCategory.overweight,
-      );
+      const summary = BmiSummary(bmi: 26.2, category: BmiCategory.overweight);
 
-      expect(summary.currentBmi, 26.2);
-      expect(summary.averageBmi, 25.8);
+      expect(summary.bmi, 26.2);
       expect(summary.category, BmiCategory.overweight);
       expect(
         summary.copyWith(category: BmiCategory.normal).category,
@@ -207,7 +198,9 @@ void main() {
         weightUnit: WeightUnit.lb,
         remindersEnabled: true,
         timeSlotWidthMinutes: 120,
+        recentEntriesCount: 10,
         heightCm: 178,
+        weightKg: 80,
         pinnedTimeSlotStartMinutes: 420,
         disclaimerAcceptedVersion: 1,
         lastExportDirectoryHint: '/exports',

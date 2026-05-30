@@ -57,19 +57,17 @@ void main() {
     expect(hasTrendSemantics, findsAtLeastNWidgets(1));
   });
 
-  testWidgets('BMI card visible when height is set and weight is present', (
+  testWidgets('BMI card visible when both height and weight are set', (
     tester,
   ) async {
     useTallViewport(tester);
-    final readings = _periodReadings(now: now, count: 6, withWeight: true);
     await tester.pumpScreen(
-      readings: readings,
-      settings: AppSettings.defaults().copyWith(heightCm: 178),
+      readings: _periodReadings(now: now, count: 6),
+      settings: AppSettings.defaults().copyWith(heightCm: 178, weightKg: 80),
       now: now,
     );
 
     expect(find.text('BMI'), findsOneWidget);
-    // The helper text is the BMI card's tell-tale text.
     expect(
       find.textContaining('Calculated from your profile height'),
       findsOneWidget,
@@ -80,10 +78,9 @@ void main() {
     tester,
   ) async {
     useTallViewport(tester);
-    final readings = _periodReadings(now: now, count: 6, withWeight: true);
     await tester.pumpScreen(
-      readings: readings,
-      settings: AppSettings.defaults(),
+      readings: _periodReadings(now: now, count: 6),
+      settings: AppSettings.defaults().copyWith(weightKg: 80),
       now: now,
     );
 
@@ -91,20 +88,18 @@ void main() {
       find.text('Set height in profile to calculate BMI.'),
       findsOneWidget,
     );
-    // The full BMI card body text must not be present.
     expect(
       find.textContaining('Calculated from your profile height'),
       findsNothing,
     );
   });
 
-  testWidgets('BMI card is hidden when height is set but no weight in period', (
+  testWidgets('BMI card is hidden when height is set but weight is null', (
     tester,
   ) async {
     useTallViewport(tester);
-    final readings = _periodReadings(now: now, count: 6);
     await tester.pumpScreen(
-      readings: readings,
+      readings: _periodReadings(now: now, count: 6),
       settings: AppSettings.defaults().copyWith(heightCm: 178),
       now: now,
     );
@@ -117,7 +112,6 @@ void main() {
 List<BloodPressureReading> _periodReadings({
   required DateTime now,
   required int count,
-  bool withWeight = false,
 }) {
   return [
     for (var i = 0; i < count; i++)
@@ -128,7 +122,6 @@ List<BloodPressureReading> _periodReadings({
         systolic: 130 + i,
         diastolic: 82 + (i % 4),
         pulse: 70 + i,
-        weightKg: withWeight ? 78.0 + i * 0.2 : null,
         source: ReadingSource.manual,
         createdAt: now,
         updatedAt: now,

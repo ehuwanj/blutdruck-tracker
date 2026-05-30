@@ -60,17 +60,6 @@ class $BloodPressureReadingsTable extends BloodPressureReadings
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _weightKgMeta = const VerificationMeta(
-    'weightKg',
-  );
-  @override
-  late final GeneratedColumn<double> weightKg = GeneratedColumn<double>(
-    'weight_kg',
-    aliasedName,
-    true,
-    type: DriftSqlType.double,
-    requiredDuringInsert: false,
-  );
   static const VerificationMeta _noteMeta = const VerificationMeta('note');
   @override
   late final GeneratedColumn<String> note = GeneratedColumn<String>(
@@ -118,7 +107,6 @@ class $BloodPressureReadingsTable extends BloodPressureReadings
     systolic,
     diastolic,
     pulse,
-    weightKg,
     note,
     source,
     createdAt,
@@ -169,12 +157,6 @@ class $BloodPressureReadingsTable extends BloodPressureReadings
       context.handle(
         _pulseMeta,
         pulse.isAcceptableOrUnknown(data['pulse']!, _pulseMeta),
-      );
-    }
-    if (data.containsKey('weight_kg')) {
-      context.handle(
-        _weightKgMeta,
-        weightKg.isAcceptableOrUnknown(data['weight_kg']!, _weightKgMeta),
       );
     }
     if (data.containsKey('note')) {
@@ -239,10 +221,6 @@ class $BloodPressureReadingsTable extends BloodPressureReadings
         DriftSqlType.int,
         data['${effectivePrefix}pulse'],
       ),
-      weightKg: attachedDatabase.typeMapping.read(
-        DriftSqlType.double,
-        data['${effectivePrefix}weight_kg'],
-      ),
       note: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}note'],
@@ -275,7 +253,6 @@ class BloodPressureReadingRow extends DataClass
   final int systolic;
   final int diastolic;
   final int? pulse;
-  final double? weightKg;
   final String? note;
   final String source;
   final int createdAt;
@@ -286,7 +263,6 @@ class BloodPressureReadingRow extends DataClass
     required this.systolic,
     required this.diastolic,
     this.pulse,
-    this.weightKg,
     this.note,
     required this.source,
     required this.createdAt,
@@ -301,9 +277,6 @@ class BloodPressureReadingRow extends DataClass
     map['diastolic'] = Variable<int>(diastolic);
     if (!nullToAbsent || pulse != null) {
       map['pulse'] = Variable<int>(pulse);
-    }
-    if (!nullToAbsent || weightKg != null) {
-      map['weight_kg'] = Variable<double>(weightKg);
     }
     if (!nullToAbsent || note != null) {
       map['note'] = Variable<String>(note);
@@ -323,9 +296,6 @@ class BloodPressureReadingRow extends DataClass
       pulse: pulse == null && nullToAbsent
           ? const Value.absent()
           : Value(pulse),
-      weightKg: weightKg == null && nullToAbsent
-          ? const Value.absent()
-          : Value(weightKg),
       note: note == null && nullToAbsent ? const Value.absent() : Value(note),
       source: Value(source),
       createdAt: Value(createdAt),
@@ -344,7 +314,6 @@ class BloodPressureReadingRow extends DataClass
       systolic: serializer.fromJson<int>(json['systolic']),
       diastolic: serializer.fromJson<int>(json['diastolic']),
       pulse: serializer.fromJson<int?>(json['pulse']),
-      weightKg: serializer.fromJson<double?>(json['weightKg']),
       note: serializer.fromJson<String?>(json['note']),
       source: serializer.fromJson<String>(json['source']),
       createdAt: serializer.fromJson<int>(json['createdAt']),
@@ -360,7 +329,6 @@ class BloodPressureReadingRow extends DataClass
       'systolic': serializer.toJson<int>(systolic),
       'diastolic': serializer.toJson<int>(diastolic),
       'pulse': serializer.toJson<int?>(pulse),
-      'weightKg': serializer.toJson<double?>(weightKg),
       'note': serializer.toJson<String?>(note),
       'source': serializer.toJson<String>(source),
       'createdAt': serializer.toJson<int>(createdAt),
@@ -374,7 +342,6 @@ class BloodPressureReadingRow extends DataClass
     int? systolic,
     int? diastolic,
     Value<int?> pulse = const Value.absent(),
-    Value<double?> weightKg = const Value.absent(),
     Value<String?> note = const Value.absent(),
     String? source,
     int? createdAt,
@@ -385,7 +352,6 @@ class BloodPressureReadingRow extends DataClass
     systolic: systolic ?? this.systolic,
     diastolic: diastolic ?? this.diastolic,
     pulse: pulse.present ? pulse.value : this.pulse,
-    weightKg: weightKg.present ? weightKg.value : this.weightKg,
     note: note.present ? note.value : this.note,
     source: source ?? this.source,
     createdAt: createdAt ?? this.createdAt,
@@ -402,7 +368,6 @@ class BloodPressureReadingRow extends DataClass
       systolic: data.systolic.present ? data.systolic.value : this.systolic,
       diastolic: data.diastolic.present ? data.diastolic.value : this.diastolic,
       pulse: data.pulse.present ? data.pulse.value : this.pulse,
-      weightKg: data.weightKg.present ? data.weightKg.value : this.weightKg,
       note: data.note.present ? data.note.value : this.note,
       source: data.source.present ? data.source.value : this.source,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
@@ -418,7 +383,6 @@ class BloodPressureReadingRow extends DataClass
           ..write('systolic: $systolic, ')
           ..write('diastolic: $diastolic, ')
           ..write('pulse: $pulse, ')
-          ..write('weightKg: $weightKg, ')
           ..write('note: $note, ')
           ..write('source: $source, ')
           ..write('createdAt: $createdAt, ')
@@ -434,7 +398,6 @@ class BloodPressureReadingRow extends DataClass
     systolic,
     diastolic,
     pulse,
-    weightKg,
     note,
     source,
     createdAt,
@@ -449,7 +412,6 @@ class BloodPressureReadingRow extends DataClass
           other.systolic == this.systolic &&
           other.diastolic == this.diastolic &&
           other.pulse == this.pulse &&
-          other.weightKg == this.weightKg &&
           other.note == this.note &&
           other.source == this.source &&
           other.createdAt == this.createdAt &&
@@ -463,7 +425,6 @@ class BloodPressureReadingsCompanion
   final Value<int> systolic;
   final Value<int> diastolic;
   final Value<int?> pulse;
-  final Value<double?> weightKg;
   final Value<String?> note;
   final Value<String> source;
   final Value<int> createdAt;
@@ -475,7 +436,6 @@ class BloodPressureReadingsCompanion
     this.systolic = const Value.absent(),
     this.diastolic = const Value.absent(),
     this.pulse = const Value.absent(),
-    this.weightKg = const Value.absent(),
     this.note = const Value.absent(),
     this.source = const Value.absent(),
     this.createdAt = const Value.absent(),
@@ -488,7 +448,6 @@ class BloodPressureReadingsCompanion
     required int systolic,
     required int diastolic,
     this.pulse = const Value.absent(),
-    this.weightKg = const Value.absent(),
     this.note = const Value.absent(),
     required String source,
     required int createdAt,
@@ -507,7 +466,6 @@ class BloodPressureReadingsCompanion
     Expression<int>? systolic,
     Expression<int>? diastolic,
     Expression<int>? pulse,
-    Expression<double>? weightKg,
     Expression<String>? note,
     Expression<String>? source,
     Expression<int>? createdAt,
@@ -520,7 +478,6 @@ class BloodPressureReadingsCompanion
       if (systolic != null) 'systolic': systolic,
       if (diastolic != null) 'diastolic': diastolic,
       if (pulse != null) 'pulse': pulse,
-      if (weightKg != null) 'weight_kg': weightKg,
       if (note != null) 'note': note,
       if (source != null) 'source': source,
       if (createdAt != null) 'created_at': createdAt,
@@ -535,7 +492,6 @@ class BloodPressureReadingsCompanion
     Value<int>? systolic,
     Value<int>? diastolic,
     Value<int?>? pulse,
-    Value<double?>? weightKg,
     Value<String?>? note,
     Value<String>? source,
     Value<int>? createdAt,
@@ -548,7 +504,6 @@ class BloodPressureReadingsCompanion
       systolic: systolic ?? this.systolic,
       diastolic: diastolic ?? this.diastolic,
       pulse: pulse ?? this.pulse,
-      weightKg: weightKg ?? this.weightKg,
       note: note ?? this.note,
       source: source ?? this.source,
       createdAt: createdAt ?? this.createdAt,
@@ -574,9 +529,6 @@ class BloodPressureReadingsCompanion
     }
     if (pulse.present) {
       map['pulse'] = Variable<int>(pulse.value);
-    }
-    if (weightKg.present) {
-      map['weight_kg'] = Variable<double>(weightKg.value);
     }
     if (note.present) {
       map['note'] = Variable<String>(note.value);
@@ -604,7 +556,6 @@ class BloodPressureReadingsCompanion
           ..write('systolic: $systolic, ')
           ..write('diastolic: $diastolic, ')
           ..write('pulse: $pulse, ')
-          ..write('weightKg: $weightKg, ')
           ..write('note: $note, ')
           ..write('source: $source, ')
           ..write('createdAt: $createdAt, ')
@@ -1778,7 +1729,6 @@ typedef $$BloodPressureReadingsTableCreateCompanionBuilder =
       required int systolic,
       required int diastolic,
       Value<int?> pulse,
-      Value<double?> weightKg,
       Value<String?> note,
       required String source,
       required int createdAt,
@@ -1792,7 +1742,6 @@ typedef $$BloodPressureReadingsTableUpdateCompanionBuilder =
       Value<int> systolic,
       Value<int> diastolic,
       Value<int?> pulse,
-      Value<double?> weightKg,
       Value<String?> note,
       Value<String> source,
       Value<int> createdAt,
@@ -1831,11 +1780,6 @@ class $$BloodPressureReadingsTableFilterComposer
 
   ColumnFilters<int> get pulse => $composableBuilder(
     column: $table.pulse,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<double> get weightKg => $composableBuilder(
-    column: $table.weightKg,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -1894,11 +1838,6 @@ class $$BloodPressureReadingsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<double> get weightKg => $composableBuilder(
-    column: $table.weightKg,
-    builder: (column) => ColumnOrderings(column),
-  );
-
   ColumnOrderings<String> get note => $composableBuilder(
     column: $table.note,
     builder: (column) => ColumnOrderings(column),
@@ -1945,9 +1884,6 @@ class $$BloodPressureReadingsTableAnnotationComposer
 
   GeneratedColumn<int> get pulse =>
       $composableBuilder(column: $table.pulse, builder: (column) => column);
-
-  GeneratedColumn<double> get weightKg =>
-      $composableBuilder(column: $table.weightKg, builder: (column) => column);
 
   GeneratedColumn<String> get note =>
       $composableBuilder(column: $table.note, builder: (column) => column);
@@ -2013,7 +1949,6 @@ class $$BloodPressureReadingsTableTableManager
                 Value<int> systolic = const Value.absent(),
                 Value<int> diastolic = const Value.absent(),
                 Value<int?> pulse = const Value.absent(),
-                Value<double?> weightKg = const Value.absent(),
                 Value<String?> note = const Value.absent(),
                 Value<String> source = const Value.absent(),
                 Value<int> createdAt = const Value.absent(),
@@ -2025,7 +1960,6 @@ class $$BloodPressureReadingsTableTableManager
                 systolic: systolic,
                 diastolic: diastolic,
                 pulse: pulse,
-                weightKg: weightKg,
                 note: note,
                 source: source,
                 createdAt: createdAt,
@@ -2039,7 +1973,6 @@ class $$BloodPressureReadingsTableTableManager
                 required int systolic,
                 required int diastolic,
                 Value<int?> pulse = const Value.absent(),
-                Value<double?> weightKg = const Value.absent(),
                 Value<String?> note = const Value.absent(),
                 required String source,
                 required int createdAt,
@@ -2051,7 +1984,6 @@ class $$BloodPressureReadingsTableTableManager
                 systolic: systolic,
                 diastolic: diastolic,
                 pulse: pulse,
-                weightKg: weightKg,
                 note: note,
                 source: source,
                 createdAt: createdAt,

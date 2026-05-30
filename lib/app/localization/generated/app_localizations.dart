@@ -451,20 +451,20 @@ abstract class AppLocalizations {
   /// No description provided for @latestReadingTapHint.
   ///
   /// In en, this message translates to:
-  /// **'Tap to see the last 7 entries'**
-  String get latestReadingTapHint;
+  /// **'Tap to see the last {count} entries'**
+  String latestReadingTapHint(int count);
 
-  /// No description provided for @lastSevenEntriesTitle.
+  /// No description provided for @lastRecentEntriesTitle.
   ///
   /// In en, this message translates to:
-  /// **'Last 7 entries'**
-  String get lastSevenEntriesTitle;
+  /// **'Last {count} entries'**
+  String lastRecentEntriesTitle(int count);
 
-  /// No description provided for @lastSevenEntriesEmpty.
+  /// No description provided for @lastRecentEntriesEmpty.
   ///
   /// In en, this message translates to:
   /// **'No entries yet.'**
-  String get lastSevenEntriesEmpty;
+  String get lastRecentEntriesEmpty;
 
   /// No description provided for @latestReadingEmptyTitle.
   ///
@@ -1419,6 +1419,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clear'**
   String get settingsHeightClearAction;
+
+  /// No description provided for @settingsWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get settingsWeightLabel;
+
+  /// No description provided for @settingsWeightHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Used for the BMI calculation.'**
+  String get settingsWeightHint;
+
+  /// No description provided for @settingsWeightSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'kg'**
+  String get settingsWeightSuffix;
+
+  /// No description provided for @settingsWeightOutOfRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a value between 20 and 400.'**
+  String get settingsWeightOutOfRange;
+
+  /// No description provided for @settingsWeightInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a number.'**
+  String get settingsWeightInvalid;
+
+  /// No description provided for @settingsRecentEntriesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent entries on tap'**
+  String get settingsRecentEntriesLabel;
+
+  /// No description provided for @settingsRecentEntriesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'How many entries the Status tab shows when you tap the latest reading.'**
+  String get settingsRecentEntriesHint;
 
   /// No description provided for @settingsThemeLabel.
   ///

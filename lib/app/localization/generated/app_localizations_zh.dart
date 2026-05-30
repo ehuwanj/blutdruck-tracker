@@ -184,13 +184,17 @@ class AppLocalizationsZh extends AppLocalizations {
   String get latestReadingPulseShort => '脉搏';
 
   @override
-  String get latestReadingTapHint => '点击查看最近 7 条记录';
+  String latestReadingTapHint(int count) {
+    return '点击查看最近 $count 条记录';
+  }
 
   @override
-  String get lastSevenEntriesTitle => '最近 7 条记录';
+  String lastRecentEntriesTitle(int count) {
+    return '最近 $count 条记录';
+  }
 
   @override
-  String get lastSevenEntriesEmpty => '暂无记录。';
+  String get lastRecentEntriesEmpty => '暂无记录。';
 
   @override
   String get latestReadingEmptyTitle => '暂无记录';
@@ -705,6 +709,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsHeightClearAction => '清除';
+
+  @override
+  String get settingsWeightLabel => '体重';
+
+  @override
+  String get settingsWeightHint => '用于计算 BMI。';
+
+  @override
+  String get settingsWeightSuffix => 'kg';
+
+  @override
+  String get settingsWeightOutOfRange => '请输入 20 到 400 之间的数值。';
+
+  @override
+  String get settingsWeightInvalid => '请输入数字。';
+
+  @override
+  String get settingsRecentEntriesLabel => '点击时显示的最近条目';
+
+  @override
+  String get settingsRecentEntriesHint => '状态标签页点击最新记录时显示的条目数。';
 
   @override
   String get settingsThemeLabel => '主题';

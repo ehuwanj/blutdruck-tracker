@@ -58,9 +58,15 @@
   "latestReadingSystolicShort": "Sys.",
   "latestReadingDiastolicShort": "Dia.",
   "latestReadingPulseShort": "Pulse",
-  "latestReadingTapHint": "Tap to see the last 7 entries",
-  "lastSevenEntriesTitle": "Last 7 entries",
-  "lastSevenEntriesEmpty": "No entries yet.",
+  "latestReadingTapHint": "Tap to see the last {count} entries",
+  "@latestReadingTapHint": {
+    "placeholders": { "count": {"type": "int"} }
+  },
+  "lastRecentEntriesTitle": "Last {count} entries",
+  "@lastRecentEntriesTitle": {
+    "placeholders": { "count": {"type": "int"} }
+  },
+  "lastRecentEntriesEmpty": "No entries yet.",
   "latestReadingEmptyTitle": "No readings yet",
   "latestReadingEmptyBody": "Add your first reading to start seeing your trend.",
   "latestReadingEmptyAction": "Add first reading",
@@ -282,6 +288,13 @@
   "settingsHeightInvalid": "Please enter a number.",
   "settingsHeightSaveAction": "Save",
   "settingsHeightClearAction": "Clear",
+  "settingsWeightLabel": "Weight",
+  "settingsWeightHint": "Used for the BMI calculation.",
+  "settingsWeightSuffix": "kg",
+  "settingsWeightOutOfRange": "Enter a value between 20 and 400.",
+  "settingsWeightInvalid": "Please enter a number.",
+  "settingsRecentEntriesLabel": "Recent entries on tap",
+  "settingsRecentEntriesHint": "How many entries the Status tab shows when you tap the latest reading.",
   "settingsThemeLabel": "Theme",
   "settingsThemeSystem": "System",
   "settingsThemeLight": "Light",

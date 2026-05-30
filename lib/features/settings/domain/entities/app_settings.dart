@@ -19,8 +19,17 @@ class AppSettings with _$AppSettings {
     /// Default `60`; allowed `60`, `120`, `180`.
     required int timeSlotWidthMinutes,
 
+    /// Default `10`; allowed `5`, `7`, `10`, `15`, `20`. Controls how many
+    /// recent entries the Status tab's tap-Latest bottom sheet renders.
+    required int recentEntriesCount,
+
     /// Profile height in centimetres. `null` = unset; BMI is not computed.
     double? heightCm,
+
+    /// Profile weight in kilograms. `null` = unset. Weight is a single
+    /// setting (not per-reading) per user request — BMI uses this paired
+    /// with `heightCm` to produce a single value.
+    double? weightKg,
 
     /// `0..1439` minutes since local midnight, or `null` to auto-detect.
     int? pinnedTimeSlotStartMinutes,
@@ -37,5 +46,6 @@ class AppSettings with _$AppSettings {
     weightUnit: WeightUnit.kg,
     remindersEnabled: false,
     timeSlotWidthMinutes: 60,
+    recentEntriesCount: 10,
   );
 }

@@ -52,7 +52,9 @@ class PrivacyInfoScreen extends ConsumerWidget {
       weightUnit: current.weightUnit,
       remindersEnabled: current.remindersEnabled,
       timeSlotWidthMinutes: current.timeSlotWidthMinutes,
+      recentEntriesCount: current.recentEntriesCount,
       heightCm: current.heightCm,
+      weightKg: current.weightKg,
       pinnedTimeSlotStartMinutes: current.pinnedTimeSlotStartMinutes,
       lastExportDirectoryHint: current.lastExportDirectoryHint,
     );

@@ -29,7 +29,6 @@ void main() {
         'systolic': 'INTEGER|required',
         'diastolic': 'INTEGER|required',
         'pulse': 'INTEGER|nullable',
-        'weight_kg': 'REAL|nullable',
         'note': 'TEXT|nullable',
         'source': 'TEXT|required',
         'created_at': 'INTEGER|required',
@@ -80,7 +79,6 @@ void main() {
         systolic: 132,
         diastolic: 84,
         pulse: 72,
-        weightKg: 78.5,
         note: '  after coffee  ',
         source: ReadingSource.manual,
         createdAt: DateTime.utc(2026, 5, 25, 7, 31),
@@ -104,7 +102,6 @@ void main() {
         systolic: 150,
         diastolic: 95,
         pulse: 80,
-        weightKg: 81,
         note: 'private note',
         source: 'surprise',
         createdAt: DateTime.utc(2026, 5, 25).millisecondsSinceEpoch,
@@ -134,7 +131,9 @@ void main() {
           weightUnit: WeightUnit.lb,
           remindersEnabled: true,
           heightCm: 180.5,
+          weightKg: 80,
           timeSlotWidthMinutes: 120,
+          recentEntriesCount: 15,
           pinnedTimeSlotStartMinutes: 480,
           disclaimerAcceptedVersion: 1,
           lastExportDirectoryHint: r'C:\exports',
@@ -149,6 +148,8 @@ void main() {
         expect(byKey['remindersEnabled'], 'true');
         expect(byKey['heightCm'], '180.5');
         expect(byKey['heightCm'], isNot(contains(',')));
+        expect(byKey['weightKg'], '80.0');
+        expect(byKey['recentEntriesCount'], '15');
         expect(mapper.fromRows(rows), settings);
       },
     );
@@ -161,7 +162,9 @@ void main() {
       expect(settings.weightUnit, WeightUnit.kg);
       expect(settings.remindersEnabled, isFalse);
       expect(settings.timeSlotWidthMinutes, 60);
+      expect(settings.recentEntriesCount, 10);
       expect(settings.heightCm, isNull);
+      expect(settings.weightKg, isNull);
       expect(settings.pinnedTimeSlotStartMinutes, isNull);
       expect(settings.disclaimerAcceptedVersion, isNull);
       expect(settings.lastExportDirectoryHint, isNull);

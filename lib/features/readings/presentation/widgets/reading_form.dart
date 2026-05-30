@@ -9,11 +9,10 @@ import 'package:intl/intl.dart';
 
 /// Auto-advance thresholds. Once the parsed integer exceeds the threshold,
 /// focus jumps to the next numeric field so the user can type the whole
-/// reading (132/84/72) without lifting their finger to tab between fields.
-/// Strict `>` (not `>=`) so users entering 60 / 30 / 30 exactly stay put.
+/// reading (132/84/72) without tabbing between fields. Strict `>` (not
+/// `>=`) so users entering 60 / 30 exactly stay put.
 const _systolicAdvanceAt = 60;
 const _diastolicAdvanceAt = 30;
-const _pulseAdvanceAt = 30;
 
 class ReadingForm extends ConsumerStatefulWidget {
   const ReadingForm({required this.state, required this.readingId, super.key});
@@ -29,14 +28,30 @@ class _ReadingFormState extends ConsumerState<ReadingForm> {
   final _systolicFocus = FocusNode(debugLabel: 'systolic');
   final _diastolicFocus = FocusNode(debugLabel: 'diastolic');
   final _pulseFocus = FocusNode(debugLabel: 'pulse');
-  final _weightFocus = FocusNode(debugLabel: 'weight');
+
+  @override
+  void initState() {
+    super.initState();
+    // Validation now runs on blur, not on every keystroke — so typing
+    // "115" doesn't flash "11 is out of range" while the user is mid-input.
+    // Each focus loss triggers a single validateNow() pass.
+    for (final node in [_systolicFocus, _diastolicFocus, _pulseFocus]) {
+      node.addListener(() => _onFocusChanged(node));
+    }
+  }
+
+  void _onFocusChanged(FocusNode node) {
+    if (node.hasFocus) return;
+    ref
+        .read(readingFormNotifierProvider(widget.readingId).notifier)
+        .validateNow();
+  }
 
   @override
   void dispose() {
     _systolicFocus.dispose();
     _diastolicFocus.dispose();
     _pulseFocus.dispose();
-    _weightFocus.dispose();
     super.dispose();
   }
 
@@ -99,24 +114,7 @@ class _ReadingFormState extends ConsumerState<ReadingForm> {
             keyboardType: TextInputType.number,
             focusNode: _pulseFocus,
             textInputAction: TextInputAction.next,
-            onChanged: (value) {
-              final parsed = int.tryParse(value);
-              notifier.setPulse(parsed);
-              if (parsed != null && parsed > _pulseAdvanceAt) {
-                _weightFocus.requestFocus();
-              }
-            },
-          ),
-          const SizedBox(height: AppSpacing.md),
-          ReadingFormField(
-            label: l10n.weightLabel,
-            initialValue: state.weightKg?.toString(),
-            suffixText: 'kg',
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            focusNode: _weightFocus,
-            // The note field comes after weight; "next" jumps to it.
-            textInputAction: TextInputAction.next,
-            onChanged: (value) => notifier.setWeightKg(double.tryParse(value)),
+            onChanged: (value) => notifier.setPulse(int.tryParse(value)),
           ),
           const SizedBox(height: AppSpacing.md),
           ReadingFormField(

@@ -18,7 +18,6 @@ class BloodPressureReading with _$BloodPressureReading {
     required DateTime createdAt,
     required DateTime updatedAt,
     int? pulse,
-    double? weightKg,
     String? note,
   }) = _BloodPressureReading;
 

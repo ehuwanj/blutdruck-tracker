@@ -27,10 +27,10 @@ void main() {
       expect(service.headers(zh).first, '日期');
     });
 
-    test('11 columns in identical order across locales', () {
-      expect(service.headers(en), hasLength(11));
-      expect(service.headers(de), hasLength(11));
-      expect(service.headers(zh), hasLength(11));
+    test('10 columns in identical order across locales', () {
+      expect(service.headers(en), hasLength(10));
+      expect(service.headers(de), hasLength(10));
+      expect(service.headers(zh), hasLength(10));
     });
   });
 
@@ -42,18 +42,15 @@ void main() {
       expect(lines.first.split(';'), service.headers(en));
     });
 
-    test('row values match the reading and decimals use a dot', () {
+    test('row values match the reading and source is the enum name', () {
       final reading = _reading(
         id: 'r-1',
         measuredAt: DateTime.utc(2026, 5, 25, 6, 30),
-        weightKg: 78.45,
       );
       final csv = service.build(readings: [reading], l10n: en);
       final data = csv.split('\r\n')[1].split(';');
-      // Column 8 (index 7) = Weight_kg, single decimal, "."-separator.
-      expect(data[7], '78.5');
-      // Column 11 (index 10) = Source, enum name lowercase (not localized).
-      expect(data[10], 'manual');
+      // Column 10 (index 9) = Source, enum name lowercase (not localized).
+      expect(data[9], 'manual');
     });
   });
 
@@ -101,7 +98,6 @@ BloodPressureReading _reading({
   required String id,
   required DateTime measuredAt,
   String? note,
-  double? weightKg,
 }) {
   return BloodPressureReading(
     id: id,
@@ -109,7 +105,6 @@ BloodPressureReading _reading({
     systolic: 132,
     diastolic: 84,
     pulse: 72,
-    weightKg: weightKg,
     note: note,
     source: ReadingSource.manual,
     createdAt: measuredAt,

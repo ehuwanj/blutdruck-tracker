@@ -58,9 +58,15 @@
   "latestReadingSystolicShort": "收缩",
   "latestReadingDiastolicShort": "舒张",
   "latestReadingPulseShort": "脉搏",
-  "latestReadingTapHint": "点击查看最近 7 条记录",
-  "lastSevenEntriesTitle": "最近 7 条记录",
-  "lastSevenEntriesEmpty": "暂无记录。",
+  "latestReadingTapHint": "点击查看最近 {count} 条记录",
+  "@latestReadingTapHint": {
+    "placeholders": { "count": {"type": "int"} }
+  },
+  "lastRecentEntriesTitle": "最近 {count} 条记录",
+  "@lastRecentEntriesTitle": {
+    "placeholders": { "count": {"type": "int"} }
+  },
+  "lastRecentEntriesEmpty": "暂无记录。",
   "latestReadingEmptyTitle": "暂无记录",
   "latestReadingEmptyBody": "添加第一条记录后即可查看趋势。",
   "latestReadingEmptyAction": "添加第一条记录",
@@ -282,6 +288,13 @@
   "settingsHeightInvalid": "请输入数字。",
   "settingsHeightSaveAction": "保存",
   "settingsHeightClearAction": "清除",
+  "settingsWeightLabel": "体重",
+  "settingsWeightHint": "用于计算 BMI。",
+  "settingsWeightSuffix": "kg",
+  "settingsWeightOutOfRange": "请输入 20 到 400 之间的数值。",
+  "settingsWeightInvalid": "请输入数字。",
+  "settingsRecentEntriesLabel": "点击时显示的最近条目",
+  "settingsRecentEntriesHint": "状态标签页点击最新记录时显示的条目数。",
   "settingsThemeLabel": "主题",
   "settingsThemeSystem": "系统",
   "settingsThemeLight": "浅色",

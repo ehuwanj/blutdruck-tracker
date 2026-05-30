@@ -187,13 +187,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String get latestReadingPulseShort => 'Puls';
 
   @override
-  String get latestReadingTapHint => 'Tippen für die letzten 7 Einträge';
+  String latestReadingTapHint(int count) {
+    return 'Tippen für die letzten $count Einträge';
+  }
 
   @override
-  String get lastSevenEntriesTitle => 'Letzte 7 Einträge';
+  String lastRecentEntriesTitle(int count) {
+    return 'Letzte $count Einträge';
+  }
 
   @override
-  String get lastSevenEntriesEmpty => 'Noch keine Einträge.';
+  String get lastRecentEntriesEmpty => 'Noch keine Einträge.';
 
   @override
   String get latestReadingEmptyTitle => 'Noch keine Messungen';
@@ -750,6 +754,29 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsHeightClearAction => 'Löschen';
+
+  @override
+  String get settingsWeightLabel => 'Gewicht';
+
+  @override
+  String get settingsWeightHint => 'Wird für den BMI verwendet.';
+
+  @override
+  String get settingsWeightSuffix => 'kg';
+
+  @override
+  String get settingsWeightOutOfRange =>
+      'Geben Sie einen Wert zwischen 20 und 400 ein.';
+
+  @override
+  String get settingsWeightInvalid => 'Bitte eine Zahl eingeben.';
+
+  @override
+  String get settingsRecentEntriesLabel => 'Letzte Einträge beim Antippen';
+
+  @override
+  String get settingsRecentEntriesHint =>
+      'Wie viele Einträge im Status-Tab beim Antippen der letzten Messung angezeigt werden.';
 
   @override
   String get settingsThemeLabel => 'Design';

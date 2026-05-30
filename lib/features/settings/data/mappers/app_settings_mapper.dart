@@ -27,7 +27,9 @@ class AppSettingsMapper {
       ),
       remindersEnabled: values[_Keys.remindersEnabled] == 'true',
       heightCm: _double(values[_Keys.heightCm]),
+      weightKg: _double(values[_Keys.weightKg]),
       timeSlotWidthMinutes: _int(values[_Keys.timeSlotWidthMinutes]) ?? 60,
+      recentEntriesCount: _int(values[_Keys.recentEntriesCount]) ?? 10,
       pinnedTimeSlotStartMinutes: _int(
         values[_Keys.pinnedTimeSlotStartMinutes],
       ),
@@ -49,8 +51,14 @@ class AppSettingsMapper {
         key: _Keys.timeSlotWidthMinutes,
         value: settings.timeSlotWidthMinutes.toString(),
       ),
+      AppSettingRow(
+        key: _Keys.recentEntriesCount,
+        value: settings.recentEntriesCount.toString(),
+      ),
       if (settings.heightCm case final heightCm?)
         AppSettingRow(key: _Keys.heightCm, value: _decimal(heightCm)),
+      if (settings.weightKg case final weightKg?)
+        AppSettingRow(key: _Keys.weightKg, value: _decimal(weightKg)),
       if (settings.pinnedTimeSlotStartMinutes case final start?)
         AppSettingRow(
           key: _Keys.pinnedTimeSlotStartMinutes,
@@ -101,7 +109,9 @@ abstract final class _Keys {
   static const weightUnit = 'weightUnit';
   static const remindersEnabled = 'remindersEnabled';
   static const heightCm = 'heightCm';
+  static const weightKg = 'weightKg';
   static const timeSlotWidthMinutes = 'timeSlotWidthMinutes';
+  static const recentEntriesCount = 'recentEntriesCount';
   static const pinnedTimeSlotStartMinutes = 'pinnedTimeSlotStartMinutes';
   static const disclaimerAcceptedVersion = 'disclaimerAcceptedVersion';
   static const lastExportDirectoryHint = 'lastExportDirectoryHint';

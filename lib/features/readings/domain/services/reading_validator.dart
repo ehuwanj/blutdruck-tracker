@@ -48,16 +48,6 @@ class ReadingValidator {
         warnings: warnings,
       );
     }
-    final weightKg = reading.weightKg;
-    if (weightKg != null) {
-      if (weightKg < 20 || weightKg > 400) {
-        errors.add(ValidationIssue.weightOutOfRange);
-      } else if (previousReading?.weightKg case final previous?) {
-        if ((weightKg - previous).abs() > 5) {
-          warnings.add(ValidationIssue.weightStepUnusual);
-        }
-      }
-    }
     if (reading.systolic <= reading.diastolic + 5) {
       warnings.add(ValidationIssue.systolicDiastolicClose);
     }
@@ -124,8 +114,6 @@ enum ValidationIssue {
   diastolicUnusual,
   pulseOutOfRange,
   pulseUnusual,
-  weightOutOfRange,
-  weightStepUnusual,
   systolicDiastolicClose,
   measuredAtTooFarInFuture,
   measuredAtOlderThanFiveYears,

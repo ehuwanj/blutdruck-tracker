@@ -46,10 +46,6 @@ class ReadingFormNotifier
     return state.copyWith(pulse: value, clearPulse: value == null);
   });
 
-  void setWeightKg(double? value) => _update((state) {
-    return state.copyWith(weightKg: value, clearWeightKg: value == null);
-  });
-
   void setNote(String? value) => _update((state) {
     final normalized = _blankToNull(value);
     return state.copyWith(note: normalized, clearNote: normalized == null);
@@ -75,12 +71,25 @@ class ReadingFormNotifier
     return true;
   }
 
+  /// Re-runs validation against the current draft and pushes the result
+  /// into state. Called by the form's FocusNode listeners on blur so
+  /// "11 is outside the expected range" only appears after the user has
+  /// finished typing, not on each keystroke of "115".
+  void validateNow() {
+    final current = state.valueOrNull;
+    if (current == null) return;
+    state = AsyncData(_validated(current));
+  }
+
   void _update(ReadingFormState Function(ReadingFormState state) update) {
     final current = state.valueOrNull;
     if (current == null) {
       return;
     }
-    state = AsyncData(_validated(update(current)));
+    // Update the draft without revalidating; the form's FocusNode listeners
+    // call validateNow() on blur, and submit() runs _validated regardless.
+    // Mid-typing errors (the "115 starts as 11" case) are gone.
+    state = AsyncData(update(current));
   }
 
   ReadingFormState _validated(ReadingFormState draft) {
@@ -112,7 +121,6 @@ class ReadingFormState {
     this.systolic,
     this.diastolic,
     this.pulse,
-    this.weightKg,
     this.note,
   });
 
@@ -132,7 +140,6 @@ class ReadingFormState {
       systolic: reading.systolic,
       diastolic: reading.diastolic,
       pulse: reading.pulse,
-      weightKg: reading.weightKg,
       note: reading.note,
       validation: _emptyValidation,
     );
@@ -144,7 +151,6 @@ class ReadingFormState {
   final int? systolic;
   final int? diastolic;
   final int? pulse;
-  final double? weightKg;
   final String? note;
   final ValidationResult validation;
 
@@ -159,13 +165,11 @@ class ReadingFormState {
     int? systolic,
     int? diastolic,
     int? pulse,
-    double? weightKg,
     String? note,
     ValidationResult? validation,
     bool clearSystolic = false,
     bool clearDiastolic = false,
     bool clearPulse = false,
-    bool clearWeightKg = false,
     bool clearNote = false,
   }) {
     return ReadingFormState(
@@ -175,7 +179,6 @@ class ReadingFormState {
       systolic: clearSystolic ? null : systolic ?? this.systolic,
       diastolic: clearDiastolic ? null : diastolic ?? this.diastolic,
       pulse: clearPulse ? null : pulse ?? this.pulse,
-      weightKg: clearWeightKg ? null : weightKg ?? this.weightKg,
       note: clearNote ? null : note ?? this.note,
       validation: validation ?? this.validation,
     );
@@ -188,7 +191,6 @@ class ReadingFormState {
       systolic: systolic ?? 120,
       diastolic: diastolic ?? 80,
       pulse: pulse,
-      weightKg: weightKg,
       note: note,
       source: ReadingSource.manual,
       createdAt: readingId == null ? now : createdAt,

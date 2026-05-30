@@ -41,8 +41,6 @@ void main() {
         reading(diastolic: 200, systolic: 220),
         reading(pulse: 25),
         reading(pulse: 220),
-        reading(weightKg: 20),
-        reading(weightKg: 400),
       ];
 
       for (final candidate in cases) {
@@ -66,10 +64,6 @@ void main() {
         ValidationIssue.pulseOutOfRange: [
           reading(pulse: 24),
           reading(pulse: 221),
-        ],
-        ValidationIssue.weightOutOfRange: [
-          reading(weightKg: 19),
-          reading(weightKg: 401),
         ],
       };
 
@@ -106,15 +100,13 @@ void main() {
       }
     });
 
-    test('warns for cross-field, old date, and weight step', () {
+    test('warns for cross-field and old date', () {
       final result = validator.validate(
         reading: reading(
           systolic: 90,
           diastolic: 86,
           measuredAt: DateTime.utc(2020),
-          weightKg: 86,
         ),
-        previousReading: reading(weightKg: 80),
         now: now,
       );
 
@@ -124,7 +116,6 @@ void main() {
         result.warnings,
         contains(ValidationIssue.measuredAtOlderThanFiveYears),
       );
-      expect(result.warnings, contains(ValidationIssue.weightStepUnusual));
     });
 
     test('rejects measured-at too far in future and note length limits', () {
@@ -341,15 +332,13 @@ void main() {
       expect(result.categoryDistribution[BloodPressureCategory.normal], 1);
     });
 
-    test('BMI integration follows height and latest weighted reading', () {
+    test('BMI is derived from settings (single height + single weight)', () {
+      // Weight is no longer per-reading — readings are irrelevant for BMI.
       final result = calculator.calculate(
-        readings: [
-          reading(measuredAt: DateTime.utc(2026, 5), weightKg: 80),
-          reading(measuredAt: DateTime.utc(2026, 5, 2), weightKg: 75),
-        ],
+        readings: [reading()],
         from: from,
         to: to,
-        settings: AppSettings.defaults().copyWith(heightCm: 180),
+        settings: AppSettings.defaults().copyWith(heightCm: 180, weightKg: 75),
       );
       final noWeight = calculator.calculate(
         readings: [reading()],
@@ -358,15 +347,15 @@ void main() {
         settings: AppSettings.defaults().copyWith(heightCm: 180),
       );
       final noHeight = calculator.calculate(
-        readings: [reading(weightKg: 80)],
+        readings: [reading()],
         from: from,
         to: to,
-        settings: AppSettings.defaults(),
+        settings: AppSettings.defaults().copyWith(weightKg: 75),
       );
 
       expect(result.bmi, isNotNull);
-      expect(result.bmi!.currentBmi, closeTo(23.148, 0.001));
-      expect(result.bmi!.averageBmi, closeTo(23.92, 0.01));
+      // 75 / 1.8^2 = 23.148...
+      expect(result.bmi!.bmi, closeTo(23.148, 0.001));
       expect(result.bmi!.category, BmiCategory.normal);
       expect(noWeight.bmi, isNull);
       expect(noHeight.bmi, isNull);
@@ -646,7 +635,6 @@ BloodPressureReading reading({
   int systolic = 120,
   int diastolic = 80,
   int? pulse,
-  double? weightKg,
   String? note,
 }) {
   final timestamp = measuredAt ?? DateTime.utc(2026, 5, 25, 8);
@@ -656,7 +644,6 @@ BloodPressureReading reading({
     systolic: systolic,
     diastolic: diastolic,
     pulse: pulse,
-    weightKg: weightKg,
     note: note,
     source: ReadingSource.manual,
     createdAt: timestamp,

@@ -54,7 +54,7 @@ class StatisticsCalculator {
         down: 2,
       ),
       categoryDistribution: _distribution(sorted),
-      bmi: _bmi(sorted, settings),
+      bmi: _bmi(settings),
     );
   }
 
@@ -96,36 +96,15 @@ class StatisticsCalculator {
     return distribution;
   }
 
-  BmiSummary? _bmi(List<BloodPressureReading> readings, AppSettings settings) {
-    final heightCm = settings.heightCm;
-    if (heightCm == null) {
-      return null;
-    }
-    final weighted = readings.where((r) => r.weightKg != null).toList();
-    if (weighted.isEmpty) {
-      return null;
-    }
-    final bmis = weighted
-        .map(
-          (r) =>
-              bmiCalculator.compute(weightKg: r.weightKg, heightCm: heightCm),
-        )
-        .whereType<double>()
-        .toList();
-    if (bmis.isEmpty) {
-      return null;
-    }
-    final latest = weighted.last;
-    final currentBmi = bmiCalculator.compute(
-      weightKg: latest.weightKg,
-      heightCm: heightCm,
+  /// BMI is now computed purely from the profile settings (single height
+  /// + single weight). No per-reading weight series exists anymore, so
+  /// there's no "average BMI over period" — just a single current value.
+  BmiSummary? _bmi(AppSettings settings) {
+    final bmi = bmiCalculator.compute(
+      weightKg: settings.weightKg,
+      heightCm: settings.heightCm,
     );
-    final averageBmi =
-        bmis.fold<double>(0, (sum, value) => sum + value) / bmis.length;
-    return BmiSummary(
-      currentBmi: currentBmi,
-      averageBmi: averageBmi,
-      category: bmiCalculator.categorize(currentBmi),
-    );
+    if (bmi == null) return null;
+    return BmiSummary(bmi: bmi, category: bmiCalculator.categorize(bmi));
   }
 }

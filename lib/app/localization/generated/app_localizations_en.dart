@@ -187,13 +187,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get latestReadingPulseShort => 'Pulse';
 
   @override
-  String get latestReadingTapHint => 'Tap to see the last 7 entries';
+  String latestReadingTapHint(int count) {
+    return 'Tap to see the last $count entries';
+  }
 
   @override
-  String get lastSevenEntriesTitle => 'Last 7 entries';
+  String lastRecentEntriesTitle(int count) {
+    return 'Last $count entries';
+  }
 
   @override
-  String get lastSevenEntriesEmpty => 'No entries yet.';
+  String get lastRecentEntriesEmpty => 'No entries yet.';
 
   @override
   String get latestReadingEmptyTitle => 'No readings yet';
@@ -746,6 +750,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsHeightClearAction => 'Clear';
+
+  @override
+  String get settingsWeightLabel => 'Weight';
+
+  @override
+  String get settingsWeightHint => 'Used for the BMI calculation.';
+
+  @override
+  String get settingsWeightSuffix => 'kg';
+
+  @override
+  String get settingsWeightOutOfRange => 'Enter a value between 20 and 400.';
+
+  @override
+  String get settingsWeightInvalid => 'Please enter a number.';
+
+  @override
+  String get settingsRecentEntriesLabel => 'Recent entries on tap';
+
+  @override
+  String get settingsRecentEntriesHint =>
+      'How many entries the Status tab shows when you tap the latest reading.';
 
   @override
   String get settingsThemeLabel => 'Theme';

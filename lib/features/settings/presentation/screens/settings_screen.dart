@@ -7,6 +7,7 @@ import 'package:blutdruck_tracker/features/settings/domain/entities/theme_mode_s
 import 'package:blutdruck_tracker/features/settings/domain/entities/weight_unit.dart';
 import 'package:blutdruck_tracker/features/settings/presentation/widgets/delete_all_data_dialog.dart';
 import 'package:blutdruck_tracker/features/settings/presentation/widgets/height_setting_tile.dart';
+import 'package:blutdruck_tracker/features/settings/presentation/widgets/weight_setting_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -32,6 +33,8 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           _SectionHeader(l10n.settingsGroupProfile),
           HeightSettingTile(settings: settings),
+          WeightSettingTile(settings: settings),
+          _RecentEntriesTile(settings: settings),
           _SectionHeader(l10n.settingsGroupAppearance),
           _ThemeTile(settings: settings),
           _LanguageTile(settings: settings),
@@ -239,6 +242,39 @@ class _WeightUnitTile extends ConsumerWidget {
               .read(settingsProvider.notifier)
               .save(settings.copyWith(weightUnit: selection.single));
         },
+      ),
+    );
+  }
+}
+
+/// Dropdown for `recentEntriesCount` (5 / 7 / 10 / 15 / 20). Drives how
+/// many entries the Status tab's "tap latest" bottom sheet renders.
+class _RecentEntriesTile extends ConsumerWidget {
+  const _RecentEntriesTile({required this.settings});
+  final AppSettings settings;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    return ListTile(
+      leading: const Icon(Icons.list_alt_outlined),
+      title: Text(l10n.settingsRecentEntriesLabel),
+      subtitle: Text(l10n.settingsRecentEntriesHint),
+      trailing: DropdownButton<int>(
+        value: settings.recentEntriesCount,
+        onChanged: (value) {
+          if (value == null) return;
+          ref
+              .read(settingsProvider.notifier)
+              .save(settings.copyWith(recentEntriesCount: value));
+        },
+        items: const [
+          DropdownMenuItem(value: 5, child: Text('5')),
+          DropdownMenuItem(value: 7, child: Text('7')),
+          DropdownMenuItem(value: 10, child: Text('10')),
+          DropdownMenuItem(value: 15, child: Text('15')),
+          DropdownMenuItem(value: 20, child: Text('20')),
+        ],
       ),
     );
   }

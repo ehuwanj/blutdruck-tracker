@@ -46,8 +46,11 @@ class LatestReadingCard extends ConsumerWidget {
               // Tap surface opens the last-7-entries bottom sheet. InkWell
               // (instead of GestureDetector) gives the standard Material
               // ripple feedback so the affordance is obvious.
+              final count =
+                  ref.watch(settingsProvider).valueOrNull?.recentEntriesCount ??
+                  10;
               return InkWell(
-                onTap: () => _showLastSevenSheet(context),
+                onTap: () => _showRecentEntriesSheet(context, count),
                 borderRadius: BorderRadius.circular(AppRadii.card),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
@@ -92,7 +95,7 @@ class LatestReadingCard extends ConsumerWidget {
                         ),
                         const SizedBox(height: AppSpacing.xs),
                         Text(
-                          l10n.latestReadingTapHint,
+                          l10n.latestReadingTapHint(count),
                           style: Theme.of(context).textTheme.bodySmall
                               ?.copyWith(
                                 color: Theme.of(
@@ -115,11 +118,11 @@ class LatestReadingCard extends ConsumerWidget {
     );
   }
 
-  void _showLastSevenSheet(BuildContext context) {
+  void _showRecentEntriesSheet(BuildContext context, int count) {
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
-      builder: (sheetContext) => const _LastSevenEntriesSheet(),
+      builder: (sheetContext) => _RecentEntriesSheet(count: count),
     );
   }
 }
@@ -164,12 +167,14 @@ class _LatestNumbers extends StatelessWidget {
   }
 }
 
-/// Bottom sheet listing the seven most recent readings. Tappable rows
-/// open the edit screen for that reading. Read directly from the
-/// readings stream so the sheet stays in sync if the underlying data
-/// changes while the sheet is open.
-class _LastSevenEntriesSheet extends ConsumerWidget {
-  const _LastSevenEntriesSheet();
+/// Bottom sheet listing the [count] most recent readings (count is the
+/// `recentEntriesCount` setting, default 10). Tappable rows open the edit
+/// screen for that reading. Reads directly from the readings stream so
+/// the sheet stays in sync if data changes while it's open.
+class _RecentEntriesSheet extends ConsumerWidget {
+  const _RecentEntriesSheet({required this.count});
+
+  final int count;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -186,7 +191,7 @@ class _LastSevenEntriesSheet extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.lastSevenEntriesTitle,
+              l10n.lastRecentEntriesTitle(count),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: AppSpacing.sm),
@@ -197,18 +202,18 @@ class _LastSevenEntriesSheet extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(
                       vertical: AppSpacing.lg,
                     ),
-                    child: Text(l10n.lastSevenEntriesEmpty),
+                    child: Text(l10n.lastRecentEntriesEmpty),
                   );
                 }
                 // readingsStreamProvider already emits desc-by-measuredAt.
-                final last7 = all.take(7).toList();
+                final recent = all.take(count).toList();
                 return Flexible(
                   child: ListView.separated(
                     shrinkWrap: true,
-                    itemCount: last7.length,
+                    itemCount: recent.length,
                     separatorBuilder: (_, _) => const Divider(height: 1),
                     itemBuilder: (context, index) {
-                      final reading = last7[index];
+                      final reading = recent[index];
                       return _SheetRow(reading: reading, l10n: l10n);
                     },
                   ),

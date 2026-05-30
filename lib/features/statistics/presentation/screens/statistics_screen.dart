@@ -435,6 +435,8 @@ class BmiCard extends ConsumerWidget {
       }
       return const SizedBox.shrink();
     }
+    // Single-value BMI now (weight is a setting, not per-reading), so the
+    // card collapses to just the current value + WHO category + helper.
     return AppCard(
       title: l10n.statisticsBmiTitle,
       child: Column(
@@ -445,17 +447,9 @@ class BmiCard extends ConsumerWidget {
             children: [
               Text(l10n.statisticsBmiCurrent),
               Text(
-                _currentBmiLabel(l10n, bmi.currentBmi, bmi.category),
+                _currentBmiLabel(l10n, bmi.bmi, bmi.category),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(l10n.statisticsBmiAverage),
-              Text(formatBmi(bmi.averageBmi, l10n)),
             ],
           ),
           const SizedBox(height: AppSpacing.md),

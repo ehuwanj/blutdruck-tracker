@@ -12,7 +12,6 @@ void main() {
       systolic: systolic,
       diastolic: diastolic,
       pulse: 72,
-      weightKg: 78.5,
       note: 'after coffee',
       source: ReadingSource.manual,
       createdAt: now,

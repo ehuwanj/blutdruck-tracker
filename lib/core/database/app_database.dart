@@ -24,7 +24,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -54,6 +54,14 @@ class AppDatabase extends _$AppDatabase {
           'ALTER TABLE blood_pressure_readings DROP COLUMN stress_level;',
         );
       }
+      // v2 → v3: weight moves to AppSettings (single value, not per-reading).
+      // Existing per-reading weights are dropped — the user explicitly
+      // accepted data loss for the simplified model.
+      if (from < 3) {
+        await customStatement(
+          'ALTER TABLE blood_pressure_readings DROP COLUMN weight_kg;',
+        );
+      }
     },
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON;');
@@ -71,7 +79,6 @@ class BloodPressureReadings extends Table {
   IntColumn get systolic => integer()();
   IntColumn get diastolic => integer()();
   IntColumn get pulse => integer().nullable()();
-  RealColumn get weightKg => real().named('weight_kg').nullable()();
   TextColumn get note => text().nullable()();
   TextColumn get source => text()();
   IntColumn get createdAt => integer().named('created_at')();
