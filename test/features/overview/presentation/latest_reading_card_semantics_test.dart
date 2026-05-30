@@ -81,7 +81,11 @@ void main() {
         textScaler: const TextScaler.linear(2),
       );
 
-      expect(find.text('132 / 84'), findsOneWidget);
+      // Text.rich-based format renders 132 and 84 in separate spans;
+      // textContaining is enough as a smoke check for "did the numbers
+      // render". The real assertion here is no RenderFlex overflow.
+      expect(find.textContaining('132'), findsWidgets);
+      expect(find.textContaining('84'), findsWidgets);
       expect(tester.takeException(), isNull);
     },
   );

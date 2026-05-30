@@ -10,12 +10,10 @@ import 'package:uuid/uuid.dart';
 /// previous Add session. Riverpod ref-counts listeners: when the entry
 /// screen widget tree is gone, the notifier is disposed; the next visit
 /// triggers a fresh build() that returns ReadingFormState.empty.
-final readingFormNotifierProvider =
-    AsyncNotifierProvider.autoDispose.family<
-      ReadingFormNotifier,
-      ReadingFormState,
-      String?
-    >(ReadingFormNotifier.new);
+final readingFormNotifierProvider = AsyncNotifierProvider.autoDispose
+    .family<ReadingFormNotifier, ReadingFormState, String?>(
+      ReadingFormNotifier.new,
+    );
 
 class ReadingFormNotifier
     extends AutoDisposeFamilyAsyncNotifier<ReadingFormState, String?> {

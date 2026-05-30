@@ -67,31 +67,40 @@ class _PeriodSelector extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final period = ref.watch(periodProvider);
     final now = ref.watch(clockProvider).now().toLocal();
-    return Wrap(
-      spacing: AppSpacing.sm,
-      runSpacing: AppSpacing.sm,
-      children: [
-        _PeriodChip(label: l10n.period7Days, days: 7, now: now),
-        _PeriodChip(label: l10n.period14Days, days: 14, now: now),
-        _PeriodChip(label: l10n.period30Days, days: 30, now: now),
-        _PeriodChip(label: l10n.period90Days, days: 90, now: now),
-        FilterChip(
-          label: Text(l10n.periodCustom),
-          selected: !_matchesPreset(period, now),
-          onSelected: (_) async {
-            final picked = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime(now.year - 5),
-              lastDate: DateTime(now.year + 1, 12, 31),
-              initialDateRange: period,
-            );
-            if (picked == null || !context.mounted) {
-              return;
-            }
-            ref.read(periodProvider.notifier).setRange(_fullLocalDays(picked));
-          },
-        ),
-      ],
+    // Horizontal scroll keeps every chip on a single row at any width
+    // (a Wrap was breaking 'Custom' onto its own line on narrow phones).
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          _PeriodChip(label: l10n.period7Days, days: 7, now: now),
+          const SizedBox(width: AppSpacing.sm),
+          _PeriodChip(label: l10n.period14Days, days: 14, now: now),
+          const SizedBox(width: AppSpacing.sm),
+          _PeriodChip(label: l10n.period30Days, days: 30, now: now),
+          const SizedBox(width: AppSpacing.sm),
+          _PeriodChip(label: l10n.period90Days, days: 90, now: now),
+          const SizedBox(width: AppSpacing.sm),
+          FilterChip(
+            label: Text(l10n.periodCustom),
+            selected: !_matchesPreset(period, now),
+            onSelected: (_) async {
+              final picked = await showDateRangePicker(
+                context: context,
+                firstDate: DateTime(now.year - 5),
+                lastDate: DateTime(now.year + 1, 12, 31),
+                initialDateRange: period,
+              );
+              if (picked == null || !context.mounted) {
+                return;
+              }
+              ref
+                  .read(periodProvider.notifier)
+                  .setRange(_fullLocalDays(picked));
+            },
+          ),
+        ],
+      ),
     );
   }
 }

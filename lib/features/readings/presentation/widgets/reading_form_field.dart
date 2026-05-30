@@ -8,6 +8,8 @@ class ReadingFormField extends StatelessWidget {
     this.suffixText,
     this.maxLines = 1,
     this.keyboardType,
+    this.focusNode,
+    this.textInputAction,
     super.key,
   });
 
@@ -16,6 +18,8 @@ class ReadingFormField extends StatelessWidget {
   final String? suffixText;
   final int maxLines;
   final TextInputType? keyboardType;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
   final ValueChanged<String> onChanged;
 
   @override
@@ -31,6 +35,8 @@ class ReadingFormField extends StatelessWidget {
       initialValue: initialValue,
       keyboardType: keyboardType,
       maxLines: maxLines,
+      focusNode: focusNode,
+      textInputAction: textInputAction,
       decoration: InputDecoration(labelText: label, suffixText: suffixText),
       onChanged: onChanged,
     );

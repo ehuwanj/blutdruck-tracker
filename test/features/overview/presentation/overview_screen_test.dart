@@ -37,8 +37,12 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('132 / 84'), findsOneWidget);
-    expect(find.text('Pulse 72 bpm'), findsOneWidget);
+    // The card uses Text.rich for "132 (Sys.) / 84 (Dia.) 72 (Pulse)" —
+    // find.text doesn't traverse TextSpans, so check by substring.
+    expect(find.textContaining('132'), findsWidgets);
+    expect(find.textContaining('84'), findsWidgets);
+    expect(find.textContaining('72'), findsWidgets);
+    expect(find.textContaining('Sys.'), findsWidgets);
   });
 
   testWidgets('period chip change updates periodProvider', (tester) async {

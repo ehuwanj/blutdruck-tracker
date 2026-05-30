@@ -178,6 +178,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get latestReadingTitle => 'Latest';
 
   @override
+  String get latestReadingSystolicShort => 'Sys.';
+
+  @override
+  String get latestReadingDiastolicShort => 'Dia.';
+
+  @override
+  String get latestReadingPulseShort => 'Pulse';
+
+  @override
+  String get latestReadingTapHint => 'Tap to see the last 7 entries';
+
+  @override
+  String get lastSevenEntriesTitle => 'Last 7 entries';
+
+  @override
+  String get lastSevenEntriesEmpty => 'No entries yet.';
+
+  @override
   String get latestReadingEmptyTitle => 'No readings yet';
 
   @override

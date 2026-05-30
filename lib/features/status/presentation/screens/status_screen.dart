@@ -29,10 +29,11 @@ class StatusScreen extends ConsumerWidget {
   }
 }
 
-/// AppBar-less body for the Status view. Holds the at-a-glance pieces:
-/// the latest reading card, the rule-based insights, the category
-/// explanation, and the persistent disclaimer. Category distribution
-/// lives in the Statistics tab now to avoid duplicating the same chart.
+/// AppBar-less body for the Status view. The "What do the categories
+/// mean?" expansion moved to the Statistics tab (right after the
+/// classification distribution) at user request, so this view focuses
+/// on at-a-glance state: the latest reading, the rule-based insights,
+/// and the persistent disclaimer.
 class StatusTabView extends StatelessWidget {
   const StatusTabView({super.key});
 
@@ -50,16 +51,17 @@ class StatusTabView extends StatelessWidget {
         SizedBox(height: AppSpacing.lg),
         InsightsCard(),
         SizedBox(height: AppSpacing.lg),
-        _CategoryExplanationCard(),
-        SizedBox(height: AppSpacing.lg),
         _PersistentDisclaimer(),
       ],
     );
   }
 }
 
-class _CategoryExplanationCard extends StatelessWidget {
-  const _CategoryExplanationCard();
+/// Public so the Statistics tab can render it after the classification
+/// distribution. Lives here historically; if Status ever stops needing it
+/// this whole file can move to the statistics feature.
+class CategoryExplanationCard extends StatelessWidget {
+  const CategoryExplanationCard({super.key});
 
   @override
   Widget build(BuildContext context) {

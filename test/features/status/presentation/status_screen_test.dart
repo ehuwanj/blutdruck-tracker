@@ -32,8 +32,10 @@ void main() {
 
       await tester.pumpScreen(readings: readings, now: now);
 
-      // Latest-reading card shows the systolic/diastolic.
-      expect(find.text('132 / 84'), findsOneWidget);
+      // Latest-reading card shows the systolic/diastolic — Text.rich now,
+      // so check by substring rather than exact-match Text widget.
+      expect(find.textContaining('132'), findsWidgets);
+      expect(find.textContaining('84'), findsWidgets);
 
       // Persistent disclaimer block is present.
       expect(

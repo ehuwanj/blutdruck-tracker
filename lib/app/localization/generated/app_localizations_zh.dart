@@ -175,6 +175,24 @@ class AppLocalizationsZh extends AppLocalizations {
   String get latestReadingTitle => '最新';
 
   @override
+  String get latestReadingSystolicShort => '收缩';
+
+  @override
+  String get latestReadingDiastolicShort => '舒张';
+
+  @override
+  String get latestReadingPulseShort => '脉搏';
+
+  @override
+  String get latestReadingTapHint => '点击查看最近 7 条记录';
+
+  @override
+  String get lastSevenEntriesTitle => '最近 7 条记录';
+
+  @override
+  String get lastSevenEntriesEmpty => '暂无记录。';
+
+  @override
   String get latestReadingEmptyTitle => '暂无记录';
 
   @override

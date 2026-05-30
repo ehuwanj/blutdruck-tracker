@@ -430,6 +430,42 @@ abstract class AppLocalizations {
   /// **'Latest'**
   String get latestReadingTitle;
 
+  /// No description provided for @latestReadingSystolicShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sys.'**
+  String get latestReadingSystolicShort;
+
+  /// No description provided for @latestReadingDiastolicShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Dia.'**
+  String get latestReadingDiastolicShort;
+
+  /// No description provided for @latestReadingPulseShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse'**
+  String get latestReadingPulseShort;
+
+  /// No description provided for @latestReadingTapHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to see the last 7 entries'**
+  String get latestReadingTapHint;
+
+  /// No description provided for @lastSevenEntriesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 entries'**
+  String get lastSevenEntriesTitle;
+
+  /// No description provided for @lastSevenEntriesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No entries yet.'**
+  String get lastSevenEntriesEmpty;
+
   /// No description provided for @latestReadingEmptyTitle.
   ///
   /// In en, this message translates to:

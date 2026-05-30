@@ -780,6 +780,113 @@ All three findings were validated against the relevant specs and addressed:
 
 ---
 
+## Post-MVP UX revisions — 2026-05-30
+
+After dogfooding on a real Android device the following changes landed in
+quick succession. They were not in the original 0..15 plan; record them
+here so the spec status table in [`specs/README.md`](specs/README.md) stays
+accurate.
+
+### Build / tooling unblock (`dd8f27d`)
+- `android/app/build.gradle.kts`: enable `isCoreLibraryDesugaringEnabled` and
+  add `coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")`.
+  Required by `flutter_local_notifications 18.x` (uses `java.time` APIs).
+- `android/app/src/main/res/drawable/ic_notification.xml`: drop
+  `?attr/colorControlNormal` — the AppCompat-only attr isn't resolvable
+  during AAPT resource compile and the fill is already white, which is all
+  Android needs for the small-icon slot.
+- Migrate to Flutter's Built-in Kotlin: remove `id("kotlin-android")` from
+  the plugins block, drop the `kotlinOptions {}` block, add a root-level
+  `kotlin { compilerOptions { jvmTarget = JVM_17 } }`. Silences the first
+  KGP warning at `flutter run`. The remaining warning is plugin-side
+  (`share_plus 13.x` has not migrated yet) and can't be silenced from this
+  side.
+
+### In-place tabs + post-save navigation (`dd8f27d`)
+- The Overview segmented button used to `context.go('/statistics')` /
+  `context.go('/status')`, navigating away to standalone screens with no
+  back-button affordance. Per spec 05 these are tabs, not routes. The
+  `OverviewScreen` is now a `StatefulWidget`; the segmented button updates
+  local state, and an `IndexedStack` swaps the body in place so scroll and
+  form state survive tab changes. The `/statistics` and `/status` routes
+  still exist for direct deep-link access.
+- Extracted `StatisticsTabView` and `StatusTabView` (AppBar-less bodies)
+  so the route-style screens and the in-place tabs share the same widgets.
+- After-save / after-delete on the reading entry screen now calls
+  `context.go('/')` instead of `Navigator.maybePop()` — the entry screen is
+  always reached via `context.go(...)` (FAB, empty-state CTA, history-row
+  tap), so the route stack is empty and `maybePop` was a no-op. Updated the
+  screen's widget test to pump under `MaterialApp.router` so `context.go`
+  resolves.
+
+### Input correctness (`9584c27`)
+- `ReadingFormField` was keyed `ValueKey('$label-$initialValue')`. Every
+  keystroke updated the form state → parent rebuilt with a new
+  `initialValue` → `ValueKey` changed → Flutter destroyed and recreated
+  the `TextFormField`, losing focus + cursor and reseeding text from
+  `initialValue`. For the weight field this surfaced as "field rejects
+  values > 10" because `8.0.toString()` is `"8.0"`, not `"8"`. Key now is
+  `ValueKey(label)` — stable per field, independent of typed value. Fixes
+  all four numeric fields.
+
+### Disclaimer dismissal (`410fc0b`)
+- Accept button on the disclaimer modal silently no-op'd. Cause: the
+  handler called `settingsProvider.notifier.save(...)` (which synchronously
+  sets `state = AsyncValue.data(...)`) before `Navigator.pop()`. The
+  synchronous state change rebuilt `DisclaimerGate` and every watcher,
+  moving the captured `context` element tree under the pop call. Fix:
+  capture `Navigator.of(context, rootNavigator: true)` and the notifier
+  before touching state, pop the dialog first, then schedule the save.
+
+### Verification findings (`ad94419`)
+- `lib/app/router.dart`: `AppShell.reschedule()` now short-circuits when
+  `settings.remindersEnabled` is false, so a reminders-stream / locale
+  tick can no longer recreate scheduled notifications after the user
+  disabled reminders via the master toggle.
+- `lib/features/reminders/presentation/screens/reminder_settings_screen.dart`:
+  `_openSheet()` now requests OS notification permission before flipping
+  `remindersEnabled` on the implicit first-enable (adding the first
+  reminder while the master switch is off). Matches spec 08 §Local
+  reminders: "Request notification permission … the first time the user
+  enables reminders."
+
+### Form + domain trim + tab restructure (`fd59bd9`)
+Eleven scope changes shipped together after user dogfooding:
+
+- **#1 Cancel on Add.** `reading_entry_screen.dart` AppBar gained a leading
+  close `IconButton` → `context.go('/')`.
+- **#2 Remove arm + stress level.** Dropped from the entity, the Drift table
+  (v1→v2 migration drops `arm` and `stress_level` columns), the mapper,
+  the form, the CSV columns, the validator enum, and all ARB keys.
+  Deleted `lib/features/readings/domain/entities/measurement_arm.dart`.
+- **#3 Remove medication note.** Same scope as #2: entity, Drift column,
+  mapper, form, CSV, `validationMedicationTooLong` enum + ARB.
+- **#4 "Notes" → "Note".** EN ARB rename only; DE/ZH were already singular.
+- **#5 "Add reading"/"Edit reading" → "Add"/"Edit".** Across all three locales.
+- **#6 Add form starts blank.** `readingFormNotifierProvider` is now
+  `AsyncNotifierProvider.autoDispose.family<...>` and the notifier extends
+  `AutoDisposeFamilyAsyncNotifier`. Riverpod ref-counts listeners, so
+  closing the entry screen disposes the notifier; the next visit triggers
+  a fresh `build()` returning `ReadingFormState.empty(...)`. Previously
+  the same family key (`null` for new) returned the cached notifier with
+  the last submitted values still in state.
+- **#7 "Overview" → "Blood Pressure".** EN/DE/ZH.
+- **#8 "Latest reading" → "Latest".** EN/DE/ZH.
+- **#9 Tab restructure.** `_OverviewTab` reordered to
+  `status → history → statistics`. Default selection is `status`.
+  `LatestReadingCard` moved from `_HistoryTabContent` into `StatusTabView`.
+  `InsightsCard` moved from `_StatisticsBody` into `StatusTabView`.
+- **#10 Remove distribution from Status.** The `ClassificationCard` on the
+  Statistics tab already renders a `_DistributionBar` from the same
+  `stats.categoryDistribution`, so Status's `_DistributionCard` is a
+  duplicate. Deleted from `StatusTabView`.
+- **#11 Back buttons on context.go'd screens.** Settings, Reminder
+  Settings, Privacy info, and Export gained a leading
+  `IconButton(Icons.arrow_back)` → `/` (or `/settings` for sub-routes).
+  Added `backButtonTooltip` ARB key in all three locales.
+
+---
+
 ## After step 15
 
 The MVP is feature-complete per the acceptance criteria in

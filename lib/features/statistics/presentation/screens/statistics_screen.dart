@@ -17,6 +17,8 @@ import 'package:blutdruck_tracker/features/statistics/domain/entities/bmi_catego
 import 'package:blutdruck_tracker/features/statistics/domain/entities/metric_summary.dart';
 import 'package:blutdruck_tracker/features/statistics/domain/entities/statistics_result.dart';
 import 'package:blutdruck_tracker/features/statistics/presentation/widgets/statistics_formatters.dart';
+import 'package:blutdruck_tracker/features/status/presentation/screens/status_screen.dart'
+    show CategoryExplanationCard;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -74,13 +76,16 @@ class _StatisticsBody extends ConsumerWidget {
       data: (stats) {
         // Insights live on the Status tab now — Statistics keeps just the
         // numeric and classification cards.
+        // The period date-range / entry-count summary card was removed at
+        // user request: the period chips above already make the range
+        // obvious, and the entry count was not actionable on its own.
         return Column(
           children: [
-            _PeriodSummaryCard(stats: stats),
-            const SizedBox(height: AppSpacing.lg),
             KeyMetricsCard(stats: stats),
             const SizedBox(height: AppSpacing.lg),
             ClassificationCard(stats: stats),
+            const SizedBox(height: AppSpacing.lg),
+            const CategoryExplanationCard(),
             const SizedBox(height: AppSpacing.lg),
             const BmiCard(),
           ],
@@ -98,36 +103,44 @@ class _PeriodSelector extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final period = ref.watch(periodProvider);
     final now = ref.watch(clockProvider).now().toLocal();
-    return Wrap(
-      spacing: AppSpacing.sm,
-      runSpacing: AppSpacing.sm,
-      children: [
-        _PeriodChip(label: l10n.period7Days, days: 7, now: now),
-        _PeriodChip(label: l10n.period14Days, days: 14, now: now),
-        _PeriodChip(label: l10n.period30Days, days: 30, now: now),
-        _PeriodChip(label: l10n.period90Days, days: 90, now: now),
-        FilterChip(
-          label: Text(l10n.periodCustom),
-          selected: !_matchesPreset(period, now),
-          onSelected: (_) async {
-            final picked = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime(now.year - 5),
-              lastDate: DateTime(now.year + 1, 12, 31),
-              initialDateRange: period,
-            );
-            if (picked == null || !context.mounted) return;
-            ref
-                .read(periodProvider.notifier)
-                .setRange(
-                  DateTimeRange(
-                    start: startOfLocalDay(picked.start),
-                    end: endOfLocalDay(picked.end),
-                  ),
-                );
-          },
-        ),
-      ],
+    // Horizontal scroll keeps every chip on a single row at any width.
+    // Wrap was previously breaking 'Custom' onto its own line on narrow
+    // phones, which the user found confusing.
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          _PeriodChip(label: l10n.period7Days, days: 7, now: now),
+          const SizedBox(width: AppSpacing.sm),
+          _PeriodChip(label: l10n.period14Days, days: 14, now: now),
+          const SizedBox(width: AppSpacing.sm),
+          _PeriodChip(label: l10n.period30Days, days: 30, now: now),
+          const SizedBox(width: AppSpacing.sm),
+          _PeriodChip(label: l10n.period90Days, days: 90, now: now),
+          const SizedBox(width: AppSpacing.sm),
+          FilterChip(
+            label: Text(l10n.periodCustom),
+            selected: !_matchesPreset(period, now),
+            onSelected: (_) async {
+              final picked = await showDateRangePicker(
+                context: context,
+                firstDate: DateTime(now.year - 5),
+                lastDate: DateTime(now.year + 1, 12, 31),
+                initialDateRange: period,
+              );
+              if (picked == null || !context.mounted) return;
+              ref
+                  .read(periodProvider.notifier)
+                  .setRange(
+                    DateTimeRange(
+                      start: startOfLocalDay(picked.start),
+                      end: endOfLocalDay(picked.end),
+                    ),
+                  );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -170,33 +183,6 @@ bool _matchesPreset(DateTimeRange period, DateTime now) {
     return isSameLocalDay(period.start, preset.start) &&
         isSameLocalDay(period.end, preset.end);
   });
-}
-
-class _PeriodSummaryCard extends StatelessWidget {
-  const _PeriodSummaryCard({required this.stats});
-
-  final StatisticsResult stats;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final range = l10n.statisticsPeriodSummary(
-      formatShortDate(l10n, stats.from.toLocal()),
-      formatShortDate(l10n, stats.to.toLocal()),
-    );
-    return AppCard(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(range, style: Theme.of(context).textTheme.titleMedium),
-          Text(
-            l10n.historyEntriesCount(stats.entryCount),
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 class KeyMetricsCard extends StatelessWidget {
