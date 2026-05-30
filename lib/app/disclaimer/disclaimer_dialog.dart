@@ -21,17 +21,24 @@ class DisclaimerDialog extends ConsumerWidget {
         actions: [
           FilledButton(
             onPressed: () {
+              // Capture navigator + notifier BEFORE touching state. The
+              // notifier's save() sets `state = AsyncValue.data(...)`
+              // synchronously, which schedules a rebuild of every
+              // settingsProvider watcher including DisclaimerGate. By the
+              // time we reach the pop call, `context` may have rebuilt
+              // under us. Capturing rootNavigator up front sidesteps that
+              // entirely and pops the modal route directly.
+              final navigator = Navigator.of(context, rootNavigator: true);
+              final notifier = ref.read(settingsProvider.notifier);
               final settings = ref.read(settingsProvider).valueOrNull;
+              navigator.pop();
               if (settings != null) {
-                ref
-                    .read(settingsProvider.notifier)
-                    .save(
-                      settings.copyWith(
-                        disclaimerAcceptedVersion: kDisclaimerVersion,
-                      ),
-                    );
+                notifier.save(
+                  settings.copyWith(
+                    disclaimerAcceptedVersion: kDisclaimerVersion,
+                  ),
+                );
               }
-              Navigator.of(context).pop();
             },
             child: Text(l10n.disclaimerAccept),
           ),
