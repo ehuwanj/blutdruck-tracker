@@ -12,7 +12,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appTitle => '血压记录';
 
   @override
-  String get overviewTitle => '概览';
+  String get overviewTitle => '血压';
 
   @override
   String get historyTitle => '历史';
@@ -36,16 +36,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get privacyTitle => '隐私说明';
 
   @override
-  String get addReadingTitle => '添加记录';
+  String get addReadingTitle => '添加';
 
   @override
-  String get editReadingTitle => '编辑记录';
+  String get editReadingTitle => '编辑';
 
   @override
   String get saveButton => '保存';
 
   @override
   String get cancelButton => '取消';
+
+  @override
+  String get backButtonTooltip => '返回';
 
   @override
   String get deleteButton => '删除';
@@ -127,22 +130,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get weightLabel => '体重';
 
   @override
-  String get armLabel => '测量手臂';
-
-  @override
-  String get armLeftLabel => '左';
-
-  @override
-  String get armRightLabel => '右';
-
-  @override
   String get unspecifiedLabel => '未指定';
-
-  @override
-  String get stressLevelLabel => '压力等级';
-
-  @override
-  String get medicationNoteLabel => '用药备注';
 
   @override
   String get noteLabel => '备注';
@@ -155,9 +143,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get validationNoteTooLong => '备注过长。';
-
-  @override
-  String get validationMedicationTooLong => '用药备注过长。';
 
   @override
   String get validationFutureDate => '测量时间过于靠后。';
@@ -187,7 +172,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get overviewTabStatus => '状态';
 
   @override
-  String get latestReadingTitle => '最新记录';
+  String get latestReadingTitle => '最新';
 
   @override
   String get latestReadingEmptyTitle => '暂无记录';
@@ -526,15 +511,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get csvColumnWeightKg => '体重_kg';
-
-  @override
-  String get csvColumnArm => '手臂';
-
-  @override
-  String get csvColumnStress => '压力';
-
-  @override
-  String get csvColumnMedication => '用药';
 
   @override
   String get csvColumnNote => '备注';

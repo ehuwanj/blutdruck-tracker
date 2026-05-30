@@ -20,7 +20,14 @@ class SettingsScreen extends ConsumerWidget {
     final settingsAsync = ref.watch(settingsProvider);
     final settings = settingsAsync.valueOrNull ?? AppSettings.defaults();
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settingsTitle)),
+      appBar: AppBar(
+        title: Text(l10n.settingsTitle),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: l10n.backButtonTooltip,
+          onPressed: () => context.go('/'),
+        ),
+      ),
       body: ListView(
         children: [
           _SectionHeader(l10n.settingsGroupProfile),

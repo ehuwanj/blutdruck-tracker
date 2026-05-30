@@ -72,9 +72,6 @@ class ReadingValidator {
     if ((reading.note?.length ?? 0) > 500) {
       errors.add(ValidationIssue.noteTooLong);
     }
-    if ((reading.medicationNote?.length ?? 0) > 200) {
-      errors.add(ValidationIssue.medicationNoteTooLong);
-    }
 
     return ValidationResult(errors: errors, warnings: warnings);
   }
@@ -133,5 +130,4 @@ enum ValidationIssue {
   measuredAtTooFarInFuture,
   measuredAtOlderThanFiveYears,
   noteTooLong,
-  medicationNoteTooLong,
 }

@@ -132,14 +132,12 @@ void main() {
         reading: reading(
           measuredAt: now.add(const Duration(hours: 2)),
           note: 'n' * 501,
-          medicationNote: 'm' * 201,
         ),
         now: now,
       );
 
       expect(result.errors, contains(ValidationIssue.measuredAtTooFarInFuture));
       expect(result.errors, contains(ValidationIssue.noteTooLong));
-      expect(result.errors, contains(ValidationIssue.medicationNoteTooLong));
     });
   });
 
@@ -650,7 +648,6 @@ BloodPressureReading reading({
   int? pulse,
   double? weightKg,
   String? note,
-  String? medicationNote,
 }) {
   final timestamp = measuredAt ?? DateTime.utc(2026, 5, 25, 8);
   return BloodPressureReading(
@@ -661,7 +658,6 @@ BloodPressureReading reading({
     pulse: pulse,
     weightKg: weightKg,
     note: note,
-    medicationNote: medicationNote,
     source: ReadingSource.manual,
     createdAt: timestamp,
     updatedAt: timestamp,

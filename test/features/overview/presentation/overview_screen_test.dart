@@ -122,6 +122,11 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    // OverviewScreen now defaults to the Status tab. Switch to History so
+    // the period chips and time-slot card are visible/hittable.
+    await tester.tap(find.text('History'));
+    await tester.pumpAndSettle();
+
     final headerBefore = tester.widget<Text>(
       find.textContaining('auto-detected'),
     );

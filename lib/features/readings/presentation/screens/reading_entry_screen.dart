@@ -37,6 +37,11 @@ class ReadingEntryScreen extends ConsumerWidget {
       data: (state) => Scaffold(
         appBar: AppBar(
           title: Text(isEdit ? l10n.editReadingTitle : l10n.addReadingTitle),
+          leading: IconButton(
+            tooltip: l10n.cancelButton,
+            icon: const Icon(Icons.close),
+            onPressed: () => context.go('/'),
+          ),
           actions: [
             if (isEdit)
               IconButton(

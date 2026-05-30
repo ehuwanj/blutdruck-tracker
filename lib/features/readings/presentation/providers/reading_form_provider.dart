@@ -1,20 +1,24 @@
 import 'package:blutdruck_tracker/app/providers.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/blood_pressure_reading.dart';
-import 'package:blutdruck_tracker/features/readings/domain/entities/measurement_arm.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/reading_source.dart';
 import 'package:blutdruck_tracker/features/readings/domain/services/reading_validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+/// Auto-disposed so a freshly-opened "Add" form always starts from the
+/// empty state, never from whatever values the user typed during a
+/// previous Add session. Riverpod ref-counts listeners: when the entry
+/// screen widget tree is gone, the notifier is disposed; the next visit
+/// triggers a fresh build() that returns ReadingFormState.empty.
 final readingFormNotifierProvider =
-    AsyncNotifierProvider.family<
+    AsyncNotifierProvider.autoDispose.family<
       ReadingFormNotifier,
       ReadingFormState,
       String?
     >(ReadingFormNotifier.new);
 
 class ReadingFormNotifier
-    extends FamilyAsyncNotifier<ReadingFormState, String?> {
+    extends AutoDisposeFamilyAsyncNotifier<ReadingFormState, String?> {
   static const _validator = ReadingValidator();
 
   @override
@@ -46,22 +50,6 @@ class ReadingFormNotifier
 
   void setWeightKg(double? value) => _update((state) {
     return state.copyWith(weightKg: value, clearWeightKg: value == null);
-  });
-
-  void setArm(MeasurementArm? value) => _update((state) {
-    return state.copyWith(arm: value, clearArm: value == null);
-  });
-
-  void setStressLevel(int? value) => _update((state) {
-    return state.copyWith(stressLevel: value, clearStressLevel: value == null);
-  });
-
-  void setMedicationNote(String? value) => _update((state) {
-    final normalized = _blankToNull(value);
-    return state.copyWith(
-      medicationNote: normalized,
-      clearMedicationNote: normalized == null,
-    );
   });
 
   void setNote(String? value) => _update((state) {
@@ -127,10 +115,7 @@ class ReadingFormState {
     this.diastolic,
     this.pulse,
     this.weightKg,
-    this.arm,
-    this.stressLevel,
     this.note,
-    this.medicationNote,
   });
 
   factory ReadingFormState.empty({required DateTime now}) {
@@ -150,10 +135,7 @@ class ReadingFormState {
       diastolic: reading.diastolic,
       pulse: reading.pulse,
       weightKg: reading.weightKg,
-      arm: reading.arm,
-      stressLevel: reading.stressLevel,
       note: reading.note,
-      medicationNote: reading.medicationNote,
       validation: _emptyValidation,
     );
   }
@@ -165,10 +147,7 @@ class ReadingFormState {
   final int? diastolic;
   final int? pulse;
   final double? weightKg;
-  final MeasurementArm? arm;
-  final int? stressLevel;
   final String? note;
-  final String? medicationNote;
   final ValidationResult validation;
 
   bool get canSubmit {
@@ -183,19 +162,13 @@ class ReadingFormState {
     int? diastolic,
     int? pulse,
     double? weightKg,
-    MeasurementArm? arm,
-    int? stressLevel,
     String? note,
-    String? medicationNote,
     ValidationResult? validation,
-    bool clearArm = false,
-    bool clearStressLevel = false,
     bool clearSystolic = false,
     bool clearDiastolic = false,
     bool clearPulse = false,
     bool clearWeightKg = false,
     bool clearNote = false,
-    bool clearMedicationNote = false,
   }) {
     return ReadingFormState(
       readingId: readingId ?? this.readingId,
@@ -205,12 +178,7 @@ class ReadingFormState {
       diastolic: clearDiastolic ? null : diastolic ?? this.diastolic,
       pulse: clearPulse ? null : pulse ?? this.pulse,
       weightKg: clearWeightKg ? null : weightKg ?? this.weightKg,
-      arm: clearArm ? null : arm ?? this.arm,
-      stressLevel: clearStressLevel ? null : stressLevel ?? this.stressLevel,
       note: clearNote ? null : note ?? this.note,
-      medicationNote: clearMedicationNote
-          ? null
-          : medicationNote ?? this.medicationNote,
       validation: validation ?? this.validation,
     );
   }
@@ -223,10 +191,7 @@ class ReadingFormState {
       diastolic: diastolic ?? 80,
       pulse: pulse,
       weightKg: weightKg,
-      arm: arm,
-      stressLevel: stressLevel,
       note: note,
-      medicationNote: medicationNote,
       source: ReadingSource.manual,
       createdAt: readingId == null ? now : createdAt,
       updatedAt: now,

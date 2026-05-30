@@ -1,14 +1,13 @@
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
-import 'package:blutdruck_tracker/app/providers.dart';
-import 'package:blutdruck_tracker/app/theme/app_colors.dart';
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/core/widgets/app_card.dart';
-import 'package:blutdruck_tracker/core/widgets/app_error_view.dart';
-import 'package:blutdruck_tracker/core/widgets/app_loading_view.dart';
+import 'package:blutdruck_tracker/features/overview/presentation/widgets/latest_reading_card.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/overview_formatters.dart';
 import 'package:blutdruck_tracker/features/statistics/domain/entities/blood_pressure_category.dart';
+import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class StatusScreen extends ConsumerWidget {
   const StatusScreen({super.key});
@@ -17,127 +16,43 @@ class StatusScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.statusTitle)),
+      appBar: AppBar(
+        title: Text(l10n.statusTitle),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: l10n.backButtonTooltip,
+          onPressed: () => context.go('/'),
+        ),
+      ),
       body: const StatusTabView(),
     );
   }
 }
 
-/// AppBar-less body for the Status view. Used both by [StatusScreen] (when
-/// reached via the /status route) and by the Overview segmented tabs.
-class StatusTabView extends ConsumerWidget {
+/// AppBar-less body for the Status view. Holds the at-a-glance pieces:
+/// the latest reading card, the rule-based insights, the category
+/// explanation, and the persistent disclaimer. Category distribution
+/// lives in the Statistics tab now to avoid duplicating the same chart.
+class StatusTabView extends StatelessWidget {
   const StatusTabView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final asyncStats = ref.watch(statisticsProvider);
-    return asyncStats.when(
-      loading: () => const AppLoadingView(),
-      error: (error, stackTrace) => AppErrorView(
-        headline: l10n.statisticsLoadErrorTitle,
-        body: l10n.statisticsLoadErrorBody,
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.lg,
+        AppSpacing.lg,
+        AppSpacing.xxl,
       ),
-      data: (stats) {
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.lg,
-            AppSpacing.lg,
-            AppSpacing.lg,
-            AppSpacing.xxl,
-          ),
-          children: [
-            _DistributionCard(distribution: stats.categoryDistribution),
-            const SizedBox(height: AppSpacing.lg),
-            const _CategoryExplanationCard(),
-            const SizedBox(height: AppSpacing.lg),
-            const _PersistentDisclaimer(),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _DistributionCard extends StatelessWidget {
-  const _DistributionCard({required this.distribution});
-
-  final Map<BloodPressureCategory, int> distribution;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final colors = Theme.of(context).extension<AppColors>()!;
-    final total = distribution.values.fold<int>(0, (a, b) => a + b);
-    return AppCard(
-      title: l10n.statusDistributionTitle,
-      child: total == 0
-          ? Text(l10n.statusDistributionEmpty)
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(AppRadii.chip),
-                  ),
-                  child: SizedBox(
-                    height: 16,
-                    child: Row(
-                      children: [
-                        for (final category in BloodPressureCategory.values)
-                          if ((distribution[category] ?? 0) > 0)
-                            Expanded(
-                              flex: distribution[category]!,
-                              child: ColoredBox(
-                                color: _colorFor(colors, category),
-                              ),
-                            ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.md),
-                _Legend(distribution: distribution),
-              ],
-            ),
-    );
-  }
-}
-
-class _Legend extends StatelessWidget {
-  const _Legend({required this.distribution});
-
-  final Map<BloodPressureCategory, int> distribution;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final colors = Theme.of(context).extension<AppColors>()!;
-    return Wrap(
-      spacing: AppSpacing.md,
-      runSpacing: AppSpacing.xs,
-      children: [
-        for (final category in BloodPressureCategory.values)
-          if ((distribution[category] ?? 0) > 0)
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: _colorFor(colors, category),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.xs),
-                Text(
-                  '${categoryLabel(l10n, category)} · '
-                  '${distribution[category]}',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
+      children: const [
+        LatestReadingCard(),
+        SizedBox(height: AppSpacing.lg),
+        InsightsCard(),
+        SizedBox(height: AppSpacing.lg),
+        _CategoryExplanationCard(),
+        SizedBox(height: AppSpacing.lg),
+        _PersistentDisclaimer(),
       ],
     );
   }
@@ -228,18 +143,5 @@ String _thresholdLabel(AppLocalizations l10n, BloodPressureCategory category) {
       l10n.statusCategoryThresholdHypertensionGrade3,
     BloodPressureCategory.isolatedSystolic =>
       l10n.statusCategoryThresholdIsolatedSystolic,
-  };
-}
-
-Color _colorFor(AppColors colors, BloodPressureCategory category) {
-  return switch (category) {
-    BloodPressureCategory.optimal ||
-    BloodPressureCategory.normal => colors.success,
-    BloodPressureCategory.highNormal => colors.caution,
-    BloodPressureCategory.hypertensionGrade1 ||
-    BloodPressureCategory.isolatedSystolic => colors.warn,
-    BloodPressureCategory.hypertensionGrade2 ||
-    BloodPressureCategory.hypertensionGrade3 ||
-    BloodPressureCategory.hypotension => colors.alert,
   };
 }

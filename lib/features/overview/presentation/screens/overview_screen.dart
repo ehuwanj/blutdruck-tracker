@@ -1,7 +1,6 @@
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/blood_pressure_chart_card.dart';
-import 'package:blutdruck_tracker/features/overview/presentation/widgets/latest_reading_card.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/time_slot_chart_card.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/weight_chart_card.dart';
 import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
@@ -16,7 +15,7 @@ class OverviewScreen extends StatefulWidget {
 }
 
 class _OverviewScreenState extends State<OverviewScreen> {
-  _OverviewTab _selected = _OverviewTab.history;
+  _OverviewTab _selected = _OverviewTab.status;
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +37,16 @@ class _OverviewScreenState extends State<OverviewScreen> {
             child: SegmentedButton<_OverviewTab>(
               segments: [
                 ButtonSegment(
+                  value: _OverviewTab.status,
+                  label: Text(l10n.overviewTabStatus),
+                ),
+                ButtonSegment(
                   value: _OverviewTab.history,
                   label: Text(l10n.overviewTabHistory),
                 ),
                 ButtonSegment(
                   value: _OverviewTab.statistics,
                   label: Text(l10n.overviewTabStatistics),
-                ),
-                ButtonSegment(
-                  value: _OverviewTab.status,
-                  label: Text(l10n.overviewTabStatus),
                 ),
               ],
               selected: {_selected},
@@ -62,9 +61,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
             child: IndexedStack(
               index: _selected.index,
               children: const [
+                StatusTabView(),
                 _HistoryTabContent(),
                 StatisticsTabView(),
-                StatusTabView(),
               ],
             ),
           ),
@@ -74,13 +73,15 @@ class _OverviewScreenState extends State<OverviewScreen> {
   }
 }
 
-enum _OverviewTab { history, statistics, status }
+enum _OverviewTab { status, history, statistics }
 
 class _HistoryTabContent extends StatelessWidget {
   const _HistoryTabContent();
 
   @override
   Widget build(BuildContext context) {
+    // LatestReadingCard moved to the Status tab; History now focuses on
+    // the trend charts (BP, time-slot, weight).
     return ListView(
       padding: const EdgeInsets.fromLTRB(
         AppSpacing.lg,
@@ -89,8 +90,6 @@ class _HistoryTabContent extends StatelessWidget {
         AppSpacing.xxl,
       ),
       children: const [
-        LatestReadingCard(),
-        SizedBox(height: AppSpacing.lg),
         BloodPressureChartCard(),
         SizedBox(height: AppSpacing.lg),
         TimeSlotChartCard(),

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/blood_pressure_reading.dart';
-import 'package:blutdruck_tracker/features/readings/domain/entities/measurement_arm.dart';
 import 'package:blutdruck_tracker/features/statistics/domain/entities/blood_pressure_category.dart';
 import 'package:blutdruck_tracker/features/statistics/domain/services/blood_pressure_classifier.dart';
 import 'package:intl/intl.dart';
@@ -14,7 +13,7 @@ import 'package:intl/intl.dart';
 /// - UTF-8 with BOM (callers prefix the BOM via [encodeUtf8WithBom]).
 /// - `;` field separator, `\r\n` line endings.
 /// - Decimal separator is always `.` regardless of locale.
-/// - 14 columns in a fixed order; header text follows the locale.
+/// - 11 columns in a fixed order; header text follows the locale.
 class CsvExportService {
   const CsvExportService({this.classifier = const BloodPressureClassifier()});
 
@@ -44,7 +43,7 @@ class CsvExportService {
     return [...utf8Bom, ...utf8.encode(content)];
   }
 
-  /// The 14 column headers in the active locale, in canonical order.
+  /// The column headers in the active locale, in canonical order.
   List<String> headers(AppLocalizations l10n) {
     return [
       l10n.csvColumnDate,
@@ -55,9 +54,6 @@ class CsvExportService {
       l10n.csvColumnPulsePressure,
       l10n.csvColumnMap,
       l10n.csvColumnWeightKg,
-      l10n.csvColumnArm,
-      l10n.csvColumnStress,
-      l10n.csvColumnMedication,
       l10n.csvColumnNote,
       l10n.csvColumnCategory,
       l10n.csvColumnSource,
@@ -81,9 +77,6 @@ class CsvExportService {
       '${reading.pulsePressure}',
       '${reading.meanArterialPressure.round()}',
       _weightOrEmpty(reading.weightKg),
-      _armLabel(reading.arm, l10n),
-      _intOrEmpty(reading.stressLevel),
-      reading.medicationNote ?? '',
       reading.note ?? '',
       _categoryLabel(category, l10n),
       // Source is the enum `name` — stable for round-trips, not localized.
@@ -94,14 +87,6 @@ class CsvExportService {
   String _intOrEmpty(int? value) => value == null ? '' : '$value';
 
   String _weightOrEmpty(double? kg) => kg == null ? '' : kg.toStringAsFixed(1);
-
-  String _armLabel(MeasurementArm? arm, AppLocalizations l10n) {
-    return switch (arm) {
-      MeasurementArm.left => l10n.armLeftLabel,
-      MeasurementArm.right => l10n.armRightLabel,
-      null => '',
-    };
-  }
 
   String _categoryLabel(BloodPressureCategory category, AppLocalizations l10n) {
     return switch (category) {

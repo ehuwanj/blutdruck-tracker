@@ -12,7 +12,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Blood Pressure Tracker';
 
   @override
-  String get overviewTitle => 'Overview';
+  String get overviewTitle => 'Blood Pressure';
 
   @override
   String get historyTitle => 'History';
@@ -36,16 +36,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyTitle => 'Privacy info';
 
   @override
-  String get addReadingTitle => 'Add reading';
+  String get addReadingTitle => 'Add';
 
   @override
-  String get editReadingTitle => 'Edit reading';
+  String get editReadingTitle => 'Edit';
 
   @override
   String get saveButton => 'Save';
 
   @override
   String get cancelButton => 'Cancel';
+
+  @override
+  String get backButtonTooltip => 'Back';
 
   @override
   String get deleteButton => 'Delete';
@@ -127,25 +130,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get weightLabel => 'Weight';
 
   @override
-  String get armLabel => 'Arm';
-
-  @override
-  String get armLeftLabel => 'Left';
-
-  @override
-  String get armRightLabel => 'Right';
-
-  @override
   String get unspecifiedLabel => 'Unspecified';
 
   @override
-  String get stressLevelLabel => 'Stress level';
-
-  @override
-  String get medicationNoteLabel => 'Medication note';
-
-  @override
-  String get noteLabel => 'Notes';
+  String get noteLabel => 'Note';
 
   @override
   String get validationRange =>
@@ -157,9 +145,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get validationNoteTooLong => 'The note is too long.';
-
-  @override
-  String get validationMedicationTooLong => 'The medication note is too long.';
 
   @override
   String get validationFutureDate =>
@@ -190,7 +175,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get overviewTabStatus => 'Status';
 
   @override
-  String get latestReadingTitle => 'Latest reading';
+  String get latestReadingTitle => 'Latest';
 
   @override
   String get latestReadingEmptyTitle => 'No readings yet';
@@ -563,15 +548,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get csvColumnWeightKg => 'Weight_kg';
-
-  @override
-  String get csvColumnArm => 'Arm';
-
-  @override
-  String get csvColumnStress => 'Stress';
-
-  @override
-  String get csvColumnMedication => 'Medication';
 
   @override
   String get csvColumnNote => 'Note';

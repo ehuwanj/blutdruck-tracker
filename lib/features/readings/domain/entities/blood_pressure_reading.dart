@@ -1,4 +1,3 @@
-import 'package:blutdruck_tracker/features/readings/domain/entities/measurement_arm.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/reading_source.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,13 +20,6 @@ class BloodPressureReading with _$BloodPressureReading {
     int? pulse,
     double? weightKg,
     String? note,
-
-    /// `null` = unspecified. `MeasurementArm` has no `unknown` value.
-    MeasurementArm? arm,
-    String? medicationNote,
-
-    /// `1..5`; validated in `ReadingValidator` (step 2).
-    int? stressLevel,
   }) = _BloodPressureReading;
 
   const BloodPressureReading._();

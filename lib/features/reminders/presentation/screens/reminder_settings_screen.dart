@@ -7,6 +7,7 @@ import 'package:blutdruck_tracker/features/reminders/domain/entities/reminder.da
 import 'package:blutdruck_tracker/features/reminders/presentation/widgets/reminder_form_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class ReminderSettingsScreen extends ConsumerWidget {
@@ -18,7 +19,14 @@ class ReminderSettingsScreen extends ConsumerWidget {
     final remindersAsync = ref.watch(remindersStreamProvider);
     final settings = ref.watch(settingsProvider).valueOrNull;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.remindersTitle)),
+      appBar: AppBar(
+        title: Text(l10n.remindersTitle),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: l10n.backButtonTooltip,
+          onPressed: () => context.go('/settings'),
+        ),
+      ),
       body: Column(
         children: [
           _MasterToggle(enabled: settings?.remindersEnabled ?? false),

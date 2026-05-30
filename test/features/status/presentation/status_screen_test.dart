@@ -16,28 +16,26 @@ void main() {
   final now = DateTime(2026, 5, 25, 12);
 
   testWidgets(
-    'renders distribution and the persistent disclaimer for fixture data',
+    'renders latest reading and the persistent disclaimer for fixture data',
     (tester) async {
-      // Three readings landing in three distinct categories.
+      // Comfortable surface so all stacked cards in the ListView render.
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
       final readings = [
-        _reading(id: 'r-optimal', sys: 115, dia: 75, at: now),
-        _reading(id: 'r-normal', sys: 124, dia: 82, at: now),
-        _reading(
-          id: 'r-grade1',
-          sys: 150,
-          dia: 95,
-          at: now.subtract(const Duration(days: 1)),
-        ),
+        _reading(id: 'r-latest', sys: 132, dia: 84, at: now),
       ];
 
       await tester.pumpScreen(readings: readings, now: now);
 
-      // Three legend entries showing localized category labels.
-      expect(find.textContaining('Optimal · 1'), findsOneWidget);
-      expect(find.textContaining('Normal · 1'), findsOneWidget);
-      expect(find.textContaining('Hypertension grade 1 · 1'), findsOneWidget);
+      // Latest-reading card shows the systolic/diastolic.
+      expect(find.text('132 / 84'), findsOneWidget);
 
-      // Persistent disclaimer block.
+      // Persistent disclaimer block is present.
       expect(
         find.textContaining(
           'This app is for personal tracking and informational purposes only.',
@@ -51,7 +49,7 @@ void main() {
     tester,
   ) async {
     await tester.pumpScreen(readings: const [], now: now);
-    expect(find.text('No readings in this period.'), findsOneWidget);
+    expect(find.text('No readings yet'), findsOneWidget);
   });
 }
 

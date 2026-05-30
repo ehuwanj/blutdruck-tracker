@@ -12,7 +12,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get appTitle => 'Blutdruck Tracker';
 
   @override
-  String get overviewTitle => 'Überblick';
+  String get overviewTitle => 'Blutdruck';
 
   @override
   String get historyTitle => 'Verlauf';
@@ -36,16 +36,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get privacyTitle => 'Datenschutz';
 
   @override
-  String get addReadingTitle => 'Messung erfassen';
+  String get addReadingTitle => 'Hinzufügen';
 
   @override
-  String get editReadingTitle => 'Messung bearbeiten';
+  String get editReadingTitle => 'Bearbeiten';
 
   @override
   String get saveButton => 'Speichern';
 
   @override
   String get cancelButton => 'Abbrechen';
+
+  @override
+  String get backButtonTooltip => 'Zurück';
 
   @override
   String get deleteButton => 'Löschen';
@@ -127,22 +130,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get weightLabel => 'Gewicht';
 
   @override
-  String get armLabel => 'Arm';
-
-  @override
-  String get armLeftLabel => 'Links';
-
-  @override
-  String get armRightLabel => 'Rechts';
-
-  @override
   String get unspecifiedLabel => 'Nicht angegeben';
-
-  @override
-  String get stressLevelLabel => 'Stress';
-
-  @override
-  String get medicationNoteLabel => 'Medikament';
 
   @override
   String get noteLabel => 'Notiz';
@@ -157,10 +145,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get validationNoteTooLong => 'Die Notiz ist zu lang.';
-
-  @override
-  String get validationMedicationTooLong =>
-      'Der Medikamentenhinweis ist zu lang.';
 
   @override
   String get validationFutureDate =>
@@ -191,7 +175,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get overviewTabStatus => 'Status';
 
   @override
-  String get latestReadingTitle => 'Letzte Messung';
+  String get latestReadingTitle => 'Aktuell';
 
   @override
   String get latestReadingEmptyTitle => 'Noch keine Messungen';
@@ -567,15 +551,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get csvColumnWeightKg => 'Gewicht_kg';
-
-  @override
-  String get csvColumnArm => 'Arm';
-
-  @override
-  String get csvColumnStress => 'Stress';
-
-  @override
-  String get csvColumnMedication => 'Medikament';
 
   @override
   String get csvColumnNote => 'Notiz';

@@ -14,6 +14,7 @@ import 'package:blutdruck_tracker/features/export/presentation/providers/export_
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/overview_formatters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ExportScreen extends ConsumerWidget {
@@ -25,7 +26,14 @@ class ExportScreen extends ConsumerWidget {
     final formState = ref.watch(exportFormProvider);
     final recents = ref.watch(recentExportsProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.exportTitle)),
+      appBar: AppBar(
+        title: Text(l10n.exportTitle),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: l10n.backButtonTooltip,
+          onPressed: () => context.go('/'),
+        ),
+      ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(
           AppSpacing.lg,

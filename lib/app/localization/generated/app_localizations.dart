@@ -109,7 +109,7 @@ abstract class AppLocalizations {
   /// No description provided for @overviewTitle.
   ///
   /// In en, this message translates to:
-  /// **'Overview'**
+  /// **'Blood Pressure'**
   String get overviewTitle;
 
   /// No description provided for @historyTitle.
@@ -157,13 +157,13 @@ abstract class AppLocalizations {
   /// No description provided for @addReadingTitle.
   ///
   /// In en, this message translates to:
-  /// **'Add reading'**
+  /// **'Add'**
   String get addReadingTitle;
 
   /// No description provided for @editReadingTitle.
   ///
   /// In en, this message translates to:
-  /// **'Edit reading'**
+  /// **'Edit'**
   String get editReadingTitle;
 
   /// No description provided for @saveButton.
@@ -177,6 +177,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancelButton;
+
+  /// No description provided for @backButtonTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get backButtonTooltip;
 
   /// No description provided for @deleteButton.
   ///
@@ -334,46 +340,16 @@ abstract class AppLocalizations {
   /// **'Weight'**
   String get weightLabel;
 
-  /// No description provided for @armLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Arm'**
-  String get armLabel;
-
-  /// No description provided for @armLeftLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Left'**
-  String get armLeftLabel;
-
-  /// No description provided for @armRightLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Right'**
-  String get armRightLabel;
-
   /// No description provided for @unspecifiedLabel.
   ///
   /// In en, this message translates to:
   /// **'Unspecified'**
   String get unspecifiedLabel;
 
-  /// No description provided for @stressLevelLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Stress level'**
-  String get stressLevelLabel;
-
-  /// No description provided for @medicationNoteLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Medication note'**
-  String get medicationNoteLabel;
-
   /// No description provided for @noteLabel.
   ///
   /// In en, this message translates to:
-  /// **'Notes'**
+  /// **'Note'**
   String get noteLabel;
 
   /// No description provided for @validationRange.
@@ -393,12 +369,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The note is too long.'**
   String get validationNoteTooLong;
-
-  /// No description provided for @validationMedicationTooLong.
-  ///
-  /// In en, this message translates to:
-  /// **'The medication note is too long.'**
-  String get validationMedicationTooLong;
 
   /// No description provided for @validationFutureDate.
   ///
@@ -457,7 +427,7 @@ abstract class AppLocalizations {
   /// No description provided for @latestReadingTitle.
   ///
   /// In en, this message translates to:
-  /// **'Latest reading'**
+  /// **'Latest'**
   String get latestReadingTitle;
 
   /// No description provided for @latestReadingEmptyTitle.
@@ -1065,24 +1035,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Weight_kg'**
   String get csvColumnWeightKg;
-
-  /// No description provided for @csvColumnArm.
-  ///
-  /// In en, this message translates to:
-  /// **'Arm'**
-  String get csvColumnArm;
-
-  /// No description provided for @csvColumnStress.
-  ///
-  /// In en, this message translates to:
-  /// **'Stress'**
-  String get csvColumnStress;
-
-  /// No description provided for @csvColumnMedication.
-  ///
-  /// In en, this message translates to:
-  /// **'Medication'**
-  String get csvColumnMedication;
 
   /// No description provided for @csvColumnNote.
   ///

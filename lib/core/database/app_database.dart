@@ -24,7 +24,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -38,6 +38,22 @@ class AppDatabase extends _$AppDatabase {
         'CREATE INDEX idx_readings_source '
         'ON blood_pressure_readings(source);',
       );
+    },
+    onUpgrade: (m, from, to) async {
+      // v1 → v2: drop arm, medication_note, stress_level columns. SQLite
+      // gained native ALTER TABLE ... DROP COLUMN in 3.35; sqlite3_flutter_libs
+      // ships a newer build so this is safe.
+      if (from < 2) {
+        await customStatement(
+          'ALTER TABLE blood_pressure_readings DROP COLUMN arm;',
+        );
+        await customStatement(
+          'ALTER TABLE blood_pressure_readings DROP COLUMN medication_note;',
+        );
+        await customStatement(
+          'ALTER TABLE blood_pressure_readings DROP COLUMN stress_level;',
+        );
+      }
     },
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON;');
@@ -57,9 +73,6 @@ class BloodPressureReadings extends Table {
   IntColumn get pulse => integer().nullable()();
   RealColumn get weightKg => real().named('weight_kg').nullable()();
   TextColumn get note => text().nullable()();
-  TextColumn get arm => text().nullable()();
-  TextColumn get medicationNote => text().named('medication_note').nullable()();
-  IntColumn get stressLevel => integer().named('stress_level').nullable()();
   TextColumn get source => text()();
   IntColumn get createdAt => integer().named('created_at')();
   IntColumn get updatedAt => integer().named('updated_at')();

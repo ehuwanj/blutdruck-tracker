@@ -72,6 +72,8 @@ class _StatisticsBody extends ConsumerWidget {
         body: l10n.statisticsLoadErrorBody,
       ),
       data: (stats) {
+        // Insights live on the Status tab now — Statistics keeps just the
+        // numeric and classification cards.
         return Column(
           children: [
             _PeriodSummaryCard(stats: stats),
@@ -81,8 +83,6 @@ class _StatisticsBody extends ConsumerWidget {
             ClassificationCard(stats: stats),
             const SizedBox(height: AppSpacing.lg),
             const BmiCard(),
-            const SizedBox(height: AppSpacing.lg),
-            const InsightsCard(),
           ],
         );
       },

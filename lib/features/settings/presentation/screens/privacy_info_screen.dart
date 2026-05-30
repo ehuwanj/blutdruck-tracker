@@ -4,6 +4,7 @@ import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/features/settings/domain/entities/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class PrivacyInfoScreen extends ConsumerWidget {
   const PrivacyInfoScreen({super.key});
@@ -12,7 +13,14 @@ class PrivacyInfoScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.privacyTitle)),
+      appBar: AppBar(
+        title: Text(l10n.privacyTitle),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: l10n.backButtonTooltip,
+          onPressed: () => context.go('/settings'),
+        ),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.lg),
         children: [

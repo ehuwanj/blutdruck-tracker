@@ -80,37 +80,6 @@ class $BloodPressureReadingsTable extends BloodPressureReadings
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _armMeta = const VerificationMeta('arm');
-  @override
-  late final GeneratedColumn<String> arm = GeneratedColumn<String>(
-    'arm',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _medicationNoteMeta = const VerificationMeta(
-    'medicationNote',
-  );
-  @override
-  late final GeneratedColumn<String> medicationNote = GeneratedColumn<String>(
-    'medication_note',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _stressLevelMeta = const VerificationMeta(
-    'stressLevel',
-  );
-  @override
-  late final GeneratedColumn<int> stressLevel = GeneratedColumn<int>(
-    'stress_level',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
   static const VerificationMeta _sourceMeta = const VerificationMeta('source');
   @override
   late final GeneratedColumn<String> source = GeneratedColumn<String>(
@@ -151,9 +120,6 @@ class $BloodPressureReadingsTable extends BloodPressureReadings
     pulse,
     weightKg,
     note,
-    arm,
-    medicationNote,
-    stressLevel,
     source,
     createdAt,
     updatedAt,
@@ -215,30 +181,6 @@ class $BloodPressureReadingsTable extends BloodPressureReadings
       context.handle(
         _noteMeta,
         note.isAcceptableOrUnknown(data['note']!, _noteMeta),
-      );
-    }
-    if (data.containsKey('arm')) {
-      context.handle(
-        _armMeta,
-        arm.isAcceptableOrUnknown(data['arm']!, _armMeta),
-      );
-    }
-    if (data.containsKey('medication_note')) {
-      context.handle(
-        _medicationNoteMeta,
-        medicationNote.isAcceptableOrUnknown(
-          data['medication_note']!,
-          _medicationNoteMeta,
-        ),
-      );
-    }
-    if (data.containsKey('stress_level')) {
-      context.handle(
-        _stressLevelMeta,
-        stressLevel.isAcceptableOrUnknown(
-          data['stress_level']!,
-          _stressLevelMeta,
-        ),
       );
     }
     if (data.containsKey('source')) {
@@ -305,18 +247,6 @@ class $BloodPressureReadingsTable extends BloodPressureReadings
         DriftSqlType.string,
         data['${effectivePrefix}note'],
       ),
-      arm: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}arm'],
-      ),
-      medicationNote: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}medication_note'],
-      ),
-      stressLevel: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}stress_level'],
-      ),
       source: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}source'],
@@ -347,9 +277,6 @@ class BloodPressureReadingRow extends DataClass
   final int? pulse;
   final double? weightKg;
   final String? note;
-  final String? arm;
-  final String? medicationNote;
-  final int? stressLevel;
   final String source;
   final int createdAt;
   final int updatedAt;
@@ -361,9 +288,6 @@ class BloodPressureReadingRow extends DataClass
     this.pulse,
     this.weightKg,
     this.note,
-    this.arm,
-    this.medicationNote,
-    this.stressLevel,
     required this.source,
     required this.createdAt,
     required this.updatedAt,
@@ -384,15 +308,6 @@ class BloodPressureReadingRow extends DataClass
     if (!nullToAbsent || note != null) {
       map['note'] = Variable<String>(note);
     }
-    if (!nullToAbsent || arm != null) {
-      map['arm'] = Variable<String>(arm);
-    }
-    if (!nullToAbsent || medicationNote != null) {
-      map['medication_note'] = Variable<String>(medicationNote);
-    }
-    if (!nullToAbsent || stressLevel != null) {
-      map['stress_level'] = Variable<int>(stressLevel);
-    }
     map['source'] = Variable<String>(source);
     map['created_at'] = Variable<int>(createdAt);
     map['updated_at'] = Variable<int>(updatedAt);
@@ -412,13 +327,6 @@ class BloodPressureReadingRow extends DataClass
           ? const Value.absent()
           : Value(weightKg),
       note: note == null && nullToAbsent ? const Value.absent() : Value(note),
-      arm: arm == null && nullToAbsent ? const Value.absent() : Value(arm),
-      medicationNote: medicationNote == null && nullToAbsent
-          ? const Value.absent()
-          : Value(medicationNote),
-      stressLevel: stressLevel == null && nullToAbsent
-          ? const Value.absent()
-          : Value(stressLevel),
       source: Value(source),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
@@ -438,9 +346,6 @@ class BloodPressureReadingRow extends DataClass
       pulse: serializer.fromJson<int?>(json['pulse']),
       weightKg: serializer.fromJson<double?>(json['weightKg']),
       note: serializer.fromJson<String?>(json['note']),
-      arm: serializer.fromJson<String?>(json['arm']),
-      medicationNote: serializer.fromJson<String?>(json['medicationNote']),
-      stressLevel: serializer.fromJson<int?>(json['stressLevel']),
       source: serializer.fromJson<String>(json['source']),
       createdAt: serializer.fromJson<int>(json['createdAt']),
       updatedAt: serializer.fromJson<int>(json['updatedAt']),
@@ -457,9 +362,6 @@ class BloodPressureReadingRow extends DataClass
       'pulse': serializer.toJson<int?>(pulse),
       'weightKg': serializer.toJson<double?>(weightKg),
       'note': serializer.toJson<String?>(note),
-      'arm': serializer.toJson<String?>(arm),
-      'medicationNote': serializer.toJson<String?>(medicationNote),
-      'stressLevel': serializer.toJson<int?>(stressLevel),
       'source': serializer.toJson<String>(source),
       'createdAt': serializer.toJson<int>(createdAt),
       'updatedAt': serializer.toJson<int>(updatedAt),
@@ -474,9 +376,6 @@ class BloodPressureReadingRow extends DataClass
     Value<int?> pulse = const Value.absent(),
     Value<double?> weightKg = const Value.absent(),
     Value<String?> note = const Value.absent(),
-    Value<String?> arm = const Value.absent(),
-    Value<String?> medicationNote = const Value.absent(),
-    Value<int?> stressLevel = const Value.absent(),
     String? source,
     int? createdAt,
     int? updatedAt,
@@ -488,11 +387,6 @@ class BloodPressureReadingRow extends DataClass
     pulse: pulse.present ? pulse.value : this.pulse,
     weightKg: weightKg.present ? weightKg.value : this.weightKg,
     note: note.present ? note.value : this.note,
-    arm: arm.present ? arm.value : this.arm,
-    medicationNote: medicationNote.present
-        ? medicationNote.value
-        : this.medicationNote,
-    stressLevel: stressLevel.present ? stressLevel.value : this.stressLevel,
     source: source ?? this.source,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
@@ -510,13 +404,6 @@ class BloodPressureReadingRow extends DataClass
       pulse: data.pulse.present ? data.pulse.value : this.pulse,
       weightKg: data.weightKg.present ? data.weightKg.value : this.weightKg,
       note: data.note.present ? data.note.value : this.note,
-      arm: data.arm.present ? data.arm.value : this.arm,
-      medicationNote: data.medicationNote.present
-          ? data.medicationNote.value
-          : this.medicationNote,
-      stressLevel: data.stressLevel.present
-          ? data.stressLevel.value
-          : this.stressLevel,
       source: data.source.present ? data.source.value : this.source,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
@@ -533,9 +420,6 @@ class BloodPressureReadingRow extends DataClass
           ..write('pulse: $pulse, ')
           ..write('weightKg: $weightKg, ')
           ..write('note: $note, ')
-          ..write('arm: $arm, ')
-          ..write('medicationNote: $medicationNote, ')
-          ..write('stressLevel: $stressLevel, ')
           ..write('source: $source, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt')
@@ -552,9 +436,6 @@ class BloodPressureReadingRow extends DataClass
     pulse,
     weightKg,
     note,
-    arm,
-    medicationNote,
-    stressLevel,
     source,
     createdAt,
     updatedAt,
@@ -570,9 +451,6 @@ class BloodPressureReadingRow extends DataClass
           other.pulse == this.pulse &&
           other.weightKg == this.weightKg &&
           other.note == this.note &&
-          other.arm == this.arm &&
-          other.medicationNote == this.medicationNote &&
-          other.stressLevel == this.stressLevel &&
           other.source == this.source &&
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt);
@@ -587,9 +465,6 @@ class BloodPressureReadingsCompanion
   final Value<int?> pulse;
   final Value<double?> weightKg;
   final Value<String?> note;
-  final Value<String?> arm;
-  final Value<String?> medicationNote;
-  final Value<int?> stressLevel;
   final Value<String> source;
   final Value<int> createdAt;
   final Value<int> updatedAt;
@@ -602,9 +477,6 @@ class BloodPressureReadingsCompanion
     this.pulse = const Value.absent(),
     this.weightKg = const Value.absent(),
     this.note = const Value.absent(),
-    this.arm = const Value.absent(),
-    this.medicationNote = const Value.absent(),
-    this.stressLevel = const Value.absent(),
     this.source = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
@@ -618,9 +490,6 @@ class BloodPressureReadingsCompanion
     this.pulse = const Value.absent(),
     this.weightKg = const Value.absent(),
     this.note = const Value.absent(),
-    this.arm = const Value.absent(),
-    this.medicationNote = const Value.absent(),
-    this.stressLevel = const Value.absent(),
     required String source,
     required int createdAt,
     required int updatedAt,
@@ -640,9 +509,6 @@ class BloodPressureReadingsCompanion
     Expression<int>? pulse,
     Expression<double>? weightKg,
     Expression<String>? note,
-    Expression<String>? arm,
-    Expression<String>? medicationNote,
-    Expression<int>? stressLevel,
     Expression<String>? source,
     Expression<int>? createdAt,
     Expression<int>? updatedAt,
@@ -656,9 +522,6 @@ class BloodPressureReadingsCompanion
       if (pulse != null) 'pulse': pulse,
       if (weightKg != null) 'weight_kg': weightKg,
       if (note != null) 'note': note,
-      if (arm != null) 'arm': arm,
-      if (medicationNote != null) 'medication_note': medicationNote,
-      if (stressLevel != null) 'stress_level': stressLevel,
       if (source != null) 'source': source,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
@@ -674,9 +537,6 @@ class BloodPressureReadingsCompanion
     Value<int?>? pulse,
     Value<double?>? weightKg,
     Value<String?>? note,
-    Value<String?>? arm,
-    Value<String?>? medicationNote,
-    Value<int?>? stressLevel,
     Value<String>? source,
     Value<int>? createdAt,
     Value<int>? updatedAt,
@@ -690,9 +550,6 @@ class BloodPressureReadingsCompanion
       pulse: pulse ?? this.pulse,
       weightKg: weightKg ?? this.weightKg,
       note: note ?? this.note,
-      arm: arm ?? this.arm,
-      medicationNote: medicationNote ?? this.medicationNote,
-      stressLevel: stressLevel ?? this.stressLevel,
       source: source ?? this.source,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -724,15 +581,6 @@ class BloodPressureReadingsCompanion
     if (note.present) {
       map['note'] = Variable<String>(note.value);
     }
-    if (arm.present) {
-      map['arm'] = Variable<String>(arm.value);
-    }
-    if (medicationNote.present) {
-      map['medication_note'] = Variable<String>(medicationNote.value);
-    }
-    if (stressLevel.present) {
-      map['stress_level'] = Variable<int>(stressLevel.value);
-    }
     if (source.present) {
       map['source'] = Variable<String>(source.value);
     }
@@ -758,9 +606,6 @@ class BloodPressureReadingsCompanion
           ..write('pulse: $pulse, ')
           ..write('weightKg: $weightKg, ')
           ..write('note: $note, ')
-          ..write('arm: $arm, ')
-          ..write('medicationNote: $medicationNote, ')
-          ..write('stressLevel: $stressLevel, ')
           ..write('source: $source, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
@@ -1935,9 +1780,6 @@ typedef $$BloodPressureReadingsTableCreateCompanionBuilder =
       Value<int?> pulse,
       Value<double?> weightKg,
       Value<String?> note,
-      Value<String?> arm,
-      Value<String?> medicationNote,
-      Value<int?> stressLevel,
       required String source,
       required int createdAt,
       required int updatedAt,
@@ -1952,9 +1794,6 @@ typedef $$BloodPressureReadingsTableUpdateCompanionBuilder =
       Value<int?> pulse,
       Value<double?> weightKg,
       Value<String?> note,
-      Value<String?> arm,
-      Value<String?> medicationNote,
-      Value<int?> stressLevel,
       Value<String> source,
       Value<int> createdAt,
       Value<int> updatedAt,
@@ -2002,21 +1841,6 @@ class $$BloodPressureReadingsTableFilterComposer
 
   ColumnFilters<String> get note => $composableBuilder(
     column: $table.note,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get arm => $composableBuilder(
-    column: $table.arm,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get medicationNote => $composableBuilder(
-    column: $table.medicationNote,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get stressLevel => $composableBuilder(
-    column: $table.stressLevel,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2080,21 +1904,6 @@ class $$BloodPressureReadingsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get arm => $composableBuilder(
-    column: $table.arm,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get medicationNote => $composableBuilder(
-    column: $table.medicationNote,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get stressLevel => $composableBuilder(
-    column: $table.stressLevel,
-    builder: (column) => ColumnOrderings(column),
-  );
-
   ColumnOrderings<String> get source => $composableBuilder(
     column: $table.source,
     builder: (column) => ColumnOrderings(column),
@@ -2142,19 +1951,6 @@ class $$BloodPressureReadingsTableAnnotationComposer
 
   GeneratedColumn<String> get note =>
       $composableBuilder(column: $table.note, builder: (column) => column);
-
-  GeneratedColumn<String> get arm =>
-      $composableBuilder(column: $table.arm, builder: (column) => column);
-
-  GeneratedColumn<String> get medicationNote => $composableBuilder(
-    column: $table.medicationNote,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get stressLevel => $composableBuilder(
-    column: $table.stressLevel,
-    builder: (column) => column,
-  );
 
   GeneratedColumn<String> get source =>
       $composableBuilder(column: $table.source, builder: (column) => column);
@@ -2219,9 +2015,6 @@ class $$BloodPressureReadingsTableTableManager
                 Value<int?> pulse = const Value.absent(),
                 Value<double?> weightKg = const Value.absent(),
                 Value<String?> note = const Value.absent(),
-                Value<String?> arm = const Value.absent(),
-                Value<String?> medicationNote = const Value.absent(),
-                Value<int?> stressLevel = const Value.absent(),
                 Value<String> source = const Value.absent(),
                 Value<int> createdAt = const Value.absent(),
                 Value<int> updatedAt = const Value.absent(),
@@ -2234,9 +2027,6 @@ class $$BloodPressureReadingsTableTableManager
                 pulse: pulse,
                 weightKg: weightKg,
                 note: note,
-                arm: arm,
-                medicationNote: medicationNote,
-                stressLevel: stressLevel,
                 source: source,
                 createdAt: createdAt,
                 updatedAt: updatedAt,
@@ -2251,9 +2041,6 @@ class $$BloodPressureReadingsTableTableManager
                 Value<int?> pulse = const Value.absent(),
                 Value<double?> weightKg = const Value.absent(),
                 Value<String?> note = const Value.absent(),
-                Value<String?> arm = const Value.absent(),
-                Value<String?> medicationNote = const Value.absent(),
-                Value<int?> stressLevel = const Value.absent(),
                 required String source,
                 required int createdAt,
                 required int updatedAt,
@@ -2266,9 +2053,6 @@ class $$BloodPressureReadingsTableTableManager
                 pulse: pulse,
                 weightKg: weightKg,
                 note: note,
-                arm: arm,
-                medicationNote: medicationNote,
-                stressLevel: stressLevel,
                 source: source,
                 createdAt: createdAt,
                 updatedAt: updatedAt,

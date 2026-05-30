@@ -1,7 +1,6 @@
 import 'package:blutdruck_tracker/core/database/app_database.dart' as db;
 import 'package:blutdruck_tracker/features/readings/data/mappers/reading_mapper.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/blood_pressure_reading.dart';
-import 'package:blutdruck_tracker/features/readings/domain/entities/measurement_arm.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/reading_source.dart';
 import 'package:blutdruck_tracker/features/settings/data/mappers/app_settings_mapper.dart';
 import 'package:blutdruck_tracker/features/settings/domain/entities/app_settings.dart';
@@ -32,9 +31,6 @@ void main() {
         'pulse': 'INTEGER|nullable',
         'weight_kg': 'REAL|nullable',
         'note': 'TEXT|nullable',
-        'arm': 'TEXT|nullable',
-        'medication_note': 'TEXT|nullable',
-        'stress_level': 'INTEGER|nullable',
         'source': 'TEXT|required',
         'created_at': 'INTEGER|required',
         'updated_at': 'INTEGER|required',
@@ -86,9 +82,6 @@ void main() {
         pulse: 72,
         weightKg: 78.5,
         note: '  after coffee  ',
-        arm: MeasurementArm.left,
-        medicationNote: '  amlodipin 5mg  ',
-        stressLevel: 2,
         source: ReadingSource.manual,
         createdAt: DateTime.utc(2026, 5, 25, 7, 31),
         updatedAt: DateTime.utc(2026, 5, 25, 7, 32),
@@ -99,15 +92,10 @@ void main() {
 
       expect(row.measuredAt, entity.measuredAt.millisecondsSinceEpoch);
       expect(row.note, 'after coffee');
-      expect(row.arm, 'left');
-      expect(row.medicationNote, 'amlodipin 5mg');
-      expect(
-        roundTrip,
-        entity.copyWith(note: 'after coffee', medicationNote: 'amlodipin 5mg'),
-      );
+      expect(roundTrip, entity.copyWith(note: 'after coffee'));
     });
 
-    test('handles unknown arm and source defensively without PHI', () {
+    test('handles unknown source defensively without PHI', () {
       final warnings = <String>[];
       final mapper = ReadingMapper(warn: warnings.add);
       final row = db.BloodPressureReadingRow(
@@ -118,9 +106,6 @@ void main() {
         pulse: 80,
         weightKg: 81,
         note: 'private note',
-        arm: 'center',
-        medicationNote: 'private medication',
-        stressLevel: 3,
         source: 'surprise',
         createdAt: DateTime.utc(2026, 5, 25).millisecondsSinceEpoch,
         updatedAt: DateTime.utc(2026, 5, 25).millisecondsSinceEpoch,
@@ -128,7 +113,6 @@ void main() {
 
       final entity = mapper.toEntity(row);
 
-      expect(entity.arm, isNull);
       expect(entity.source, ReadingSource.manual);
       expect(warnings, hasLength(1));
       expect(warnings.single, contains('surprise'));

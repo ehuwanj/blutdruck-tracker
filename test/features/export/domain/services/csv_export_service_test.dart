@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
 import 'package:blutdruck_tracker/features/export/domain/services/csv_export_service.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/blood_pressure_reading.dart';
-import 'package:blutdruck_tracker/features/readings/domain/entities/measurement_arm.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/reading_source.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,10 +27,10 @@ void main() {
       expect(service.headers(zh).first, '日期');
     });
 
-    test('14 columns in identical order across locales', () {
-      expect(service.headers(en), hasLength(14));
-      expect(service.headers(de), hasLength(14));
-      expect(service.headers(zh), hasLength(14));
+    test('11 columns in identical order across locales', () {
+      expect(service.headers(en), hasLength(11));
+      expect(service.headers(de), hasLength(11));
+      expect(service.headers(zh), hasLength(11));
     });
   });
 
@@ -51,10 +50,10 @@ void main() {
       );
       final csv = service.build(readings: [reading], l10n: en);
       final data = csv.split('\r\n')[1].split(';');
-      // Column 8 = Weight_kg with single-decimal "."-separator format.
+      // Column 8 (index 7) = Weight_kg, single decimal, "."-separator.
       expect(data[7], '78.5');
-      // Column 14 = Source, enum name lowercase (not localized).
-      expect(data[13], 'manual');
+      // Column 11 (index 10) = Source, enum name lowercase (not localized).
+      expect(data[10], 'manual');
     });
   });
 
@@ -112,7 +111,6 @@ BloodPressureReading _reading({
     pulse: 72,
     weightKg: weightKg,
     note: note,
-    arm: MeasurementArm.left,
     source: ReadingSource.manual,
     createdAt: measuredAt,
     updatedAt: measuredAt,

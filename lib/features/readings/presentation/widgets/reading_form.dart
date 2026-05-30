@@ -1,6 +1,5 @@
 import 'package:blutdruck_tracker/app/localization/generated/app_localizations.dart';
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
-import 'package:blutdruck_tracker/features/readings/domain/entities/measurement_arm.dart';
 import 'package:blutdruck_tracker/features/readings/domain/services/reading_validator.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/providers/reading_form_provider.dart';
 import 'package:blutdruck_tracker/features/readings/presentation/widgets/reading_form_field.dart';
@@ -62,51 +61,6 @@ class ReadingForm extends ConsumerWidget {
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: (value) => notifier.setWeightKg(double.tryParse(value)),
           ),
-          const SizedBox(height: AppSpacing.lg),
-          Text(l10n.armLabel, style: Theme.of(context).textTheme.labelLarge),
-          const SizedBox(height: AppSpacing.sm),
-          SegmentedButton<String>(
-            segments: [
-              ButtonSegment(value: 'none', label: Text(l10n.unspecifiedLabel)),
-              ButtonSegment(value: 'left', label: Text(l10n.armLeftLabel)),
-              ButtonSegment(value: 'right', label: Text(l10n.armRightLabel)),
-            ],
-            selected: {state.arm?.name ?? 'none'},
-            onSelectionChanged: (selection) {
-              final selected = selection.single;
-              notifier.setArm(
-                selected == 'left'
-                    ? MeasurementArm.left
-                    : selected == 'right'
-                    ? MeasurementArm.right
-                    : null,
-              );
-            },
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          Text(
-            l10n.stressLevelLabel,
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          SegmentedButton<int>(
-            segments: [
-              ButtonSegment(value: 0, label: Text(l10n.unspecifiedLabel)),
-              for (var i = 1; i <= 5; i++)
-                ButtonSegment(value: i, label: Text('$i')),
-            ],
-            selected: {state.stressLevel ?? 0},
-            onSelectionChanged: (selection) {
-              final selected = selection.single;
-              notifier.setStressLevel(selected == 0 ? null : selected);
-            },
-          ),
-          const SizedBox(height: AppSpacing.md),
-          ReadingFormField(
-            label: l10n.medicationNoteLabel,
-            initialValue: state.medicationNote,
-            onChanged: notifier.setMedicationNote,
-          ),
           const SizedBox(height: AppSpacing.md),
           ReadingFormField(
             label: l10n.noteLabel,
@@ -131,7 +85,6 @@ class ReadingForm extends ConsumerWidget {
       ValidationIssue.systolicDiastolicClose =>
         l10n.validationSystolicDiastolic,
       ValidationIssue.noteTooLong => l10n.validationNoteTooLong,
-      ValidationIssue.medicationNoteTooLong => l10n.validationMedicationTooLong,
       ValidationIssue.measuredAtTooFarInFuture => l10n.validationFutureDate,
       _ => l10n.validationRange,
     };

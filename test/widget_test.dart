@@ -33,12 +33,12 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Overview'), findsWidgets);
+    expect(find.text('Blood Pressure'), findsWidgets);
 
     await tester.tap(find.byType(FloatingActionButton));
     await tester.pumpAndSettle();
 
-    expect(find.text('Add reading'), findsWidgets);
+    expect(find.text('Add'), findsWidgets);
   });
 
   testWidgets('disclaimer blocks interaction until accepted', (tester) async {

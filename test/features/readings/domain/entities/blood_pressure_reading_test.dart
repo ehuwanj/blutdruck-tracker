@@ -1,5 +1,4 @@
 import 'package:blutdruck_tracker/features/readings/domain/entities/blood_pressure_reading.dart';
-import 'package:blutdruck_tracker/features/readings/domain/entities/measurement_arm.dart';
 import 'package:blutdruck_tracker/features/readings/domain/entities/reading_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -15,9 +14,6 @@ void main() {
       pulse: 72,
       weightKg: 78.5,
       note: 'after coffee',
-      arm: MeasurementArm.left,
-      medicationNote: 'amlodipin 5mg',
-      stressLevel: 2,
       source: ReadingSource.manual,
       createdAt: now,
       updatedAt: now,
@@ -27,7 +23,7 @@ void main() {
   test('constructs with all fields and copyWith replaces systolic', () {
     final r = make();
     expect(r.systolic, 132);
-    expect(r.arm, MeasurementArm.left);
+    expect(r.note, 'after coffee');
     final r2 = r.copyWith(systolic: 140);
     expect(r2.systolic, 140);
     expect(r2.diastolic, r.diastolic);

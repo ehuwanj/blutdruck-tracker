@@ -30,13 +30,6 @@ mixin _$BloodPressureReading {
   double? get weightKg => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
 
-  /// `null` = unspecified. `MeasurementArm` has no `unknown` value.
-  MeasurementArm? get arm => throw _privateConstructorUsedError;
-  String? get medicationNote => throw _privateConstructorUsedError;
-
-  /// `1..5`; validated in `ReadingValidator` (step 2).
-  int? get stressLevel => throw _privateConstructorUsedError;
-
   /// Create a copy of BloodPressureReading
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -62,9 +55,6 @@ abstract class $BloodPressureReadingCopyWith<$Res> {
     int? pulse,
     double? weightKg,
     String? note,
-    MeasurementArm? arm,
-    String? medicationNote,
-    int? stressLevel,
   });
 }
 
@@ -96,9 +86,6 @@ class _$BloodPressureReadingCopyWithImpl<
     Object? pulse = freezed,
     Object? weightKg = freezed,
     Object? note = freezed,
-    Object? arm = freezed,
-    Object? medicationNote = freezed,
-    Object? stressLevel = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -142,18 +129,6 @@ class _$BloodPressureReadingCopyWithImpl<
                 ? _value.note
                 : note // ignore: cast_nullable_to_non_nullable
                       as String?,
-            arm: freezed == arm
-                ? _value.arm
-                : arm // ignore: cast_nullable_to_non_nullable
-                      as MeasurementArm?,
-            medicationNote: freezed == medicationNote
-                ? _value.medicationNote
-                : medicationNote // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            stressLevel: freezed == stressLevel
-                ? _value.stressLevel
-                : stressLevel // ignore: cast_nullable_to_non_nullable
-                      as int?,
           )
           as $Val,
     );
@@ -180,9 +155,6 @@ abstract class _$$BloodPressureReadingImplCopyWith<$Res>
     int? pulse,
     double? weightKg,
     String? note,
-    MeasurementArm? arm,
-    String? medicationNote,
-    int? stressLevel,
   });
 }
 
@@ -210,9 +182,6 @@ class __$$BloodPressureReadingImplCopyWithImpl<$Res>
     Object? pulse = freezed,
     Object? weightKg = freezed,
     Object? note = freezed,
-    Object? arm = freezed,
-    Object? medicationNote = freezed,
-    Object? stressLevel = freezed,
   }) {
     return _then(
       _$BloodPressureReadingImpl(
@@ -256,18 +225,6 @@ class __$$BloodPressureReadingImplCopyWithImpl<$Res>
             ? _value.note
             : note // ignore: cast_nullable_to_non_nullable
                   as String?,
-        arm: freezed == arm
-            ? _value.arm
-            : arm // ignore: cast_nullable_to_non_nullable
-                  as MeasurementArm?,
-        medicationNote: freezed == medicationNote
-            ? _value.medicationNote
-            : medicationNote // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        stressLevel: freezed == stressLevel
-            ? _value.stressLevel
-            : stressLevel // ignore: cast_nullable_to_non_nullable
-                  as int?,
       ),
     );
   }
@@ -287,9 +244,6 @@ class _$BloodPressureReadingImpl extends _BloodPressureReading {
     this.pulse,
     this.weightKg,
     this.note,
-    this.arm,
-    this.medicationNote,
-    this.stressLevel,
   }) : super._();
 
   @override
@@ -315,19 +269,9 @@ class _$BloodPressureReadingImpl extends _BloodPressureReading {
   @override
   final String? note;
 
-  /// `null` = unspecified. `MeasurementArm` has no `unknown` value.
-  @override
-  final MeasurementArm? arm;
-  @override
-  final String? medicationNote;
-
-  /// `1..5`; validated in `ReadingValidator` (step 2).
-  @override
-  final int? stressLevel;
-
   @override
   String toString() {
-    return 'BloodPressureReading(id: $id, measuredAt: $measuredAt, systolic: $systolic, diastolic: $diastolic, source: $source, createdAt: $createdAt, updatedAt: $updatedAt, pulse: $pulse, weightKg: $weightKg, note: $note, arm: $arm, medicationNote: $medicationNote, stressLevel: $stressLevel)';
+    return 'BloodPressureReading(id: $id, measuredAt: $measuredAt, systolic: $systolic, diastolic: $diastolic, source: $source, createdAt: $createdAt, updatedAt: $updatedAt, pulse: $pulse, weightKg: $weightKg, note: $note)';
   }
 
   @override
@@ -350,12 +294,7 @@ class _$BloodPressureReadingImpl extends _BloodPressureReading {
             (identical(other.pulse, pulse) || other.pulse == pulse) &&
             (identical(other.weightKg, weightKg) ||
                 other.weightKg == weightKg) &&
-            (identical(other.note, note) || other.note == note) &&
-            (identical(other.arm, arm) || other.arm == arm) &&
-            (identical(other.medicationNote, medicationNote) ||
-                other.medicationNote == medicationNote) &&
-            (identical(other.stressLevel, stressLevel) ||
-                other.stressLevel == stressLevel));
+            (identical(other.note, note) || other.note == note));
   }
 
   @override
@@ -371,9 +310,6 @@ class _$BloodPressureReadingImpl extends _BloodPressureReading {
     pulse,
     weightKg,
     note,
-    arm,
-    medicationNote,
-    stressLevel,
   );
 
   /// Create a copy of BloodPressureReading
@@ -401,9 +337,6 @@ abstract class _BloodPressureReading extends BloodPressureReading {
     final int? pulse,
     final double? weightKg,
     final String? note,
-    final MeasurementArm? arm,
-    final String? medicationNote,
-    final int? stressLevel,
   }) = _$BloodPressureReadingImpl;
   const _BloodPressureReading._() : super._();
 
@@ -429,16 +362,6 @@ abstract class _BloodPressureReading extends BloodPressureReading {
   double? get weightKg;
   @override
   String? get note;
-
-  /// `null` = unspecified. `MeasurementArm` has no `unknown` value.
-  @override
-  MeasurementArm? get arm;
-  @override
-  String? get medicationNote;
-
-  /// `1..5`; validated in `ReadingValidator` (step 2).
-  @override
-  int? get stressLevel;
 
   /// Create a copy of BloodPressureReading
   /// with the given fields replaced by the non-null parameter values.
