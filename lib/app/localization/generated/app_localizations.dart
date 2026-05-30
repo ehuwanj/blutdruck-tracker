@@ -544,12 +544,6 @@ abstract class AppLocalizations {
   /// **'7 d'**
   String get period7Days;
 
-  /// No description provided for @period14Days.
-  ///
-  /// In en, this message translates to:
-  /// **'14 d'**
-  String get period14Days;
-
   /// No description provided for @period30Days.
   ///
   /// In en, this message translates to:
@@ -789,12 +783,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Category distribution'**
   String get statisticsClassificationTitle;
-
-  /// No description provided for @statisticsClassificationOpenStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Open status view'**
-  String get statisticsClassificationOpenStatus;
 
   /// No description provided for @statisticsBmiTitle.
   ///

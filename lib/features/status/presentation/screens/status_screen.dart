@@ -2,8 +2,6 @@ import 'package:blutdruck_tracker/app/localization/generated/app_localizations.d
 import 'package:blutdruck_tracker/core/constants/app_constants.dart';
 import 'package:blutdruck_tracker/core/widgets/app_card.dart';
 import 'package:blutdruck_tracker/features/overview/presentation/widgets/latest_reading_card.dart';
-import 'package:blutdruck_tracker/features/overview/presentation/widgets/overview_formatters.dart';
-import 'package:blutdruck_tracker/features/statistics/domain/entities/blood_pressure_category.dart';
 import 'package:blutdruck_tracker/features/statistics/presentation/screens/statistics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,10 +28,9 @@ class StatusScreen extends ConsumerWidget {
 }
 
 /// AppBar-less body for the Status view. The "What do the categories
-/// mean?" expansion moved to the Statistics tab (right after the
-/// classification distribution) at user request, so this view focuses
-/// on at-a-glance state: the latest reading, the rule-based insights,
-/// and the persistent disclaimer.
+/// mean?" expansion was removed at user request; the category explanation
+/// is reachable by tapping the Category distribution on the Statistics
+/// tab (it opens as a bottom sheet).
 class StatusTabView extends StatelessWidget {
   const StatusTabView({super.key});
 
@@ -57,64 +54,6 @@ class StatusTabView extends StatelessWidget {
   }
 }
 
-/// Public so the Statistics tab can render it after the classification
-/// distribution. Lives here historically; if Status ever stops needing it
-/// this whole file can move to the statistics feature.
-class CategoryExplanationCard extends StatelessWidget {
-  const CategoryExplanationCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return AppCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ExpansionTile(
-            tilePadding: EdgeInsets.zero,
-            childrenPadding: const EdgeInsets.symmetric(
-              vertical: AppSpacing.sm,
-            ),
-            title: Text(
-              l10n.statusExplanationTitle,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: AppSpacing.md),
-                child: Text(l10n.statusExplanationIntro),
-              ),
-              for (final category in BloodPressureCategory.values)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          categoryLabel(l10n, category),
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: Text(
-                          _thresholdLabel(l10n, category),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _PersistentDisclaimer extends StatelessWidget {
   const _PersistentDisclaimer();
 
@@ -128,22 +67,4 @@ class _PersistentDisclaimer extends StatelessWidget {
       ),
     );
   }
-}
-
-String _thresholdLabel(AppLocalizations l10n, BloodPressureCategory category) {
-  return switch (category) {
-    BloodPressureCategory.hypotension =>
-      l10n.statusCategoryThresholdHypotension,
-    BloodPressureCategory.optimal => l10n.statusCategoryThresholdOptimal,
-    BloodPressureCategory.normal => l10n.statusCategoryThresholdNormal,
-    BloodPressureCategory.highNormal => l10n.statusCategoryThresholdHighNormal,
-    BloodPressureCategory.hypertensionGrade1 =>
-      l10n.statusCategoryThresholdHypertensionGrade1,
-    BloodPressureCategory.hypertensionGrade2 =>
-      l10n.statusCategoryThresholdHypertensionGrade2,
-    BloodPressureCategory.hypertensionGrade3 =>
-      l10n.statusCategoryThresholdHypertensionGrade3,
-    BloodPressureCategory.isolatedSystolic =>
-      l10n.statusCategoryThresholdIsolatedSystolic,
-  };
 }

@@ -247,9 +247,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get period7Days => '7 天';
 
   @override
-  String get period14Days => '14 天';
-
-  @override
   String get period30Days => '30 天';
 
   @override
@@ -383,9 +380,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get statisticsClassificationTitle => '分类分布';
-
-  @override
-  String get statisticsClassificationOpenStatus => '打开状态视图';
 
   @override
   String get statisticsBmiTitle => 'BMI';

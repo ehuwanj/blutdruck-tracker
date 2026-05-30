@@ -269,9 +269,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get period7Days => '7 d';
 
   @override
-  String get period14Days => '14 d';
-
-  @override
   String get period30Days => '30 d';
 
   @override
@@ -407,9 +404,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statisticsClassificationTitle => 'Category distribution';
-
-  @override
-  String get statisticsClassificationOpenStatus => 'Open status view';
 
   @override
   String get statisticsBmiTitle => 'BMI';

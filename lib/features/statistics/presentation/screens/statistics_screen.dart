@@ -17,8 +17,6 @@ import 'package:blutdruck_tracker/features/statistics/domain/entities/bmi_catego
 import 'package:blutdruck_tracker/features/statistics/domain/entities/metric_summary.dart';
 import 'package:blutdruck_tracker/features/statistics/domain/entities/statistics_result.dart';
 import 'package:blutdruck_tracker/features/statistics/presentation/widgets/statistics_formatters.dart';
-import 'package:blutdruck_tracker/features/status/presentation/screens/status_screen.dart'
-    show CategoryExplanationCard;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -75,17 +73,15 @@ class _StatisticsBody extends ConsumerWidget {
       ),
       data: (stats) {
         // Insights live on the Status tab now — Statistics keeps just the
-        // numeric and classification cards.
-        // The period date-range / entry-count summary card was removed at
-        // user request: the period chips above already make the range
-        // obvious, and the entry count was not actionable on its own.
+        // numeric and classification cards. The "What do the categories
+        // mean?" expansion card was removed at user request; the
+        // ClassificationCard's distribution bar is now tappable and opens
+        // the same explanation as a bottom sheet.
         return Column(
           children: [
             KeyMetricsCard(stats: stats),
             const SizedBox(height: AppSpacing.lg),
             ClassificationCard(stats: stats),
-            const SizedBox(height: AppSpacing.lg),
-            const CategoryExplanationCard(),
             const SizedBox(height: AppSpacing.lg),
             const BmiCard(),
           ],
@@ -103,71 +99,81 @@ class _PeriodSelector extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final period = ref.watch(periodProvider);
     final now = ref.watch(clockProvider).now().toLocal();
-    // Horizontal scroll keeps every chip on a single row at any width.
-    // Wrap was previously breaking 'Custom' onto its own line on narrow
-    // phones, which the user found confusing.
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          _PeriodChip(label: l10n.period7Days, days: 7, now: now),
-          const SizedBox(width: AppSpacing.sm),
-          _PeriodChip(label: l10n.period14Days, days: 14, now: now),
-          const SizedBox(width: AppSpacing.sm),
-          _PeriodChip(label: l10n.period30Days, days: 30, now: now),
-          const SizedBox(width: AppSpacing.sm),
-          _PeriodChip(label: l10n.period90Days, days: 90, now: now),
-          const SizedBox(width: AppSpacing.sm),
-          FilterChip(
-            label: Text(l10n.periodCustom),
-            selected: !_matchesPreset(period, now),
-            onSelected: (_) async {
-              final picked = await showDateRangePicker(
-                context: context,
-                firstDate: DateTime(now.year - 5),
-                lastDate: DateTime(now.year + 1, 12, 31),
-                initialDateRange: period,
+    // Connected SegmentedButton matches the Overview tabs visual style.
+    // The 14d preset was dropped at user request.
+    return SegmentedButton<_PeriodChoice>(
+      segments: [
+        ButtonSegment(
+          value: _PeriodChoice.days7,
+          label: Text(l10n.period7Days),
+        ),
+        ButtonSegment(
+          value: _PeriodChoice.days30,
+          label: Text(l10n.period30Days),
+        ),
+        ButtonSegment(
+          value: _PeriodChoice.days90,
+          label: Text(l10n.period90Days),
+        ),
+        ButtonSegment(
+          value: _PeriodChoice.custom,
+          label: Text(l10n.periodCustom),
+        ),
+      ],
+      selected: {_choiceFor(period, now)},
+      showSelectedIcon: false,
+      onSelectionChanged: (selection) async {
+        final choice = selection.single;
+        if (choice == _PeriodChoice.custom) {
+          final picked = await showDateRangePicker(
+            context: context,
+            firstDate: DateTime(now.year - 5),
+            lastDate: DateTime(now.year + 1, 12, 31),
+            initialDateRange: period,
+          );
+          if (picked == null || !context.mounted) return;
+          ref
+              .read(periodProvider.notifier)
+              .setRange(
+                DateTimeRange(
+                  start: startOfLocalDay(picked.start),
+                  end: endOfLocalDay(picked.end),
+                ),
               );
-              if (picked == null || !context.mounted) return;
-              ref
-                  .read(periodProvider.notifier)
-                  .setRange(
-                    DateTimeRange(
-                      start: startOfLocalDay(picked.start),
-                      end: endOfLocalDay(picked.end),
-                    ),
-                  );
-            },
-          ),
-        ],
-      ),
+          return;
+        }
+        ref
+            .read(periodProvider.notifier)
+            .setRange(_presetRange(now, _daysFor(choice)));
+      },
     );
   }
 }
 
-class _PeriodChip extends ConsumerWidget {
-  const _PeriodChip({
-    required this.label,
-    required this.days,
-    required this.now,
-  });
+enum _PeriodChoice { days7, days30, days90, custom }
 
-  final String label;
-  final int days;
-  final DateTime now;
+int _daysFor(_PeriodChoice choice) {
+  return switch (choice) {
+    _PeriodChoice.days7 => 7,
+    _PeriodChoice.days30 => 30,
+    _PeriodChoice.days90 => 90,
+    _PeriodChoice.custom => 0,
+  };
+}
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final range = _presetRange(now, days);
-    final period = ref.watch(periodProvider);
-    return FilterChip(
-      label: Text(label),
-      selected:
-          isSameLocalDay(period.start, range.start) &&
-          isSameLocalDay(period.end, range.end),
-      onSelected: (_) => ref.read(periodProvider.notifier).setRange(range),
-    );
+_PeriodChoice _choiceFor(DateTimeRange period, DateTime now) {
+  for (final choice in const [
+    _PeriodChoice.days7,
+    _PeriodChoice.days30,
+    _PeriodChoice.days90,
+  ]) {
+    final preset = _presetRange(now, _daysFor(choice));
+    if (isSameLocalDay(period.start, preset.start) &&
+        isSameLocalDay(period.end, preset.end)) {
+      return choice;
+    }
   }
+  return _PeriodChoice.custom;
 }
 
 DateTimeRange _presetRange(DateTime now, int days) {
@@ -175,14 +181,6 @@ DateTimeRange _presetRange(DateTime now, int days) {
     start: startOfLocalDay(now).subtract(Duration(days: days - 1)),
     end: endOfLocalDay(now),
   );
-}
-
-bool _matchesPreset(DateTimeRange period, DateTime now) {
-  return [7, 14, 30, 90].any((days) {
-    final preset = _presetRange(now, days);
-    return isSameLocalDay(period.start, preset.start) &&
-        isSameLocalDay(period.end, preset.end);
-  });
 }
 
 class KeyMetricsCard extends StatelessWidget {
@@ -293,19 +291,106 @@ class ClassificationCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return AppCard(
       title: l10n.statisticsClassificationTitle,
-      trailing: IconButton(
-        tooltip: l10n.statisticsClassificationOpenStatus,
-        icon: const Icon(Icons.open_in_new),
-        onPressed: () => context.go('/status'),
-      ),
+      // The "open in Status" trailing icon was removed at user request —
+      // the segmented button at the top of Overview already navigates
+      // between tabs, so this was redundant. Tapping the distribution
+      // now reveals the category-explanation bottom sheet (replacing the
+      // standalone "What do the categories mean?" expansion card).
       child: stats.entryCount == 0
           ? Text(l10n.statusDistributionEmpty)
           : InkWell(
-              onTap: () => context.go('/status'),
+              onTap: () => _showCategoryExplanation(context),
               child: _DistributionBar(distribution: stats.categoryDistribution),
             ),
     );
   }
+}
+
+void _showCategoryExplanation(BuildContext context) {
+  showModalBottomSheet<void>(
+    context: context,
+    showDragHandle: true,
+    isScrollControlled: true,
+    builder: (sheetContext) => const _CategoryExplanationSheet(),
+  );
+}
+
+class _CategoryExplanationSheet extends StatelessWidget {
+  const _CategoryExplanationSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          AppSpacing.sm,
+          AppSpacing.lg,
+          AppSpacing.lg,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.statusExplanationTitle,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              Text(l10n.statusExplanationIntro),
+              const SizedBox(height: AppSpacing.md),
+              for (final category in BloodPressureCategory.values)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          categoryLabel(l10n, category),
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          _statusCategoryThresholdLabel(l10n, category),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+String _statusCategoryThresholdLabel(
+  AppLocalizations l10n,
+  BloodPressureCategory category,
+) {
+  return switch (category) {
+    BloodPressureCategory.hypotension =>
+      l10n.statusCategoryThresholdHypotension,
+    BloodPressureCategory.optimal => l10n.statusCategoryThresholdOptimal,
+    BloodPressureCategory.normal => l10n.statusCategoryThresholdNormal,
+    BloodPressureCategory.highNormal => l10n.statusCategoryThresholdHighNormal,
+    BloodPressureCategory.hypertensionGrade1 =>
+      l10n.statusCategoryThresholdHypertensionGrade1,
+    BloodPressureCategory.hypertensionGrade2 =>
+      l10n.statusCategoryThresholdHypertensionGrade2,
+    BloodPressureCategory.hypertensionGrade3 =>
+      l10n.statusCategoryThresholdHypertensionGrade3,
+    BloodPressureCategory.isolatedSystolic =>
+      l10n.statusCategoryThresholdIsolatedSystolic,
+  };
 }
 
 class _DistributionBar extends StatelessWidget {

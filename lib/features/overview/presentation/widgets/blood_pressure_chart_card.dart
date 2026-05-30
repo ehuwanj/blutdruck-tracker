@@ -67,67 +67,74 @@ class _PeriodSelector extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final period = ref.watch(periodProvider);
     final now = ref.watch(clockProvider).now().toLocal();
-    // Horizontal scroll keeps every chip on a single row at any width
-    // (a Wrap was breaking 'Custom' onto its own line on narrow phones).
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          _PeriodChip(label: l10n.period7Days, days: 7, now: now),
-          const SizedBox(width: AppSpacing.sm),
-          _PeriodChip(label: l10n.period14Days, days: 14, now: now),
-          const SizedBox(width: AppSpacing.sm),
-          _PeriodChip(label: l10n.period30Days, days: 30, now: now),
-          const SizedBox(width: AppSpacing.sm),
-          _PeriodChip(label: l10n.period90Days, days: 90, now: now),
-          const SizedBox(width: AppSpacing.sm),
-          FilterChip(
-            label: Text(l10n.periodCustom),
-            selected: !_matchesPreset(period, now),
-            onSelected: (_) async {
-              final picked = await showDateRangePicker(
-                context: context,
-                firstDate: DateTime(now.year - 5),
-                lastDate: DateTime(now.year + 1, 12, 31),
-                initialDateRange: period,
-              );
-              if (picked == null || !context.mounted) {
-                return;
-              }
-              ref
-                  .read(periodProvider.notifier)
-                  .setRange(_fullLocalDays(picked));
-            },
-          ),
-        ],
-      ),
+    // Connected SegmentedButton (matches the Overview tabs visual style).
+    // 14d was dropped at user request; 7/30/90/Custom remain.
+    return SegmentedButton<_PeriodChoice>(
+      segments: [
+        ButtonSegment(
+          value: _PeriodChoice.days7,
+          label: Text(l10n.period7Days),
+        ),
+        ButtonSegment(
+          value: _PeriodChoice.days30,
+          label: Text(l10n.period30Days),
+        ),
+        ButtonSegment(
+          value: _PeriodChoice.days90,
+          label: Text(l10n.period90Days),
+        ),
+        ButtonSegment(
+          value: _PeriodChoice.custom,
+          label: Text(l10n.periodCustom),
+        ),
+      ],
+      selected: {_choiceFor(period, now)},
+      showSelectedIcon: false,
+      onSelectionChanged: (selection) async {
+        final choice = selection.single;
+        if (choice == _PeriodChoice.custom) {
+          final picked = await showDateRangePicker(
+            context: context,
+            firstDate: DateTime(now.year - 5),
+            lastDate: DateTime(now.year + 1, 12, 31),
+            initialDateRange: period,
+          );
+          if (picked == null || !context.mounted) return;
+          ref.read(periodProvider.notifier).setRange(_fullLocalDays(picked));
+          return;
+        }
+        ref
+            .read(periodProvider.notifier)
+            .setRange(_presetRange(now, _daysFor(choice)));
+      },
     );
   }
 }
 
-class _PeriodChip extends ConsumerWidget {
-  const _PeriodChip({
-    required this.label,
-    required this.days,
-    required this.now,
-  });
+enum _PeriodChoice { days7, days30, days90, custom }
 
-  final String label;
-  final int days;
-  final DateTime now;
+int _daysFor(_PeriodChoice choice) {
+  return switch (choice) {
+    _PeriodChoice.days7 => 7,
+    _PeriodChoice.days30 => 30,
+    _PeriodChoice.days90 => 90,
+    _PeriodChoice.custom => 0,
+  };
+}
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final range = _presetRange(now, days);
-    final period = ref.watch(periodProvider);
-    return FilterChip(
-      label: Text(label),
-      selected:
-          _sameLocalDay(period.start, range.start) &&
-          _sameLocalDay(period.end, range.end),
-      onSelected: (_) => ref.read(periodProvider.notifier).setRange(range),
-    );
+_PeriodChoice _choiceFor(DateTimeRange period, DateTime now) {
+  for (final choice in const [
+    _PeriodChoice.days7,
+    _PeriodChoice.days30,
+    _PeriodChoice.days90,
+  ]) {
+    final preset = _presetRange(now, _daysFor(choice));
+    if (_sameLocalDay(period.start, preset.start) &&
+        _sameLocalDay(period.end, preset.end)) {
+      return choice;
+    }
   }
+  return _PeriodChoice.custom;
 }
 
 class _BloodPressureLineChart extends StatelessWidget {
@@ -290,14 +297,6 @@ DateTimeRange _fullLocalDays(DateTimeRange range) {
       999,
     ),
   );
-}
-
-bool _matchesPreset(DateTimeRange period, DateTime now) {
-  return [7, 14, 30, 90].any((days) {
-    final preset = _presetRange(now, days);
-    return _sameLocalDay(period.start, preset.start) &&
-        _sameLocalDay(period.end, preset.end);
-  });
 }
 
 bool _sameLocalDay(DateTime a, DateTime b) {
